@@ -1,0 +1,1293 @@
+scenario,region,year,tcsi
+historical,West Coast,1950,0.6809
+historical,West Coast,1951,0.6891
+historical,West Coast,1952,0.667
+historical,West Coast,1953,0.7257
+historical,West Coast,1954,0.6762
+historical,West Coast,1955,0.6806
+historical,West Coast,1956,0.6459
+historical,West Coast,1957,0.6636
+historical,West Coast,1958,0.744
+historical,West Coast,1959,0.7091
+historical,West Coast,1960,0.7218
+historical,West Coast,1961,0.7668
+historical,West Coast,1962,0.7422
+historical,West Coast,1963,0.7105
+historical,West Coast,1964,0.6594
+historical,West Coast,1965,0.6606
+historical,West Coast,1966,0.7448
+historical,West Coast,1967,0.6136
+historical,West Coast,1968,0.7116
+historical,West Coast,1969,0.6579
+historical,West Coast,1970,0.6883
+historical,West Coast,1971,0.6103
+historical,West Coast,1972,0.6899
+historical,West Coast,1973,0.6719
+historical,West Coast,1974,0.6362
+historical,West Coast,1975,0.718
+historical,West Coast,1976,0.7188
+historical,West Coast,1977,0.6751
+historical,West Coast,1978,0.7414
+historical,West Coast,1979,0.7021
+historical,West Coast,1980,0.7186
+historical,West Coast,1981,0.7818
+historical,West Coast,1982,0.7742
+historical,West Coast,1983,0.6872
+historical,West Coast,1984,0.8216
+historical,West Coast,1985,0.6972
+historical,West Coast,1986,0.7346
+historical,West Coast,1987,0.6727
+historical,West Coast,1988,0.6569
+historical,West Coast,1989,0.7423
+historical,West Coast,1990,0.7153
+historical,West Coast,1991,0.6825
+historical,West Coast,1992,0.6141
+historical,West Coast,1993,0.6641
+historical,West Coast,1994,0.7672
+historical,West Coast,1995,0.7218
+historical,West Coast,1996,0.7002
+historical,West Coast,1997,0.7612
+historical,West Coast,1998,0.7165
+historical,West Coast,1999,0.6662
+historical,West Coast,2000,0.6544
+historical,West Coast,2001,0.8018
+historical,West Coast,2002,0.7587
+historical,West Coast,2003,0.7953
+historical,West Coast,2004,0.7409
+historical,West Coast,2005,0.7537
+historical,West Coast,2006,0.7601
+historical,West Coast,2007,0.7979
+historical,West Coast,2008,0.7181
+historical,West Coast,2009,0.7147
+historical,West Coast,2010,0.7778
+historical,West Coast,2011,0.8019
+historical,West Coast,2012,0.7592
+historical,West Coast,2013,0.7833
+historical,West Coast,2014,0.7569
+historical,Northwest / Mountain,1950,0.6452
+historical,Northwest / Mountain,1951,0.6453
+historical,Northwest / Mountain,1952,0.6784
+historical,Northwest / Mountain,1953,0.6098
+historical,Northwest / Mountain,1954,0.6517
+historical,Northwest / Mountain,1955,0.6879
+historical,Northwest / Mountain,1956,0.6854
+historical,Northwest / Mountain,1957,0.6837
+historical,Northwest / Mountain,1958,0.5773
+historical,Northwest / Mountain,1959,0.6766
+historical,Northwest / Mountain,1960,0.6239
+historical,Northwest / Mountain,1961,0.6195
+historical,Northwest / Mountain,1962,0.6725
+historical,Northwest / Mountain,1963,0.5393
+historical,Northwest / Mountain,1964,0.6419
+historical,Northwest / Mountain,1965,0.6741
+historical,Northwest / Mountain,1966,0.6022
+historical,Northwest / Mountain,1967,0.6944
+historical,Northwest / Mountain,1968,0.5673
+historical,Northwest / Mountain,1969,0.6641
+historical,Northwest / Mountain,1970,0.6657
+historical,Northwest / Mountain,1971,0.6948
+historical,Northwest / Mountain,1972,0.6516
+historical,Northwest / Mountain,1973,0.6718
+historical,Northwest / Mountain,1974,0.6993
+historical,Northwest / Mountain,1975,0.604
+historical,Northwest / Mountain,1976,0.5883
+historical,Northwest / Mountain,1977,0.6577
+historical,Northwest / Mountain,1978,0.5137
+historical,Northwest / Mountain,1979,0.6478
+historical,Northwest / Mountain,1980,0.5738
+historical,Northwest / Mountain,1981,0.5791
+historical,Northwest / Mountain,1982,0.554
+historical,Northwest / Mountain,1983,0.6715
+historical,Northwest / Mountain,1984,0.5709
+historical,Northwest / Mountain,1985,0.5559
+historical,Northwest / Mountain,1986,0.5322
+historical,Northwest / Mountain,1987,0.6686
+historical,Northwest / Mountain,1988,0.6949
+historical,Northwest / Mountain,1989,0.6202
+historical,Northwest / Mountain,1990,0.6827
+historical,Northwest / Mountain,1991,0.6808
+historical,Northwest / Mountain,1992,0.6929
+historical,Northwest / Mountain,1993,0.6453
+historical,Northwest / Mountain,1994,0.6362
+historical,Northwest / Mountain,1995,0.608
+historical,Northwest / Mountain,1996,0.5943
+historical,Northwest / Mountain,1997,0.5816
+historical,Northwest / Mountain,1998,0.6496
+historical,Northwest / Mountain,1999,0.6837
+historical,Northwest / Mountain,2000,0.6869
+historical,Northwest / Mountain,2001,0.574
+historical,Northwest / Mountain,2002,0.5905
+historical,Northwest / Mountain,2003,0.611
+historical,Northwest / Mountain,2004,0.584
+historical,Northwest / Mountain,2005,0.6075
+historical,Northwest / Mountain,2006,0.5677
+historical,Northwest / Mountain,2007,0.5195
+historical,Northwest / Mountain,2008,0.6296
+historical,Northwest / Mountain,2009,0.5988
+historical,Northwest / Mountain,2010,0.5648
+historical,Northwest / Mountain,2011,0.5694
+historical,Northwest / Mountain,2012,0.5658
+historical,Northwest / Mountain,2013,0.5581
+historical,Northwest / Mountain,2014,0.622
+historical,South,1950,0.7207
+historical,South,1951,0.6885
+historical,South,1952,0.7164
+historical,South,1953,0.7174
+historical,South,1954,0.7104
+historical,South,1955,0.7083
+historical,South,1956,0.724
+historical,South,1957,0.7029
+historical,South,1958,0.7314
+historical,South,1959,0.7091
+historical,South,1960,0.7235
+historical,South,1961,0.7084
+historical,South,1962,0.6812
+historical,South,1963,0.6973
+historical,South,1964,0.6976
+historical,South,1965,0.7157
+historical,South,1966,0.7189
+historical,South,1967,0.7054
+historical,South,1968,0.6996
+historical,South,1969,0.7026
+historical,South,1970,0.7198
+historical,South,1971,0.7114
+historical,South,1972,0.7088
+historical,South,1973,0.7068
+historical,South,1974,0.6913
+historical,South,1975,0.7109
+historical,South,1976,0.7093
+historical,South,1977,0.711
+historical,South,1978,0.6956
+historical,South,1979,0.6936
+historical,South,1980,0.72
+historical,South,1981,0.7224
+historical,South,1982,0.7051
+historical,South,1983,0.7003
+historical,South,1984,0.7192
+historical,South,1985,0.7127
+historical,South,1986,0.7132
+historical,South,1987,0.7016
+historical,South,1988,0.7028
+historical,South,1989,0.6978
+historical,South,1990,0.7015
+historical,South,1991,0.7247
+historical,South,1992,0.7096
+historical,South,1993,0.7084
+historical,South,1994,0.7122
+historical,South,1995,0.7145
+historical,South,1996,0.7015
+historical,South,1997,0.7234
+historical,South,1998,0.702
+historical,South,1999,0.7008
+historical,South,2000,0.7136
+historical,South,2001,0.7053
+historical,South,2002,0.713
+historical,South,2003,0.7154
+historical,South,2004,0.7146
+historical,South,2005,0.7186
+historical,South,2006,0.7174
+historical,South,2007,0.7258
+historical,South,2008,0.7009
+historical,South,2009,0.7126
+historical,South,2010,0.7173
+historical,South,2011,0.7097
+historical,South,2012,0.7162
+historical,South,2013,0.7128
+historical,South,2014,0.7024
+historical,East Coast,1950,0.9545
+historical,East Coast,1951,0.9675
+historical,East Coast,1952,0.9377
+historical,East Coast,1953,0.9824
+historical,East Coast,1954,0.9583
+historical,East Coast,1955,0.938
+historical,East Coast,1956,0.9493
+historical,East Coast,1957,0.9499
+historical,East Coast,1958,0.9887
+historical,East Coast,1959,0.9327
+historical,East Coast,1960,0.9579
+historical,East Coast,1961,0.9195
+historical,East Coast,1962,0.9164
+historical,East Coast,1963,0.9542
+historical,East Coast,1964,0.9647
+historical,East Coast,1965,0.9794
+historical,East Coast,1966,0.9716
+historical,East Coast,1967,0.9629
+historical,East Coast,1968,0.9853
+historical,East Coast,1969,0.9468
+historical,East Coast,1970,0.9711
+historical,East Coast,1971,0.9729
+historical,East Coast,1972,0.962
+historical,East Coast,1973,0.9646
+historical,East Coast,1974,0.9497
+historical,East Coast,1975,0.9554
+historical,East Coast,1976,0.9738
+historical,East Coast,1977,0.9801
+historical,East Coast,1978,0.9592
+historical,East Coast,1979,0.9573
+historical,East Coast,1980,0.9976
+historical,East Coast,1981,0.9726
+historical,East Coast,1982,0.9756
+historical,East Coast,1983,0.9285
+historical,East Coast,1984,0.928
+historical,East Coast,1985,0.9881
+historical,East Coast,1986,0.9884
+historical,East Coast,1987,0.9762
+historical,East Coast,1988,0.9754
+historical,East Coast,1989,0.9748
+historical,East Coast,1990,0.9634
+historical,East Coast,1991,0.9507
+historical,East Coast,1992,0.9872
+historical,East Coast,1993,0.9848
+historical,East Coast,1994,0.9574
+historical,East Coast,1995,0.9322
+historical,East Coast,1996,0.9577
+historical,East Coast,1997,0.9639
+historical,East Coast,1998,0.9757
+historical,East Coast,1999,0.9388
+historical,East Coast,2000,0.9563
+historical,East Coast,2001,0.9706
+historical,East Coast,2002,0.9605
+historical,East Coast,2003,0.9486
+historical,East Coast,2004,0.9672
+historical,East Coast,2005,0.9826
+historical,East Coast,2006,0.9619
+historical,East Coast,2007,0.9739
+historical,East Coast,2008,0.9587
+historical,East Coast,2009,0.9795
+historical,East Coast,2010,0.9469
+historical,East Coast,2011,0.9838
+historical,East Coast,2012,0.9557
+historical,East Coast,2013,0.9565
+historical,East Coast,2014,0.9233
+ssp126,West Coast,2015,0.8092
+ssp126,West Coast,2016,0.771
+ssp126,West Coast,2017,0.791
+ssp126,West Coast,2018,0.7695
+ssp126,West Coast,2019,0.7888
+ssp126,West Coast,2020,0.8139
+ssp126,West Coast,2021,0.7115
+ssp126,West Coast,2022,0.8322
+ssp126,West Coast,2023,0.7733
+ssp126,West Coast,2024,0.7703
+ssp126,West Coast,2025,0.7672
+ssp126,West Coast,2026,0.785
+ssp126,West Coast,2027,0.709
+ssp126,West Coast,2028,0.7714
+ssp126,West Coast,2029,0.8272
+ssp126,West Coast,2030,0.7796
+ssp126,West Coast,2031,0.7589
+ssp126,West Coast,2032,0.8238
+ssp126,West Coast,2033,0.7979
+ssp126,West Coast,2034,0.8243
+ssp126,West Coast,2035,0.7698
+ssp126,West Coast,2036,0.8063
+ssp126,West Coast,2037,0.7424
+ssp126,West Coast,2038,0.8015
+ssp126,West Coast,2039,0.8069
+ssp126,West Coast,2040,0.7836
+ssp126,West Coast,2041,0.7166
+ssp126,West Coast,2042,0.7868
+ssp126,West Coast,2043,0.7915
+ssp126,West Coast,2044,0.8312
+ssp126,West Coast,2045,0.7965
+ssp126,West Coast,2046,0.8594
+ssp126,West Coast,2047,0.8086
+ssp126,West Coast,2048,0.7477
+ssp126,West Coast,2049,0.7363
+ssp126,West Coast,2050,0.7843
+ssp126,West Coast,2051,0.7942
+ssp126,West Coast,2052,0.7946
+ssp126,West Coast,2053,0.7959
+ssp126,West Coast,2054,0.8888
+ssp126,West Coast,2055,0.7555
+ssp126,West Coast,2056,0.7996
+ssp126,West Coast,2057,0.7548
+ssp126,West Coast,2058,0.8332
+ssp126,West Coast,2059,0.8599
+ssp126,West Coast,2060,0.7982
+ssp126,West Coast,2061,0.8405
+ssp126,West Coast,2062,0.8352
+ssp126,West Coast,2063,0.8146
+ssp126,West Coast,2064,0.7271
+ssp126,West Coast,2065,0.83
+ssp126,West Coast,2066,0.8373
+ssp126,West Coast,2067,0.75
+ssp126,West Coast,2068,0.7712
+ssp126,West Coast,2069,0.6775
+ssp126,West Coast,2070,0.7456
+ssp126,West Coast,2071,0.8058
+ssp126,West Coast,2072,0.7294
+ssp126,West Coast,2073,0.8233
+ssp126,West Coast,2074,0.8608
+ssp126,West Coast,2075,0.7903
+ssp126,West Coast,2076,0.7914
+ssp126,West Coast,2077,0.8532
+ssp126,West Coast,2078,0.8403
+ssp126,West Coast,2079,0.7584
+ssp126,West Coast,2080,0.7184
+ssp126,West Coast,2081,0.8351
+ssp126,West Coast,2082,0.7703
+ssp126,West Coast,2083,0.7521
+ssp126,West Coast,2084,0.8461
+ssp126,West Coast,2085,0.7967
+ssp126,West Coast,2086,0.7306
+ssp126,West Coast,2087,0.78
+ssp126,West Coast,2088,0.8285
+ssp126,West Coast,2089,0.8138
+ssp126,West Coast,2090,0.756
+ssp126,West Coast,2091,0.7377
+ssp126,West Coast,2092,0.8166
+ssp126,West Coast,2093,0.7798
+ssp126,West Coast,2094,0.7938
+ssp126,West Coast,2095,0.7786
+ssp126,West Coast,2096,0.7477
+ssp126,West Coast,2097,0.8228
+ssp126,West Coast,2098,0.8061
+ssp126,West Coast,2099,0.802
+ssp126,West Coast,2100,0.8118
+ssp126,Northwest / Mountain,2015,0.5553
+ssp126,Northwest / Mountain,2016,0.5858
+ssp126,Northwest / Mountain,2017,0.6813
+ssp126,Northwest / Mountain,2018,0.655
+ssp126,Northwest / Mountain,2019,0.6018
+ssp126,Northwest / Mountain,2020,0.6236
+ssp126,Northwest / Mountain,2021,0.6964
+ssp126,Northwest / Mountain,2022,0.5066
+ssp126,Northwest / Mountain,2023,0.6035
+ssp126,Northwest / Mountain,2024,0.5508
+ssp126,Northwest / Mountain,2025,0.5319
+ssp126,Northwest / Mountain,2026,0.572
+ssp126,Northwest / Mountain,2027,0.6161
+ssp126,Northwest / Mountain,2028,0.5077
+ssp126,Northwest / Mountain,2029,0.6834
+ssp126,Northwest / Mountain,2030,0.5952
+ssp126,Northwest / Mountain,2031,0.6072
+ssp126,Northwest / Mountain,2032,0.6349
+ssp126,Northwest / Mountain,2033,0.5535
+ssp126,Northwest / Mountain,2034,0.4992
+ssp126,Northwest / Mountain,2035,0.5786
+ssp126,Northwest / Mountain,2036,0.5616
+ssp126,Northwest / Mountain,2037,0.6434
+ssp126,Northwest / Mountain,2038,0.6655
+ssp126,Northwest / Mountain,2039,0.6158
+ssp126,Northwest / Mountain,2040,0.6703
+ssp126,Northwest / Mountain,2041,0.5801
+ssp126,Northwest / Mountain,2042,0.5643
+ssp126,Northwest / Mountain,2043,0.5871
+ssp126,Northwest / Mountain,2044,0.5769
+ssp126,Northwest / Mountain,2045,0.6858
+ssp126,Northwest / Mountain,2046,0.5782
+ssp126,Northwest / Mountain,2047,0.5316
+ssp126,Northwest / Mountain,2048,0.5563
+ssp126,Northwest / Mountain,2049,0.6828
+ssp126,Northwest / Mountain,2050,0.6176
+ssp126,Northwest / Mountain,2051,0.5967
+ssp126,Northwest / Mountain,2052,0.5523
+ssp126,Northwest / Mountain,2053,0.5887
+ssp126,Northwest / Mountain,2054,0.4977
+ssp126,Northwest / Mountain,2055,0.5046
+ssp126,Northwest / Mountain,2056,0.5722
+ssp126,Northwest / Mountain,2057,0.5645
+ssp126,Northwest / Mountain,2058,0.5857
+ssp126,Northwest / Mountain,2059,0.5807
+ssp126,Northwest / Mountain,2060,0.5957
+ssp126,Northwest / Mountain,2061,0.5387
+ssp126,Northwest / Mountain,2062,0.5663
+ssp126,Northwest / Mountain,2063,0.5206
+ssp126,Northwest / Mountain,2064,0.6275
+ssp126,Northwest / Mountain,2065,0.4975
+ssp126,Northwest / Mountain,2066,0.5425
+ssp126,Northwest / Mountain,2067,0.554
+ssp126,Northwest / Mountain,2068,0.5399
+ssp126,Northwest / Mountain,2069,0.6731
+ssp126,Northwest / Mountain,2070,0.6474
+ssp126,Northwest / Mountain,2071,0.6115
+ssp126,Northwest / Mountain,2072,0.6801
+ssp126,Northwest / Mountain,2073,0.5777
+ssp126,Northwest / Mountain,2074,0.5182
+ssp126,Northwest / Mountain,2075,0.6046
+ssp126,Northwest / Mountain,2076,0.4871
+ssp126,Northwest / Mountain,2077,0.4704
+ssp126,Northwest / Mountain,2078,0.5193
+ssp126,Northwest / Mountain,2079,0.6474
+ssp126,Northwest / Mountain,2080,0.6685
+ssp126,Northwest / Mountain,2081,0.5635
+ssp126,Northwest / Mountain,2082,0.6031
+ssp126,Northwest / Mountain,2083,0.5662
+ssp126,Northwest / Mountain,2084,0.6469
+ssp126,Northwest / Mountain,2085,0.5921
+ssp126,Northwest / Mountain,2086,0.5924
+ssp126,Northwest / Mountain,2087,0.5642
+ssp126,Northwest / Mountain,2088,0.4932
+ssp126,Northwest / Mountain,2089,0.6021
+ssp126,Northwest / Mountain,2090,0.6377
+ssp126,Northwest / Mountain,2091,0.6483
+ssp126,Northwest / Mountain,2092,0.5431
+ssp126,Northwest / Mountain,2093,0.6003
+ssp126,Northwest / Mountain,2094,0.5646
+ssp126,Northwest / Mountain,2095,0.6077
+ssp126,Northwest / Mountain,2096,0.6629
+ssp126,Northwest / Mountain,2097,0.5041
+ssp126,Northwest / Mountain,2098,0.5914
+ssp126,Northwest / Mountain,2099,0.6141
+ssp126,Northwest / Mountain,2100,0.6236
+ssp126,South,2015,0.7116
+ssp126,South,2016,0.6965
+ssp126,South,2017,0.6848
+ssp126,South,2018,0.7175
+ssp126,South,2019,0.7092
+ssp126,South,2020,0.6936
+ssp126,South,2021,0.6904
+ssp126,South,2022,0.7056
+ssp126,South,2023,0.7114
+ssp126,South,2024,0.7098
+ssp126,South,2025,0.7078
+ssp126,South,2026,0.7122
+ssp126,South,2027,0.7067
+ssp126,South,2028,0.709
+ssp126,South,2029,0.7154
+ssp126,South,2030,0.7177
+ssp126,South,2031,0.7016
+ssp126,South,2032,0.7024
+ssp126,South,2033,0.6861
+ssp126,South,2034,0.7187
+ssp126,South,2035,0.7095
+ssp126,South,2036,0.6996
+ssp126,South,2037,0.72
+ssp126,South,2038,0.692
+ssp126,South,2039,0.7158
+ssp126,South,2040,0.7155
+ssp126,South,2041,0.7171
+ssp126,South,2042,0.6964
+ssp126,South,2043,0.7028
+ssp126,South,2044,0.7183
+ssp126,South,2045,0.7026
+ssp126,South,2046,0.7071
+ssp126,South,2047,0.709
+ssp126,South,2048,0.7139
+ssp126,South,2049,0.7048
+ssp126,South,2050,0.6895
+ssp126,South,2051,0.708
+ssp126,South,2052,0.6777
+ssp126,South,2053,0.706
+ssp126,South,2054,0.7213
+ssp126,South,2055,0.7188
+ssp126,South,2056,0.7
+ssp126,South,2057,0.714
+ssp126,South,2058,0.7009
+ssp126,South,2059,0.7028
+ssp126,South,2060,0.7189
+ssp126,South,2061,0.721
+ssp126,South,2062,0.7101
+ssp126,South,2063,0.706
+ssp126,South,2064,0.7055
+ssp126,South,2065,0.7169
+ssp126,South,2066,0.6954
+ssp126,South,2067,0.7162
+ssp126,South,2068,0.7148
+ssp126,South,2069,0.6891
+ssp126,South,2070,0.7155
+ssp126,South,2071,0.702
+ssp126,South,2072,0.6908
+ssp126,South,2073,0.7236
+ssp126,South,2074,0.6912
+ssp126,South,2075,0.7226
+ssp126,South,2076,0.7122
+ssp126,South,2077,0.7204
+ssp126,South,2078,0.7211
+ssp126,South,2079,0.6898
+ssp126,South,2080,0.699
+ssp126,South,2081,0.7118
+ssp126,South,2082,0.7088
+ssp126,South,2083,0.7066
+ssp126,South,2084,0.6891
+ssp126,South,2085,0.7069
+ssp126,South,2086,0.7001
+ssp126,South,2087,0.6956
+ssp126,South,2088,0.7021
+ssp126,South,2089,0.7069
+ssp126,South,2090,0.7122
+ssp126,South,2091,0.699
+ssp126,South,2092,0.7095
+ssp126,South,2093,0.7111
+ssp126,South,2094,0.7157
+ssp126,South,2095,0.7108
+ssp126,South,2096,0.6995
+ssp126,South,2097,0.7029
+ssp126,South,2098,0.7109
+ssp126,South,2099,0.7003
+ssp126,South,2100,0.6957
+ssp126,East Coast,2015,0.9406
+ssp126,East Coast,2016,0.955
+ssp126,East Coast,2017,0.9342
+ssp126,East Coast,2018,0.9664
+ssp126,East Coast,2019,0.981
+ssp126,East Coast,2020,0.9455
+ssp126,East Coast,2021,0.937
+ssp126,East Coast,2022,0.9657
+ssp126,East Coast,2023,0.944
+ssp126,East Coast,2024,0.945
+ssp126,East Coast,2025,0.9655
+ssp126,East Coast,2026,0.9339
+ssp126,East Coast,2027,0.9484
+ssp126,East Coast,2028,0.956
+ssp126,East Coast,2029,0.9366
+ssp126,East Coast,2030,0.9646
+ssp126,East Coast,2031,0.9621
+ssp126,East Coast,2032,0.9504
+ssp126,East Coast,2033,0.9493
+ssp126,East Coast,2034,0.9512
+ssp126,East Coast,2035,0.9286
+ssp126,East Coast,2036,0.9414
+ssp126,East Coast,2037,0.9851
+ssp126,East Coast,2038,0.9483
+ssp126,East Coast,2039,0.974
+ssp126,East Coast,2040,0.9717
+ssp126,East Coast,2041,0.9498
+ssp126,East Coast,2042,0.9413
+ssp126,East Coast,2043,0.9958
+ssp126,East Coast,2044,0.9893
+ssp126,East Coast,2045,0.9534
+ssp126,East Coast,2046,0.9839
+ssp126,East Coast,2047,0.9711
+ssp126,East Coast,2048,0.9761
+ssp126,East Coast,2049,0.9335
+ssp126,East Coast,2050,0.9434
+ssp126,East Coast,2051,0.9225
+ssp126,East Coast,2052,0.9294
+ssp126,East Coast,2053,0.945
+ssp126,East Coast,2054,0.9394
+ssp126,East Coast,2055,0.9695
+ssp126,East Coast,2056,0.9733
+ssp126,East Coast,2057,0.9815
+ssp126,East Coast,2058,0.9733
+ssp126,East Coast,2059,0.9368
+ssp126,East Coast,2060,0.9578
+ssp126,East Coast,2061,0.9637
+ssp126,East Coast,2062,0.9899
+ssp126,East Coast,2063,0.9682
+ssp126,East Coast,2064,0.9914
+ssp126,East Coast,2065,0.9513
+ssp126,East Coast,2066,0.9663
+ssp126,East Coast,2067,0.9672
+ssp126,East Coast,2068,0.9702
+ssp126,East Coast,2069,0.9507
+ssp126,East Coast,2070,0.9556
+ssp126,East Coast,2071,0.9639
+ssp126,East Coast,2072,0.9368
+ssp126,East Coast,2073,0.9585
+ssp126,East Coast,2074,0.9421
+ssp126,East Coast,2075,0.9291
+ssp126,East Coast,2076,0.9458
+ssp126,East Coast,2077,0.9794
+ssp126,East Coast,2078,0.9901
+ssp126,East Coast,2079,0.9609
+ssp126,East Coast,2080,0.9259
+ssp126,East Coast,2081,0.9341
+ssp126,East Coast,2082,0.9514
+ssp126,East Coast,2083,0.951
+ssp126,East Coast,2084,0.9737
+ssp126,East Coast,2085,0.9401
+ssp126,East Coast,2086,0.9401
+ssp126,East Coast,2087,0.9436
+ssp126,East Coast,2088,0.9653
+ssp126,East Coast,2089,0.9803
+ssp126,East Coast,2090,0.99
+ssp126,East Coast,2091,0.9287
+ssp126,East Coast,2092,0.966
+ssp126,East Coast,2093,0.9634
+ssp126,East Coast,2094,0.9639
+ssp126,East Coast,2095,0.9632
+ssp126,East Coast,2096,0.9308
+ssp126,East Coast,2097,0.9647
+ssp126,East Coast,2098,0.9632
+ssp126,East Coast,2099,0.9531
+ssp126,East Coast,2100,0.9613
+ssp245,West Coast,2015,0.81
+ssp245,West Coast,2016,0.7916
+ssp245,West Coast,2017,0.7756
+ssp245,West Coast,2018,0.7627
+ssp245,West Coast,2019,0.7631
+ssp245,West Coast,2020,0.7567
+ssp245,West Coast,2021,0.8235
+ssp245,West Coast,2022,0.8277
+ssp245,West Coast,2023,0.7505
+ssp245,West Coast,2024,0.8028
+ssp245,West Coast,2025,0.715
+ssp245,West Coast,2026,0.7968
+ssp245,West Coast,2027,0.7337
+ssp245,West Coast,2028,0.7508
+ssp245,West Coast,2029,0.8157
+ssp245,West Coast,2030,0.852
+ssp245,West Coast,2031,0.796
+ssp245,West Coast,2032,0.7715
+ssp245,West Coast,2033,0.7367
+ssp245,West Coast,2034,0.761
+ssp245,West Coast,2035,0.8436
+ssp245,West Coast,2036,0.7232
+ssp245,West Coast,2037,0.8852
+ssp245,West Coast,2038,0.8675
+ssp245,West Coast,2039,0.7929
+ssp245,West Coast,2040,0.8066
+ssp245,West Coast,2041,0.8324
+ssp245,West Coast,2042,0.8135
+ssp245,West Coast,2043,0.8493
+ssp245,West Coast,2044,0.7773
+ssp245,West Coast,2045,0.7661
+ssp245,West Coast,2046,0.844
+ssp245,West Coast,2047,0.7805
+ssp245,West Coast,2048,0.8149
+ssp245,West Coast,2049,0.8949
+ssp245,West Coast,2050,0.788
+ssp245,West Coast,2051,0.8505
+ssp245,West Coast,2052,0.7996
+ssp245,West Coast,2053,0.8156
+ssp245,West Coast,2054,0.7988
+ssp245,West Coast,2055,0.7829
+ssp245,West Coast,2056,0.8099
+ssp245,West Coast,2057,0.7116
+ssp245,West Coast,2058,0.8761
+ssp245,West Coast,2059,0.8296
+ssp245,West Coast,2060,0.8394
+ssp245,West Coast,2061,0.8258
+ssp245,West Coast,2062,0.8319
+ssp245,West Coast,2063,0.8723
+ssp245,West Coast,2064,0.7837
+ssp245,West Coast,2065,0.8732
+ssp245,West Coast,2066,0.8289
+ssp245,West Coast,2067,0.8577
+ssp245,West Coast,2068,0.8333
+ssp245,West Coast,2069,0.8235
+ssp245,West Coast,2070,0.8388
+ssp245,West Coast,2071,0.8064
+ssp245,West Coast,2072,0.8389
+ssp245,West Coast,2073,0.8284
+ssp245,West Coast,2074,0.8017
+ssp245,West Coast,2075,0.8344
+ssp245,West Coast,2076,0.8199
+ssp245,West Coast,2077,0.8318
+ssp245,West Coast,2078,0.8162
+ssp245,West Coast,2079,0.7842
+ssp245,West Coast,2080,0.7757
+ssp245,West Coast,2081,0.8738
+ssp245,West Coast,2082,0.86
+ssp245,West Coast,2083,0.8289
+ssp245,West Coast,2084,0.8704
+ssp245,West Coast,2085,0.796
+ssp245,West Coast,2086,0.8404
+ssp245,West Coast,2087,0.8432
+ssp245,West Coast,2088,0.8002
+ssp245,West Coast,2089,0.8735
+ssp245,West Coast,2090,0.8448
+ssp245,West Coast,2091,0.8698
+ssp245,West Coast,2092,0.8059
+ssp245,West Coast,2093,0.831
+ssp245,West Coast,2094,0.8124
+ssp245,West Coast,2095,0.8586
+ssp245,West Coast,2096,0.8344
+ssp245,West Coast,2097,0.8538
+ssp245,West Coast,2098,0.8176
+ssp245,West Coast,2099,0.8635
+ssp245,West Coast,2100,0.835
+ssp245,Northwest / Mountain,2015,0.6014
+ssp245,Northwest / Mountain,2016,0.5541
+ssp245,Northwest / Mountain,2017,0.5754
+ssp245,Northwest / Mountain,2018,0.6562
+ssp245,Northwest / Mountain,2019,0.5477
+ssp245,Northwest / Mountain,2020,0.6362
+ssp245,Northwest / Mountain,2021,0.6082
+ssp245,Northwest / Mountain,2022,0.5836
+ssp245,Northwest / Mountain,2023,0.6767
+ssp245,Northwest / Mountain,2024,0.5679
+ssp245,Northwest / Mountain,2025,0.6144
+ssp245,Northwest / Mountain,2026,0.5818
+ssp245,Northwest / Mountain,2027,0.6976
+ssp245,Northwest / Mountain,2028,0.7006
+ssp245,Northwest / Mountain,2029,0.5474
+ssp245,Northwest / Mountain,2030,0.6134
+ssp245,Northwest / Mountain,2031,0.5514
+ssp245,Northwest / Mountain,2032,0.5579
+ssp245,Northwest / Mountain,2033,0.5979
+ssp245,Northwest / Mountain,2034,0.5629
+ssp245,Northwest / Mountain,2035,0.5486
+ssp245,Northwest / Mountain,2036,0.601
+ssp245,Northwest / Mountain,2037,0.5236
+ssp245,Northwest / Mountain,2038,0.5949
+ssp245,Northwest / Mountain,2039,0.5395
+ssp245,Northwest / Mountain,2040,0.5735
+ssp245,Northwest / Mountain,2041,0.5751
+ssp245,Northwest / Mountain,2042,0.5215
+ssp245,Northwest / Mountain,2043,0.6055
+ssp245,Northwest / Mountain,2044,0.536
+ssp245,Northwest / Mountain,2045,0.4981
+ssp245,Northwest / Mountain,2046,0.5324
+ssp245,Northwest / Mountain,2047,0.6207
+ssp245,Northwest / Mountain,2048,0.5855
+ssp245,Northwest / Mountain,2049,0.5194
+ssp245,Northwest / Mountain,2050,0.6776
+ssp245,Northwest / Mountain,2051,0.6044
+ssp245,Northwest / Mountain,2052,0.5979
+ssp245,Northwest / Mountain,2053,0.6051
+ssp245,Northwest / Mountain,2054,0.5449
+ssp245,Northwest / Mountain,2055,0.5766
+ssp245,Northwest / Mountain,2056,0.568
+ssp245,Northwest / Mountain,2057,0.65
+ssp245,Northwest / Mountain,2058,0.4993
+ssp245,Northwest / Mountain,2059,0.4525
+ssp245,Northwest / Mountain,2060,0.5667
+ssp245,Northwest / Mountain,2061,0.5844
+ssp245,Northwest / Mountain,2062,0.567
+ssp245,Northwest / Mountain,2063,0.4994
+ssp245,Northwest / Mountain,2064,0.6016
+ssp245,Northwest / Mountain,2065,0.5006
+ssp245,Northwest / Mountain,2066,0.5222
+ssp245,Northwest / Mountain,2067,0.6131
+ssp245,Northwest / Mountain,2068,0.6267
+ssp245,Northwest / Mountain,2069,0.5274
+ssp245,Northwest / Mountain,2070,0.4529
+ssp245,Northwest / Mountain,2071,0.5695
+ssp245,Northwest / Mountain,2072,0.5946
+ssp245,Northwest / Mountain,2073,0.5372
+ssp245,Northwest / Mountain,2074,0.5066
+ssp245,Northwest / Mountain,2075,0.5821
+ssp245,Northwest / Mountain,2076,0.6924
+ssp245,Northwest / Mountain,2077,0.5092
+ssp245,Northwest / Mountain,2078,0.5691
+ssp245,Northwest / Mountain,2079,0.6676
+ssp245,Northwest / Mountain,2080,0.5883
+ssp245,Northwest / Mountain,2081,0.6084
+ssp245,Northwest / Mountain,2082,0.5321
+ssp245,Northwest / Mountain,2083,0.5431
+ssp245,Northwest / Mountain,2084,0.5876
+ssp245,Northwest / Mountain,2085,0.543
+ssp245,Northwest / Mountain,2086,0.5453
+ssp245,Northwest / Mountain,2087,0.5049
+ssp245,Northwest / Mountain,2088,0.4279
+ssp245,Northwest / Mountain,2089,0.5107
+ssp245,Northwest / Mountain,2090,0.5313
+ssp245,Northwest / Mountain,2091,0.5829
+ssp245,Northwest / Mountain,2092,0.4881
+ssp245,Northwest / Mountain,2093,0.5662
+ssp245,Northwest / Mountain,2094,0.5635
+ssp245,Northwest / Mountain,2095,0.5461
+ssp245,Northwest / Mountain,2096,0.563
+ssp245,Northwest / Mountain,2097,0.5453
+ssp245,Northwest / Mountain,2098,0.5207
+ssp245,Northwest / Mountain,2099,0.4831
+ssp245,Northwest / Mountain,2100,0.6143
+ssp245,South,2015,0.7023
+ssp245,South,2016,0.6886
+ssp245,South,2017,0.7132
+ssp245,South,2018,0.6956
+ssp245,South,2019,0.7028
+ssp245,South,2020,0.714
+ssp245,South,2021,0.7145
+ssp245,South,2022,0.7054
+ssp245,South,2023,0.7045
+ssp245,South,2024,0.7259
+ssp245,South,2025,0.7096
+ssp245,South,2026,0.691
+ssp245,South,2027,0.6987
+ssp245,South,2028,0.6818
+ssp245,South,2029,0.7115
+ssp245,South,2030,0.6953
+ssp245,South,2031,0.7161
+ssp245,South,2032,0.7219
+ssp245,South,2033,0.7256
+ssp245,South,2034,0.7282
+ssp245,South,2035,0.7027
+ssp245,South,2036,0.7231
+ssp245,South,2037,0.6836
+ssp245,South,2038,0.677
+ssp245,South,2039,0.7022
+ssp245,South,2040,0.6992
+ssp245,South,2041,0.7097
+ssp245,South,2042,0.6903
+ssp245,South,2043,0.7012
+ssp245,South,2044,0.7048
+ssp245,South,2045,0.6991
+ssp245,South,2046,0.707
+ssp245,South,2047,0.7069
+ssp245,South,2048,0.7001
+ssp245,South,2049,0.706
+ssp245,South,2050,0.6993
+ssp245,South,2051,0.7019
+ssp245,South,2052,0.711
+ssp245,South,2053,0.7161
+ssp245,South,2054,0.7169
+ssp245,South,2055,0.7209
+ssp245,South,2056,0.693
+ssp245,South,2057,0.6953
+ssp245,South,2058,0.7148
+ssp245,South,2059,0.7129
+ssp245,South,2060,0.7163
+ssp245,South,2061,0.7004
+ssp245,South,2062,0.7032
+ssp245,South,2063,0.7197
+ssp245,South,2064,0.7062
+ssp245,South,2065,0.6968
+ssp245,South,2066,0.7141
+ssp245,South,2067,0.726
+ssp245,South,2068,0.6999
+ssp245,South,2069,0.701
+ssp245,South,2070,0.7232
+ssp245,South,2071,0.7042
+ssp245,South,2072,0.7121
+ssp245,South,2073,0.6935
+ssp245,South,2074,0.7052
+ssp245,South,2075,0.7105
+ssp245,South,2076,0.6988
+ssp245,South,2077,0.6964
+ssp245,South,2078,0.6897
+ssp245,South,2079,0.6996
+ssp245,South,2080,0.7223
+ssp245,South,2081,0.7186
+ssp245,South,2082,0.7149
+ssp245,South,2083,0.7105
+ssp245,South,2084,0.7093
+ssp245,South,2085,0.7147
+ssp245,South,2086,0.7055
+ssp245,South,2087,0.6978
+ssp245,South,2088,0.6936
+ssp245,South,2089,0.7048
+ssp245,South,2090,0.7134
+ssp245,South,2091,0.701
+ssp245,South,2092,0.709
+ssp245,South,2093,0.7106
+ssp245,South,2094,0.7116
+ssp245,South,2095,0.7137
+ssp245,South,2096,0.7095
+ssp245,South,2097,0.7046
+ssp245,South,2098,0.716
+ssp245,South,2099,0.7197
+ssp245,South,2100,0.6935
+ssp245,East Coast,2015,0.9629
+ssp245,East Coast,2016,0.9709
+ssp245,East Coast,2017,0.9713
+ssp245,East Coast,2018,0.9779
+ssp245,East Coast,2019,1.0
+ssp245,East Coast,2020,0.9598
+ssp245,East Coast,2021,0.9735
+ssp245,East Coast,2022,0.9507
+ssp245,East Coast,2023,0.9744
+ssp245,East Coast,2024,0.9718
+ssp245,East Coast,2025,0.9812
+ssp245,East Coast,2026,0.9339
+ssp245,East Coast,2027,0.9455
+ssp245,East Coast,2028,0.912
+ssp245,East Coast,2029,0.9563
+ssp245,East Coast,2030,0.9848
+ssp245,East Coast,2031,0.9713
+ssp245,East Coast,2032,0.9767
+ssp245,East Coast,2033,0.9577
+ssp245,East Coast,2034,0.9852
+ssp245,East Coast,2035,0.9497
+ssp245,East Coast,2036,0.9593
+ssp245,East Coast,2037,0.9561
+ssp245,East Coast,2038,0.9228
+ssp245,East Coast,2039,0.9573
+ssp245,East Coast,2040,0.9539
+ssp245,East Coast,2041,0.9706
+ssp245,East Coast,2042,0.9362
+ssp245,East Coast,2043,0.9282
+ssp245,East Coast,2044,0.949
+ssp245,East Coast,2045,0.9427
+ssp245,East Coast,2046,0.9826
+ssp245,East Coast,2047,0.958
+ssp245,East Coast,2048,0.97
+ssp245,East Coast,2049,0.9835
+ssp245,East Coast,2050,0.9626
+ssp245,East Coast,2051,0.966
+ssp245,East Coast,2052,0.9421
+ssp245,East Coast,2053,0.9397
+ssp245,East Coast,2054,0.9811
+ssp245,East Coast,2055,0.9707
+ssp245,East Coast,2056,0.9495
+ssp245,East Coast,2057,0.949
+ssp245,East Coast,2058,0.9489
+ssp245,East Coast,2059,0.9243
+ssp245,East Coast,2060,0.9237
+ssp245,East Coast,2061,0.9481
+ssp245,East Coast,2062,0.9496
+ssp245,East Coast,2063,0.9813
+ssp245,East Coast,2064,0.904
+ssp245,East Coast,2065,0.9197
+ssp245,East Coast,2066,0.9908
+ssp245,East Coast,2067,0.9673
+ssp245,East Coast,2068,0.9304
+ssp245,East Coast,2069,0.9387
+ssp245,East Coast,2070,0.9808
+ssp245,East Coast,2071,0.9214
+ssp245,East Coast,2072,0.9709
+ssp245,East Coast,2073,0.9353
+ssp245,East Coast,2074,0.9412
+ssp245,East Coast,2075,0.9678
+ssp245,East Coast,2076,0.9275
+ssp245,East Coast,2077,0.9917
+ssp245,East Coast,2078,0.9863
+ssp245,East Coast,2079,0.9283
+ssp245,East Coast,2080,0.951
+ssp245,East Coast,2081,0.9343
+ssp245,East Coast,2082,0.9412
+ssp245,East Coast,2083,0.9494
+ssp245,East Coast,2084,0.9684
+ssp245,East Coast,2085,0.9655
+ssp245,East Coast,2086,0.9934
+ssp245,East Coast,2087,0.9789
+ssp245,East Coast,2088,0.9591
+ssp245,East Coast,2089,0.9567
+ssp245,East Coast,2090,0.9539
+ssp245,East Coast,2091,0.9538
+ssp245,East Coast,2092,0.9802
+ssp245,East Coast,2093,0.9817
+ssp245,East Coast,2094,0.9273
+ssp245,East Coast,2095,0.9761
+ssp245,East Coast,2096,0.9472
+ssp245,East Coast,2097,0.9674
+ssp245,East Coast,2098,0.9473
+ssp245,East Coast,2099,0.9832
+ssp245,East Coast,2100,0.9539
+ssp585,West Coast,2015,0.7504
+ssp585,West Coast,2016,0.6561
+ssp585,West Coast,2017,0.73
+ssp585,West Coast,2018,0.7626
+ssp585,West Coast,2019,0.7873
+ssp585,West Coast,2020,0.8128
+ssp585,West Coast,2021,0.8171
+ssp585,West Coast,2022,0.7942
+ssp585,West Coast,2023,0.855
+ssp585,West Coast,2024,0.8034
+ssp585,West Coast,2025,0.7265
+ssp585,West Coast,2026,0.7574
+ssp585,West Coast,2027,0.7801
+ssp585,West Coast,2028,0.7936
+ssp585,West Coast,2029,0.8003
+ssp585,West Coast,2030,0.8434
+ssp585,West Coast,2031,0.7601
+ssp585,West Coast,2032,0.8083
+ssp585,West Coast,2033,0.8216
+ssp585,West Coast,2034,0.7867
+ssp585,West Coast,2035,0.7571
+ssp585,West Coast,2036,0.8133
+ssp585,West Coast,2037,0.7594
+ssp585,West Coast,2038,0.7847
+ssp585,West Coast,2039,0.8114
+ssp585,West Coast,2040,0.8121
+ssp585,West Coast,2041,0.8429
+ssp585,West Coast,2042,0.8041
+ssp585,West Coast,2043,0.7936
+ssp585,West Coast,2044,0.7832
+ssp585,West Coast,2045,0.849
+ssp585,West Coast,2046,0.8103
+ssp585,West Coast,2047,0.8283
+ssp585,West Coast,2048,0.8711
+ssp585,West Coast,2049,0.8314
+ssp585,West Coast,2050,0.7872
+ssp585,West Coast,2051,0.8051
+ssp585,West Coast,2052,0.792
+ssp585,West Coast,2053,0.839
+ssp585,West Coast,2054,0.8224
+ssp585,West Coast,2055,0.8325
+ssp585,West Coast,2056,0.8127
+ssp585,West Coast,2057,0.8683
+ssp585,West Coast,2058,0.845
+ssp585,West Coast,2059,0.8068
+ssp585,West Coast,2060,0.8423
+ssp585,West Coast,2061,0.837
+ssp585,West Coast,2062,0.8744
+ssp585,West Coast,2063,0.8604
+ssp585,West Coast,2064,0.8719
+ssp585,West Coast,2065,0.8409
+ssp585,West Coast,2066,0.8112
+ssp585,West Coast,2067,0.8579
+ssp585,West Coast,2068,0.8399
+ssp585,West Coast,2069,0.8703
+ssp585,West Coast,2070,0.823
+ssp585,West Coast,2071,0.8296
+ssp585,West Coast,2072,0.8346
+ssp585,West Coast,2073,0.8668
+ssp585,West Coast,2074,0.8597
+ssp585,West Coast,2075,0.8158
+ssp585,West Coast,2076,0.787
+ssp585,West Coast,2077,0.832
+ssp585,West Coast,2078,0.7961
+ssp585,West Coast,2079,0.8656
+ssp585,West Coast,2080,0.8423
+ssp585,West Coast,2081,0.8334
+ssp585,West Coast,2082,0.8315
+ssp585,West Coast,2083,0.8252
+ssp585,West Coast,2084,0.8724
+ssp585,West Coast,2085,0.7972
+ssp585,West Coast,2086,0.8389
+ssp585,West Coast,2087,0.8236
+ssp585,West Coast,2088,0.8383
+ssp585,West Coast,2089,0.8253
+ssp585,West Coast,2090,0.8871
+ssp585,West Coast,2091,0.8481
+ssp585,West Coast,2092,0.8242
+ssp585,West Coast,2093,0.8457
+ssp585,West Coast,2094,0.8367
+ssp585,West Coast,2095,0.7918
+ssp585,West Coast,2096,0.8501
+ssp585,West Coast,2097,0.818
+ssp585,West Coast,2098,0.8883
+ssp585,West Coast,2099,0.8376
+ssp585,West Coast,2100,0.8391
+ssp585,Northwest / Mountain,2015,0.6112
+ssp585,Northwest / Mountain,2016,0.7051
+ssp585,Northwest / Mountain,2017,0.6594
+ssp585,Northwest / Mountain,2018,0.6784
+ssp585,Northwest / Mountain,2019,0.5123
+ssp585,Northwest / Mountain,2020,0.5855
+ssp585,Northwest / Mountain,2021,0.5768
+ssp585,Northwest / Mountain,2022,0.5434
+ssp585,Northwest / Mountain,2023,0.5356
+ssp585,Northwest / Mountain,2024,0.5048
+ssp585,Northwest / Mountain,2025,0.6434
+ssp585,Northwest / Mountain,2026,0.6279
+ssp585,Northwest / Mountain,2027,0.5713
+ssp585,Northwest / Mountain,2028,0.5877
+ssp585,Northwest / Mountain,2029,0.5902
+ssp585,Northwest / Mountain,2030,0.6136
+ssp585,Northwest / Mountain,2031,0.6418
+ssp585,Northwest / Mountain,2032,0.5212
+ssp585,Northwest / Mountain,2033,0.6463
+ssp585,Northwest / Mountain,2034,0.569
+ssp585,Northwest / Mountain,2035,0.5122
+ssp585,Northwest / Mountain,2036,0.4873
+ssp585,Northwest / Mountain,2037,0.6589
+ssp585,Northwest / Mountain,2038,0.7059
+ssp585,Northwest / Mountain,2039,0.6631
+ssp585,Northwest / Mountain,2040,0.6366
+ssp585,Northwest / Mountain,2041,0.5512
+ssp585,Northwest / Mountain,2042,0.5863
+ssp585,Northwest / Mountain,2043,0.5262
+ssp585,Northwest / Mountain,2044,0.606
+ssp585,Northwest / Mountain,2045,0.5722
+ssp585,Northwest / Mountain,2046,0.4971
+ssp585,Northwest / Mountain,2047,0.485
+ssp585,Northwest / Mountain,2048,0.5168
+ssp585,Northwest / Mountain,2049,0.5963
+ssp585,Northwest / Mountain,2050,0.5856
+ssp585,Northwest / Mountain,2051,0.6018
+ssp585,Northwest / Mountain,2052,0.4484
+ssp585,Northwest / Mountain,2053,0.5623
+ssp585,Northwest / Mountain,2054,0.5121
+ssp585,Northwest / Mountain,2055,0.6489
+ssp585,Northwest / Mountain,2056,0.6007
+ssp585,Northwest / Mountain,2057,0.4798
+ssp585,Northwest / Mountain,2058,0.5056
+ssp585,Northwest / Mountain,2059,0.5917
+ssp585,Northwest / Mountain,2060,0.5185
+ssp585,Northwest / Mountain,2061,0.4336
+ssp585,Northwest / Mountain,2062,0.6068
+ssp585,Northwest / Mountain,2063,0.5056
+ssp585,Northwest / Mountain,2064,0.5301
+ssp585,Northwest / Mountain,2065,0.497
+ssp585,Northwest / Mountain,2066,0.5867
+ssp585,Northwest / Mountain,2067,0.4698
+ssp585,Northwest / Mountain,2068,0.4856
+ssp585,Northwest / Mountain,2069,0.5862
+ssp585,Northwest / Mountain,2070,0.5138
+ssp585,Northwest / Mountain,2071,0.4236
+ssp585,Northwest / Mountain,2072,0.5257
+ssp585,Northwest / Mountain,2073,0.4648
+ssp585,Northwest / Mountain,2074,0.4712
+ssp585,Northwest / Mountain,2075,0.4664
+ssp585,Northwest / Mountain,2076,0.4343
+ssp585,Northwest / Mountain,2077,0.5251
+ssp585,Northwest / Mountain,2078,0.5627
+ssp585,Northwest / Mountain,2079,0.4123
+ssp585,Northwest / Mountain,2080,0.5031
+ssp585,Northwest / Mountain,2081,0.4232
+ssp585,Northwest / Mountain,2082,0.4069
+ssp585,Northwest / Mountain,2083,0.449
+ssp585,Northwest / Mountain,2084,0.5114
+ssp585,Northwest / Mountain,2085,0.5244
+ssp585,Northwest / Mountain,2086,0.4904
+ssp585,Northwest / Mountain,2087,0.4507
+ssp585,Northwest / Mountain,2088,0.4668
+ssp585,Northwest / Mountain,2089,0.51
+ssp585,Northwest / Mountain,2090,0.4795
+ssp585,Northwest / Mountain,2091,0.474
+ssp585,Northwest / Mountain,2092,0.4486
+ssp585,Northwest / Mountain,2093,0.4368
+ssp585,Northwest / Mountain,2094,0.4049
+ssp585,Northwest / Mountain,2095,0.432
+ssp585,Northwest / Mountain,2096,0.4372
+ssp585,Northwest / Mountain,2097,0.3817
+ssp585,Northwest / Mountain,2098,0.5123
+ssp585,Northwest / Mountain,2099,0.3982
+ssp585,Northwest / Mountain,2100,0.3201
+ssp585,South,2015,0.7188
+ssp585,South,2016,0.7037
+ssp585,South,2017,0.7141
+ssp585,South,2018,0.694
+ssp585,South,2019,0.6894
+ssp585,South,2020,0.6961
+ssp585,South,2021,0.6983
+ssp585,South,2022,0.7209
+ssp585,South,2023,0.7061
+ssp585,South,2024,0.7115
+ssp585,South,2025,0.7098
+ssp585,South,2026,0.7077
+ssp585,South,2027,0.7082
+ssp585,South,2028,0.7027
+ssp585,South,2029,0.7092
+ssp585,South,2030,0.7231
+ssp585,South,2031,0.7064
+ssp585,South,2032,0.6974
+ssp585,South,2033,0.7073
+ssp585,South,2034,0.6923
+ssp585,South,2035,0.7092
+ssp585,South,2036,0.698
+ssp585,South,2037,0.7267
+ssp585,South,2038,0.6957
+ssp585,South,2039,0.6954
+ssp585,South,2040,0.7033
+ssp585,South,2041,0.7078
+ssp585,South,2042,0.7013
+ssp585,South,2043,0.7013
+ssp585,South,2044,0.708
+ssp585,South,2045,0.6956
+ssp585,South,2046,0.7128
+ssp585,South,2047,0.7139
+ssp585,South,2048,0.7106
+ssp585,South,2049,0.6927
+ssp585,South,2050,0.6902
+ssp585,South,2051,0.6944
+ssp585,South,2052,0.734
+ssp585,South,2053,0.6986
+ssp585,South,2054,0.7091
+ssp585,South,2055,0.7113
+ssp585,South,2056,0.7126
+ssp585,South,2057,0.7152
+ssp585,South,2058,0.7179
+ssp585,South,2059,0.7087
+ssp585,South,2060,0.7092
+ssp585,South,2061,0.7108
+ssp585,South,2062,0.7044
+ssp585,South,2063,0.7063
+ssp585,South,2064,0.7144
+ssp585,South,2065,0.6844
+ssp585,South,2066,0.7105
+ssp585,South,2067,0.7118
+ssp585,South,2068,0.7027
+ssp585,South,2069,0.7067
+ssp585,South,2070,0.6976
+ssp585,South,2071,0.7313
+ssp585,South,2072,0.6897
+ssp585,South,2073,0.6881
+ssp585,South,2074,0.7131
+ssp585,South,2075,0.7216
+ssp585,South,2076,0.7037
+ssp585,South,2077,0.7165
+ssp585,South,2078,0.7032
+ssp585,South,2079,0.718
+ssp585,South,2080,0.7105
+ssp585,South,2081,0.7046
+ssp585,South,2082,0.7082
+ssp585,South,2083,0.7123
+ssp585,South,2084,0.7085
+ssp585,South,2085,0.6996
+ssp585,South,2086,0.6933
+ssp585,South,2087,0.7219
+ssp585,South,2088,0.7143
+ssp585,South,2089,0.706
+ssp585,South,2090,0.7198
+ssp585,South,2091,0.7066
+ssp585,South,2092,0.7132
+ssp585,South,2093,0.7261
+ssp585,South,2094,0.7017
+ssp585,South,2095,0.7127
+ssp585,South,2096,0.7063
+ssp585,South,2097,0.7142
+ssp585,South,2098,0.7078
+ssp585,South,2099,0.6978
+ssp585,South,2100,0.6996
+ssp585,East Coast,2015,0.968
+ssp585,East Coast,2016,0.9502
+ssp585,East Coast,2017,0.9702
+ssp585,East Coast,2018,0.9469
+ssp585,East Coast,2019,0.9799
+ssp585,East Coast,2020,0.9547
+ssp585,East Coast,2021,0.9765
+ssp585,East Coast,2022,0.9684
+ssp585,East Coast,2023,0.9711
+ssp585,East Coast,2024,0.9649
+ssp585,East Coast,2025,0.9983
+ssp585,East Coast,2026,0.9461
+ssp585,East Coast,2027,0.9471
+ssp585,East Coast,2028,0.9946
+ssp585,East Coast,2029,0.9509
+ssp585,East Coast,2030,0.9734
+ssp585,East Coast,2031,0.9659
+ssp585,East Coast,2032,0.9622
+ssp585,East Coast,2033,0.9374
+ssp585,East Coast,2034,0.9363
+ssp585,East Coast,2035,0.9776
+ssp585,East Coast,2036,0.9698
+ssp585,East Coast,2037,0.943
+ssp585,East Coast,2038,0.9602
+ssp585,East Coast,2039,0.9449
+ssp585,East Coast,2040,0.9353
+ssp585,East Coast,2041,0.9264
+ssp585,East Coast,2042,0.9507
+ssp585,East Coast,2043,0.9542
+ssp585,East Coast,2044,0.9547
+ssp585,East Coast,2045,0.9549
+ssp585,East Coast,2046,0.9359
+ssp585,East Coast,2047,0.9766
+ssp585,East Coast,2048,0.9626
+ssp585,East Coast,2049,0.9142
+ssp585,East Coast,2050,0.9258
+ssp585,East Coast,2051,0.9705
+ssp585,East Coast,2052,0.994
+ssp585,East Coast,2053,0.9434
+ssp585,East Coast,2054,0.9675
+ssp585,East Coast,2055,0.9567
+ssp585,East Coast,2056,0.9678
+ssp585,East Coast,2057,0.9426
+ssp585,East Coast,2058,0.94
+ssp585,East Coast,2059,0.9115
+ssp585,East Coast,2060,0.9256
+ssp585,East Coast,2061,0.9534
+ssp585,East Coast,2062,0.9491
+ssp585,East Coast,2063,0.9589
+ssp585,East Coast,2064,0.9485
+ssp585,East Coast,2065,0.9532
+ssp585,East Coast,2066,0.9246
+ssp585,East Coast,2067,0.9546
+ssp585,East Coast,2068,0.9326
+ssp585,East Coast,2069,0.9476
+ssp585,East Coast,2070,0.909
+ssp585,East Coast,2071,0.9548
+ssp585,East Coast,2072,0.9706
+ssp585,East Coast,2073,0.949
+ssp585,East Coast,2074,0.9485
+ssp585,East Coast,2075,0.9409
+ssp585,East Coast,2076,0.9409
+ssp585,East Coast,2077,0.9519
+ssp585,East Coast,2078,0.9262
+ssp585,East Coast,2079,0.9768
+ssp585,East Coast,2080,0.906
+ssp585,East Coast,2081,0.9178
+ssp585,East Coast,2082,0.9461
+ssp585,East Coast,2083,0.9297
+ssp585,East Coast,2084,0.9438
+ssp585,East Coast,2085,0.9279
+ssp585,East Coast,2086,0.9248
+ssp585,East Coast,2087,0.9522
+ssp585,East Coast,2088,0.9479
+ssp585,East Coast,2089,0.9509
+ssp585,East Coast,2090,0.9117
+ssp585,East Coast,2091,0.9997
+ssp585,East Coast,2092,0.9176
+ssp585,East Coast,2093,0.9731
+ssp585,East Coast,2094,0.9553
+ssp585,East Coast,2095,0.9004
+ssp585,East Coast,2096,0.9552
+ssp585,East Coast,2097,0.9485
+ssp585,East Coast,2098,0.9566
+ssp585,East Coast,2099,0.927
+ssp585,East Coast,2100,0.9315

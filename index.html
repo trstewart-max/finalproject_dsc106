@@ -1,0 +1,1573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Can Your Dream Vacation Survive Climate Change?</title>
+  <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=Playfair+Display:ital,wght@0,700;0,900;1,900&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/topojson-client@3/dist/topojson-client.min.js"></script>
+  <style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#060d1b;--surface:#0c1929;--surface2:#132236;
+  --border:#1c3250;--text:#ddeeff;--text-dim:#5e7fa0;--text-mid:#8aaac8;
+  --accent:#00d4ff;
+  --sans:'Syne',sans-serif;--serif:'Playfair Display',serif;--mono:'Fira Code',monospace;
+  --beach:#06b6d4;--ski:#3b82f6;--hiking:#22c55e;--cool:#a855f7;
+  --worsen:#f97316;--reloc:#06b6d4;--disap:#ef4444;
+}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:hidden}
+
+/* ── HERO ── */
+#hero{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:48px 32px;
+  background:radial-gradient(ellipse at 50% 35%,#0d1f3c 0%,var(--bg) 70%);
+  position:relative;overflow:hidden;
+}
+#hero::before{
+  content:'';position:absolute;inset:0;opacity:.12;
+  background:repeating-linear-gradient(90deg,var(--border) 0,var(--border) 1px,transparent 1px,transparent 80px),
+             repeating-linear-gradient(0deg,var(--border) 0,var(--border) 1px,transparent 1px,transparent 80px);
+}
+.hero-badge{
+  font-family:var(--mono);font-size:10px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:3px;margin-bottom:28px;
+  padding:5px 18px;border:1px solid rgba(0,212,255,.25);border-radius:20px;
+  display:inline-block;position:relative;
+}
+#hero h1{
+  font-family:var(--serif);font-size:clamp(34px,6vw,78px);font-weight:900;
+  line-height:1.05;max-width:880px;margin-bottom:24px;position:relative;
+}
+#hero h1 em{color:var(--accent);font-style:italic}
+.hero-sub{
+  font-size:clamp(15px,1.8vw,20px);color:var(--text-mid);
+  max-width:540px;line-height:1.75;margin-bottom:20px;position:relative;
+}
+.hero-intro{
+  font-size:14px;color:var(--text-dim);max-width:480px;line-height:1.7;
+  margin-bottom:52px;position:relative;font-family:var(--mono);
+}
+.scroll-cue{
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  color:var(--text-dim);font-size:10px;font-family:var(--mono);
+  letter-spacing:1px;text-transform:uppercase;position:relative;
+  animation:bounce 2.2s ease-in-out infinite;
+}
+.scroll-arrow{
+  width:20px;height:20px;border-right:2px solid var(--text-dim);
+  border-bottom:2px solid var(--text-dim);transform:rotate(45deg);
+}
+@keyframes bounce{0%,100%{transform:translateY(0)} 50%{transform:translateY(9px)}}
+
+/* ── BUILDER ── */
+#builder{
+  background:var(--surface);
+  border-top:1px solid var(--border);
+}
+.builder-inner{
+  max-width:900px;margin:0 auto;padding:80px 40px;
+}
+.builder-progress{
+  display:flex;gap:6px;margin-bottom:48px;justify-content:center;
+}
+.progress-dot{
+  width:8px;height:8px;border-radius:50%;
+  background:var(--border);transition:all .3s;
+}
+.progress-dot.done{background:var(--accent)}
+.progress-dot.active{background:var(--accent);box-shadow:0 0 8px var(--accent);transform:scale(1.3)}
+
+.builder-step{display:none}
+.builder-step.active{display:block}
+
+.builder-q{
+  font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:700;
+  text-align:center;margin-bottom:10px;
+}
+.builder-hint{
+  font-family:var(--mono);font-size:11px;color:var(--text-dim);
+  text-align:center;margin-bottom:36px;letter-spacing:.5px;
+}
+.option-grid{
+  display:grid;gap:12px;
+}
+.option-grid.cols-2{grid-template-columns:1fr 1fr}
+.option-grid.cols-3{grid-template-columns:1fr 1fr 1fr}
+.option-grid.cols-4{grid-template-columns:1fr 1fr 1fr 1fr}
+.option-grid.cols-4-wrap{grid-template-columns:repeat(4,1fr)}
+
+@media(max-width:700px){
+  .option-grid.cols-3,.option-grid.cols-4,.option-grid.cols-4-wrap{grid-template-columns:1fr 1fr}
+}
+
+.opt-card{
+  background:var(--surface2);border:1px solid var(--border);
+  border-radius:12px;padding:20px 16px;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;gap:10px;
+  transition:all .2s;text-align:center;user-select:none;
+}
+.opt-card:hover{border-color:var(--accent);transform:translateY(-2px);background:rgba(0,212,255,.05)}
+.opt-card.selected{
+  border-color:var(--accent);background:rgba(0,212,255,.1);
+  box-shadow:0 0 0 1px var(--accent) inset;
+}
+.opt-icon{
+  width:42px;height:42px;border-radius:50%;
+  background:var(--border);display:flex;align-items:center;justify-content:center;
+  font-size:18px;font-weight:700;color:var(--text-dim);
+  font-family:var(--mono);transition:all .2s;
+  flex-shrink:0;
+}
+.opt-card.selected .opt-icon{background:var(--accent);color:var(--bg)}
+.opt-label{font-size:14px;font-weight:700;color:var(--text)}
+.opt-desc{font-size:11px;color:var(--text-dim);font-family:var(--mono);line-height:1.4}
+.opt-check{
+  width:18px;height:18px;border-radius:50%;border:2px solid var(--border);
+  display:flex;align-items:center;justify-content:center;
+  font-size:10px;transition:all .2s;color:transparent;align-self:flex-end;
+}
+.opt-card.selected .opt-check{border-color:var(--accent);background:var(--accent);color:var(--bg)}
+
+.builder-nav{
+  display:flex;align-items:center;justify-content:space-between;
+  margin-top:36px;
+}
+.builder-count{font-family:var(--mono);font-size:11px;color:var(--text-dim)}
+.btn-next,.btn-reveal{
+  padding:12px 32px;border-radius:8px;border:none;cursor:pointer;
+  font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.5px;
+  transition:all .2s;
+}
+.btn-next{background:var(--accent);color:var(--bg)}
+.btn-next:hover{opacity:.88;transform:translateY(-1px)}
+.btn-next:disabled{opacity:.35;cursor:not-allowed;transform:none}
+.btn-reveal{
+  background:linear-gradient(135deg,#3b82f6,#a855f7);color:#fff;
+  font-size:13px;padding:14px 36px;
+}
+.btn-reveal:hover{opacity:.9;transform:translateY(-2px);box-shadow:0 8px 24px rgba(59,130,246,.3)}
+
+/* ── PROFILE REVEAL ── */
+#profile-reveal{
+  background:var(--bg);border-top:1px solid var(--border);
+  min-height:100vh;display:flex;align-items:center;justify-content:center;
+}
+.reveal-inner{max-width:700px;margin:0 auto;padding:80px 40px;text-align:center}
+.reveal-label{
+  font-family:var(--mono);font-size:10px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:2.5px;margin-bottom:32px;
+}
+.profile-bars{
+  display:flex;flex-direction:column;gap:14px;margin-bottom:40px;text-align:left;
+}
+.pb-row{display:flex;align-items:center;gap:12px}
+.pb-name{font-family:var(--mono);font-size:11px;color:var(--text-dim);width:130px;flex-shrink:0}
+.pb-track{flex:1;height:8px;border-radius:4px;background:var(--border);overflow:hidden;position:relative}
+.pb-fill{height:100%;border-radius:4px;width:0;transition:width 1.2s cubic-bezier(.25,.46,.45,.94)}
+.pb-pct{font-family:var(--mono);font-size:12px;width:38px;text-align:right;color:var(--text-dim)}
+.reveal-profile-name{
+  font-family:var(--serif);font-size:clamp(32px,5vw,56px);font-weight:900;
+  line-height:1.1;margin-bottom:16px;opacity:0;transform:translateY(20px);
+  transition:all .8s ease;
+}
+.reveal-profile-name.show{opacity:1;transform:translateY(0)}
+.reveal-profile-desc{
+  font-size:15px;color:var(--text-mid);line-height:1.7;max-width:500px;
+  margin:0 auto 36px;opacity:0;transition:opacity .6s ease .4s;
+}
+.reveal-profile-desc.show{opacity:1}
+.btn-discover{
+  padding:14px 36px;border-radius:8px;border:1px solid var(--accent);
+  background:transparent;color:var(--accent);
+  font-family:var(--mono);font-size:12px;cursor:pointer;transition:all .2s;
+  opacity:0;transition:all .4s ease .8s;
+}
+.btn-discover.show{opacity:1}
+.btn-discover:hover{background:rgba(0,212,255,.1)}
+
+/* ── SCROLL CONTAINER (sticky map + steps) ── */
+.scroll-container{display:flex;align-items:flex-start;border-top:1px solid var(--border)}
+
+/* STICKY MAP */
+.map-panel{
+  position:sticky;top:0;height:100vh;flex:0 0 58%;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 48%,#0a1f38 0%,var(--bg) 70%);
+}
+.map-top{
+  position:absolute;top:0;left:0;right:0;z-index:20;padding:14px 20px;
+  background:linear-gradient(180deg,rgba(6,13,27,.92) 0%,transparent 100%);
+  display:flex;align-items:center;gap:10px;
+}
+.map-profile-pill{
+  font-family:var(--mono);font-size:10px;padding:4px 12px;
+  border-radius:12px;border:1px solid var(--border);color:var(--text-dim);
+  transition:all .4s;
+}
+.map-period-badge{
+  margin-left:auto;font-family:var(--mono);font-size:9px;
+  color:var(--text-dim);background:rgba(6,13,27,.7);
+  border:1px solid var(--border);padding:4px 10px;border-radius:6px;
+  transition:color .3s;
+}
+#map-svg{width:100%;height:100%;display:block}
+.sp{stroke:#0c1929;stroke-width:.5px;cursor:pointer}
+.sp:hover{stroke:#fff;stroke-width:1px}
+
+/* Map legend */
+.map-legend{
+  position:absolute;bottom:18px;left:18px;
+  background:rgba(6,13,27,.92);backdrop-filter:blur(10px);
+  border:1px solid var(--border);border-radius:9px;padding:10px 14px;
+}
+.ml-title{font-family:var(--mono);font-size:9px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.ml-row{display:flex;align-items:center;gap:7px;margin-bottom:4px}
+.ml-swatch{width:14px;height:9px;border-radius:2px;flex-shrink:0}
+.ml-label{font-family:var(--mono);font-size:9px;color:var(--text-dim)}
+
+/* State detail slide-in (same as P3) */
+#state-detail{
+  position:absolute;top:14px;right:14px;bottom:14px;width:252px;
+  background:rgba(6,13,27,.97);backdrop-filter:blur(18px);
+  border:1px solid var(--border);border-radius:12px;
+  display:flex;flex-direction:column;
+  transform:translateX(280px);
+  transition:transform .3s cubic-bezier(.34,1.1,.64,1);
+  z-index:50;overflow-y:auto;
+}
+#state-detail.open{transform:translateX(0)}
+.sd-x{
+  position:absolute;top:10px;right:10px;
+  background:transparent;border:1px solid var(--border);color:var(--text-dim);
+  width:24px;height:24px;border-radius:50%;cursor:pointer;font-size:10px;
+  display:flex;align-items:center;justify-content:center;transition:all .15s;
+  font-family:var(--mono);font-weight:700;
+}
+.sd-x:hover{background:var(--border);color:var(--text)}
+.sd-hd{padding:14px 16px 10px;border-bottom:1px solid var(--border)}
+.sd-name{font-size:15px;font-weight:800;margin-bottom:2px;padding-right:26px}
+.sd-reg{font-family:var(--mono);font-size:9px;color:var(--text-dim)}
+.sd-bd{padding:12px 16px;flex:1;display:flex;flex-direction:column;gap:11px}
+.sd-metric-label{font-family:var(--mono);font-size:9px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:.9px;margin-bottom:4px}
+.sd-big{font-family:var(--mono);font-size:20px;font-weight:500}
+.sd-bar-bg{height:5px;border-radius:3px;background:var(--border);overflow:hidden;margin-bottom:2px}
+.sd-bar-fill{height:100%;border-radius:3px}
+.sd-tl{display:grid;grid-template-columns:1fr 1fr 1fr;gap:5px;margin-top:2px}
+.sd-tc{background:var(--surface2);border:1px solid var(--border);border-radius:6px;padding:7px 8px}
+.sd-ty{font-family:var(--mono);font-size:8px;color:var(--text-dim);text-transform:uppercase;margin-bottom:2px}
+.sd-tv{font-family:var(--mono);font-size:13px;font-weight:500}
+.sd-td{font-family:var(--mono);font-size:8px;margin-top:1px}
+.sd-insight{
+  margin:0 16px 14px;padding:9px 11px;
+  background:rgba(0,212,255,.05);border:1px solid rgba(0,212,255,.14);
+  border-radius:8px;font-size:11px;color:var(--text-mid);line-height:1.6;
+}
+
+/* SCROLL STEPS */
+.scroll-steps{flex:1;border-left:1px solid var(--border)}
+.step{
+  min-height:100vh;padding:64px 44px;
+  display:flex;flex-direction:column;justify-content:center;
+  border-top:1px solid var(--border);
+}
+.step:first-child{border-top:none}
+.step-kicker{
+  font-family:var(--mono);font-size:9px;text-transform:uppercase;letter-spacing:2px;
+  margin-bottom:14px;display:flex;align-items:center;gap:8px;color:var(--text-dim);
+}
+.kicker-line{width:24px;height:1px;background:var(--accent)}
+.step-head{
+  font-family:var(--serif);font-size:clamp(22px,2.6vw,34px);
+  font-weight:700;line-height:1.2;margin-bottom:16px;
+}
+.step-body{
+  font-size:14px;color:var(--text-mid);line-height:1.8;
+  max-width:420px;margin-bottom:14px;
+}
+.step-body strong{color:var(--text)}
+.step-callout{
+  background:var(--surface2);border-left:3px solid var(--accent);
+  border-radius:0 8px 8px 0;padding:12px 15px;margin:10px 0 14px;
+  font-size:13px;color:var(--text-mid);line-height:1.65;max-width:420px;
+}
+
+/* ── TOOLTIP ── */
+#tt{
+  position:fixed;background:rgba(4,10,20,.97);backdrop-filter:blur(14px);
+  border:1px solid var(--border);border-radius:10px;padding:12px 15px;
+  pointer-events:none;opacity:0;transition:opacity .12s;z-index:999;min-width:190px;
+}
+#tt.show{opacity:1}
+.tth{font-size:13px;font-weight:700;padding-bottom:8px;margin-bottom:8px;border-bottom:1px solid var(--border)}
+.ttr{display:flex;justify-content:space-between;margin:4px 0}
+.ttk{font-family:var(--mono);font-size:9px;color:var(--text-dim);text-transform:uppercase}
+.ttv{font-family:var(--mono);font-size:11px}
+.ttbar{height:4px;border-radius:2px;background:var(--border);margin-top:9px;overflow:hidden}
+.ttfill{height:100%;border-radius:2px}
+.tthint{font-size:9px;color:var(--text-dim);text-align:center;margin-top:7px;border-top:1px solid var(--border);padding-top:6px}
+
+/* ── WHAT HAPPENED ── */
+#factors{
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:80px 60px;
+}
+.factors-inner{max-width:800px;margin:0 auto}
+.factors-kicker{
+  font-family:var(--mono);font-size:9px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:2.5px;margin-bottom:14px;
+}
+.factors-head{
+  font-family:var(--serif);font-size:clamp(26px,3.5vw,42px);
+  font-weight:900;line-height:1.15;margin-bottom:16px;
+}
+.factors-sub{font-size:15px;color:var(--text-mid);line-height:1.75;max-width:600px;margin-bottom:48px}
+.factor-item{margin-bottom:32px}
+.factor-label{
+  display:flex;justify-content:space-between;align-items:baseline;
+  margin-bottom:8px;
+}
+.factor-name{font-size:15px;font-weight:700}
+.factor-change{font-family:var(--mono);font-size:13px;font-weight:500}
+.factor-track{height:10px;border-radius:5px;background:var(--border);overflow:hidden;margin-bottom:6px}
+.factor-fill{height:100%;border-radius:5px;width:0;transition:width 1.4s cubic-bezier(.25,.46,.45,.94)}
+.factor-note{font-size:12px;color:var(--text-dim);line-height:1.55;font-family:var(--mono)}
+
+/* ── FINAL REVEAL ── */
+#final{
+  min-height:100vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:80px 40px;
+  background:radial-gradient(ellipse at 50% 50%,#0d1020 0%,var(--bg) 70%);
+  border-top:1px solid var(--border);
+}
+.final-kicker{
+  font-family:var(--mono);font-size:10px;text-transform:uppercase;
+  letter-spacing:3px;color:var(--text-dim);margin-bottom:20px;
+}
+.final-verdict{
+  font-family:var(--serif);font-size:clamp(28px,4.5vw,58px);
+  font-weight:900;line-height:1.1;max-width:700px;margin-bottom:32px;
+}
+.final-verdict em{font-style:normal}
+.final-timeline{
+  display:flex;gap:0;border:1px solid var(--border);border-radius:12px;
+  overflow:hidden;margin-bottom:36px;
+}
+.ft-item{
+  flex:1;padding:22px 18px;text-align:center;
+  border-right:1px solid var(--border);background:var(--surface);
+}
+.ft-item:last-child{border-right:none}
+.ft-year{font-family:var(--mono);font-size:10px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:8px}
+.ft-score{font-family:var(--mono);font-size:28px;font-weight:500}
+.ft-label{font-size:11px;color:var(--text-dim);margin-top:4px;font-family:var(--mono)}
+.ft-arrow{
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--mono);font-size:14px;padding:0 8px;
+  background:var(--bg);color:var(--text-dim);border-right:1px solid var(--border);
+}
+.final-body{font-size:16px;color:var(--text-mid);line-height:1.75;max-width:560px;margin-bottom:40px}
+.btn-explore{
+  padding:13px 32px;border-radius:8px;border:1px solid var(--border);
+  background:var(--surface);color:var(--text);font-family:var(--mono);
+  font-size:12px;cursor:pointer;transition:all .2s;
+}
+.btn-explore:hover{border-color:var(--accent);color:var(--accent)}
+
+/* ── EXPLORE ── */
+#explore{
+  background:var(--bg);border-top:2px solid var(--border);
+  padding:80px 60px;
+}
+.explore-inner{max-width:960px;margin:0 auto}
+.explore-head-row{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:36px;flex-wrap:wrap;gap:16px}
+.explore-head h2{font-family:var(--serif);font-size:clamp(24px,3vw,36px);font-weight:700}
+.explore-head p{font-size:14px;color:var(--text-mid);margin-top:8px;line-height:1.6;max-width:500px}
+.ec-row{display:flex;gap:20px;flex-wrap:wrap}
+.ec-grp .ec-lbl{font-family:var(--mono);font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:7px}
+.ec-tabs{display:flex;gap:5px;flex-wrap:wrap}
+.ec-tab{
+  padding:6px 13px;border-radius:6px;border:1px solid var(--border);
+  background:transparent;color:var(--text-dim);font-family:var(--mono);
+  font-size:10px;cursor:pointer;transition:all .15s;
+}
+.ec-tab:hover{border-color:var(--accent);color:var(--accent)}
+.ec-tab.active{background:var(--accent);border-color:var(--accent);color:var(--bg);font-weight:700}
+.explore-map-row{
+  display:grid;grid-template-columns:1fr 320px;gap:28px;
+  align-items:flex-start;margin-bottom:40px;
+}
+#explore-map-svg{width:100%;border-radius:10px;overflow:hidden;
+  background:radial-gradient(ellipse at 50% 48%,#0a1f38 0%,var(--bg) 70%)}
+#explore-map-svg .sp{cursor:pointer}
+.explore-detail{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:20px;
+}
+.ed-lbl{font-family:var(--mono);font-size:9px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:6px}
+.ed-state{font-size:16px;font-weight:700;margin-bottom:14px}
+.ed-metric{margin-bottom:12px}
+.ed-bar-bg{height:5px;border-radius:3px;background:var(--border);overflow:hidden;margin-top:4px}
+.ed-bar-fill{height:100%;border-radius:3px;transition:width .6s ease}
+#explore-chart-wrap{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:20px}
+#explore-chart-title{font-family:var(--mono);font-size:10px;color:var(--text-dim);text-transform:uppercase;letter-spacing:1px;margin-bottom:14px}
+#explore-chart-svg{width:100%;display:block}
+
+/* ── CONCLUSION ── */
+#conclusion{
+  min-height:60vh;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;text-align:center;
+  padding:80px 40px;
+  background:radial-gradient(ellipse at 50% 50%,#0e0614 0%,var(--bg) 70%);
+  border-top:1px solid var(--border);
+}
+#conclusion h2{
+  font-family:var(--serif);font-size:clamp(24px,4vw,50px);
+  font-weight:900;line-height:1.15;max-width:760px;margin-bottom:24px;
+}
+#conclusion h2 em{color:var(--accent);font-style:italic}
+#conclusion p{font-size:15px;color:var(--text-mid);line-height:1.8;max-width:620px;margin-bottom:32px}
+.credits{
+  font-family:var(--mono);font-size:10px;color:var(--text-dim);
+  border-top:1px solid var(--border);padding-top:24px;max-width:640px;
+  line-height:1.7;
+}
+  </style>
+</head>
+<body>
+
+<!-- ═══ S1: HERO ═══════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="hero-badge">DSC 106 &mdash; CMIP6 Climate Projections</div>
+  <h1>Can Your Dream Vacation<br>Survive <em>Climate Change?</em></h1>
+  <p class="hero-sub">The weather that makes your favorite trips possible may not stay the same forever.</p>
+  <p class="hero-intro">People choose destinations because of climate. Beaches need warmth without extreme heat. Ski resorts need reliable snow. National parks need mild temperatures. As the climate changes, so does the geography of the perfect vacation.</p>
+  <div class="scroll-cue">
+    <span>Build your vacation to find out</span>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- ═══ S2: VACATION BUILDER ════════════════════════════════════════ -->
+<section id="builder">
+  <div class="builder-inner">
+    <div class="builder-progress">
+      <div class="progress-dot active" id="pd-0"></div>
+      <div class="progress-dot" id="pd-1"></div>
+      <div class="progress-dot" id="pd-2"></div>
+      <div class="progress-dot" id="pd-3"></div>
+      <div class="progress-dot" id="pd-4"></div>
+    </div>
+
+    <!-- Step 1: Temperature -->
+    <div class="builder-step active" id="bstep-0">
+      <h2 class="builder-q">What's your ideal outdoor temperature?</h2>
+      <p class="builder-hint">Think about your favorite vacation days, not the hottest days</p>
+      <div class="option-grid cols-4">
+        <div class="opt-card" data-val="cool" onclick="selectOpt(this,0)">
+          <div class="opt-icon">60</div>
+          <div class="opt-label">Cool</div>
+          <div class="opt-desc">60&ndash;70&deg;F<br>Crisp mountain air</div>
+        </div>
+        <div class="opt-card" data-val="mild" onclick="selectOpt(this,0)">
+          <div class="opt-icon">74</div>
+          <div class="opt-label">Mild</div>
+          <div class="opt-desc">70&ndash;78&deg;F<br>Perfect comfort</div>
+        </div>
+        <div class="opt-card" data-val="warm" onclick="selectOpt(this,0)">
+          <div class="opt-icon">82</div>
+          <div class="opt-label">Warm</div>
+          <div class="opt-desc">78&ndash;88&deg;F<br>Beach weather</div>
+        </div>
+        <div class="opt-card" data-val="hot" onclick="selectOpt(this,0)">
+          <div class="opt-icon">92</div>
+          <div class="opt-label">Hot</div>
+          <div class="opt-desc">88&deg;F+<br>Desert sunshine</div>
+        </div>
+      </div>
+      <div class="builder-nav">
+        <span class="builder-count">Step 1 of 5</span>
+        <button class="btn-next" id="next-0" disabled onclick="nextStep(0)">Continue &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 2: Landscape -->
+    <div class="builder-step" id="bstep-1">
+      <h2 class="builder-q">Which landscape calls to you?</h2>
+      <p class="builder-hint">Choose the setting that defines your ideal trip</p>
+      <div class="option-grid cols-3">
+        <div class="opt-card" data-val="ocean" onclick="selectOpt(this,1)">
+          <div class="opt-icon">~</div>
+          <div class="opt-label">Ocean &amp; Coast</div>
+          <div class="opt-desc">Beaches, waves, and saltwater air</div>
+        </div>
+        <div class="opt-card" data-val="mountains" onclick="selectOpt(this,1)">
+          <div class="opt-icon">^</div>
+          <div class="opt-label">Mountains</div>
+          <div class="opt-desc">Peaks, altitude, and alpine scenery</div>
+        </div>
+        <div class="opt-card" data-val="forest" onclick="selectOpt(this,1)">
+          <div class="opt-icon">Y</div>
+          <div class="opt-label">Forest</div>
+          <div class="opt-desc">Trails, canopy, and wildlife</div>
+        </div>
+        <div class="opt-card" data-val="lakes" onclick="selectOpt(this,1)">
+          <div class="opt-icon">O</div>
+          <div class="opt-label">Lake Country</div>
+          <div class="opt-desc">Inland water, fishing, and calm</div>
+        </div>
+        <div class="opt-card" data-val="desert" onclick="selectOpt(this,1)">
+          <div class="opt-icon">*</div>
+          <div class="opt-label">Desert</div>
+          <div class="opt-desc">Open skies, red rock, and vast space</div>
+        </div>
+        <div class="opt-card" data-val="cities" onclick="selectOpt(this,1)">
+          <div class="opt-icon">#</div>
+          <div class="opt-label">City &amp; Culture</div>
+          <div class="opt-desc">Restaurants, museums, and energy</div>
+        </div>
+      </div>
+      <div class="builder-nav">
+        <span class="builder-count">Step 2 of 5</span>
+        <button class="btn-next" id="next-1" disabled onclick="nextStep(1)">Continue &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 3: Activities -->
+    <div class="builder-step" id="bstep-2">
+      <h2 class="builder-q">What do you actually do on vacation?</h2>
+      <p class="builder-hint">Choose up to 3 activities</p>
+      <div class="option-grid cols-4-wrap">
+        <div class="opt-card multi" data-val="swimming" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Swimming</div>
+          <div class="opt-desc">Ocean or pools</div>
+        </div>
+        <div class="opt-card multi" data-val="skiing" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Skiing</div>
+          <div class="opt-desc">Snow sports</div>
+        </div>
+        <div class="opt-card multi" data-val="hiking" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Hiking</div>
+          <div class="opt-desc">Trails and parks</div>
+        </div>
+        <div class="opt-card multi" data-val="camping" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Camping</div>
+          <div class="opt-desc">Outdoors overnight</div>
+        </div>
+        <div class="opt-card multi" data-val="wildlife" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Wildlife</div>
+          <div class="opt-desc">Nature viewing</div>
+        </div>
+        <div class="opt-card multi" data-val="food" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Food &amp; Dining</div>
+          <div class="opt-desc">Local cuisine</div>
+        </div>
+        <div class="opt-card multi" data-val="beach" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Beach &amp; Sun</div>
+          <div class="opt-desc">Relax and tan</div>
+        </div>
+        <div class="opt-card multi" data-val="sightseeing" onclick="toggleOpt(this,2)">
+          <div class="opt-check">&#10003;</div>
+          <div class="opt-label">Sightseeing</div>
+          <div class="opt-desc">Landmarks and views</div>
+        </div>
+      </div>
+      <div class="builder-nav">
+        <span class="builder-count">Step 3 of 5 &mdash; <span id="act-count">0</span>/3 selected</span>
+        <button class="btn-next" id="next-2" disabled onclick="nextStep(2)">Continue &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 4: Weather -->
+    <div class="builder-step" id="bstep-3">
+      <h2 class="builder-q">What does your ideal vacation weather look like?</h2>
+      <p class="builder-hint">Think beyond temperature &mdash; precipitation and sky matter too</p>
+      <div class="option-grid cols-3">
+        <div class="opt-card" data-val="sunny" onclick="selectOpt(this,3)">
+          <div class="opt-icon">S</div>
+          <div class="opt-label">Hot &amp; Sunny</div>
+          <div class="opt-desc">Clear blue skies, intense warmth</div>
+        </div>
+        <div class="opt-card" data-val="mild_clear" onclick="selectOpt(this,3)">
+          <div class="opt-icon">PC</div>
+          <div class="opt-label">Mild &amp; Clear</div>
+          <div class="opt-desc">Partly cloudy, comfortable</div>
+        </div>
+        <div class="opt-card" data-val="cool_over" onclick="selectOpt(this,3)">
+          <div class="opt-icon">C</div>
+          <div class="opt-label">Cool &amp; Overcast</div>
+          <div class="opt-desc">Dramatic skies, crisp air</div>
+        </div>
+        <div class="opt-card" data-val="snowy" onclick="selectOpt(this,3)">
+          <div class="opt-icon">SN</div>
+          <div class="opt-label">Winter Snow</div>
+          <div class="opt-desc">Fresh powder, cozy atmosphere</div>
+        </div>
+        <div class="opt-card" data-val="rainy" onclick="selectOpt(this,3)">
+          <div class="opt-icon">R</div>
+          <div class="opt-label">Tropical Showers</div>
+          <div class="opt-desc">Brief rain, lush greenery</div>
+        </div>
+        <div class="opt-card" data-val="nopref" onclick="selectOpt(this,3)">
+          <div class="opt-icon">?</div>
+          <div class="opt-label">No Preference</div>
+          <div class="opt-desc">Adapt to the destination</div>
+        </div>
+      </div>
+      <div class="builder-nav">
+        <span class="builder-count">Step 4 of 5</span>
+        <button class="btn-next" id="next-3" disabled onclick="nextStep(3)">Continue &rarr;</button>
+      </div>
+    </div>
+
+    <!-- Step 5: Style -->
+    <div class="builder-step" id="bstep-4">
+      <h2 class="builder-q">What's your travel personality?</h2>
+      <p class="builder-hint">How do you actually spend your vacation days?</p>
+      <div class="option-grid cols-3">
+        <div class="opt-card" data-val="relaxing" onclick="selectOpt(this,4)">
+          <div class="opt-icon">Z</div>
+          <div class="opt-label">Pure Relaxation</div>
+          <div class="opt-desc">Slow mornings, long afternoons, no agenda</div>
+        </div>
+        <div class="opt-card" data-val="adventurous" onclick="selectOpt(this,4)">
+          <div class="opt-icon">!</div>
+          <div class="opt-label">Outdoor Adventure</div>
+          <div class="opt-desc">Push limits, seek thrills, explore terrain</div>
+        </div>
+        <div class="opt-card" data-val="active" onclick="selectOpt(this,4)">
+          <div class="opt-icon">A</div>
+          <div class="opt-label">Active &amp; Sporty</div>
+          <div class="opt-desc">Exercise, movement, sweat, accomplish</div>
+        </div>
+        <div class="opt-card" data-val="scenic" onclick="selectOpt(this,4)">
+          <div class="opt-icon">V</div>
+          <div class="opt-label">Scenic &amp; Peaceful</div>
+          <div class="opt-desc">Views, stillness, photography, nature</div>
+        </div>
+        <div class="opt-card" data-val="cultural" onclick="selectOpt(this,4)">
+          <div class="opt-icon">C</div>
+          <div class="opt-label">Cultural Exploration</div>
+          <div class="opt-desc">History, food, locals, stories</div>
+        </div>
+        <div class="opt-card" data-val="mixed" onclick="selectOpt(this,4)">
+          <div class="opt-icon">+</div>
+          <div class="opt-label">Mix of Everything</div>
+          <div class="opt-desc">Some of each, day by day</div>
+        </div>
+      </div>
+      <div class="builder-nav">
+        <span class="builder-count">Step 5 of 5 &mdash; Final step</span>
+        <button class="btn-reveal" id="btn-reveal" disabled onclick="revealProfile()">Reveal My Vacation Profile</button>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ S3: PROFILE REVEAL ══════════════════════════════════════════ -->
+<section id="profile-reveal">
+  <div class="reveal-inner">
+    <p class="reveal-label">Analyzing your vacation preferences&hellip;</p>
+    <div class="profile-bars">
+      <div class="pb-row">
+        <span class="pb-name">Beach Escape</span>
+        <div class="pb-track"><div class="pb-fill" id="pb-beach" style="background:var(--beach)"></div></div>
+        <span class="pb-pct" id="pp-beach">0%</span>
+      </div>
+      <div class="pb-row">
+        <span class="pb-name">Mountain Adventure</span>
+        <div class="pb-track"><div class="pb-fill" id="pb-ski" style="background:var(--ski)"></div></div>
+        <span class="pb-pct" id="pp-ski">0%</span>
+      </div>
+      <div class="pb-row">
+        <span class="pb-name">Outdoor Explorer</span>
+        <div class="pb-track"><div class="pb-fill" id="pb-hiking" style="background:var(--hiking)"></div></div>
+        <span class="pb-pct" id="pp-hiking">0%</span>
+      </div>
+      <div class="pb-row">
+        <span class="pb-name">Mild Getaway</span>
+        <div class="pb-track"><div class="pb-fill" id="pb-cool" style="background:var(--cool)"></div></div>
+        <span class="pb-pct" id="pp-cool">0%</span>
+      </div>
+    </div>
+    <h2 class="reveal-profile-name" id="reveal-name">Beach Escape</h2>
+    <p class="reveal-profile-desc" id="reveal-desc">Your ideal trip centers on warm coastal temperatures, sunshine, and comfortable ocean water. You travel for the feeling of warmth on your face and sand between your toes.</p>
+    <button class="btn-discover" id="btn-discover" onclick="startStory()">See what climate change means for your vacation &rarr;</button>
+  </div>
+</section>
+
+<!-- ═══ S4-6: STICKY MAP NARRATIVE ════════════════════════════════ -->
+<div class="scroll-container" id="story-container">
+
+  <div class="map-panel">
+    <div class="map-top">
+      <span class="map-profile-pill" id="map-profile-pill">Your Vacation Profile</span>
+      <span class="map-period-badge" id="map-period-badge">Today</span>
+    </div>
+    <svg id="map-svg"></svg>
+    <div class="map-legend">
+      <div class="ml-title" id="ml-title">Climate Suitability</div>
+      <div id="ml-bins"></div>
+    </div>
+    <div id="state-detail">
+      <button class="sd-x" id="sd-close">X</button>
+      <div class="sd-hd"><div class="sd-name" id="sd-name">-</div><div class="sd-reg" id="sd-reg">-</div></div>
+      <div class="sd-bd" id="sd-bd"></div>
+      <div class="sd-insight" id="sd-insight"></div>
+    </div>
+  </div>
+
+  <div class="scroll-steps">
+
+    <div class="step" data-state="today" id="step-today">
+      <div class="step-kicker"><div class="kicker-line"></div>Your ideal destinations today</div>
+      <h2 class="step-head" id="sh-today">The best places for your vacation, today</h2>
+      <p class="step-body" id="sb-today-1">The map shows current climate suitability for your vacation type across all 50 states. Greener states offer conditions closest to what your ideal trip needs.</p>
+      <div class="step-callout" id="sc-today">These regions have built entire vacation economies on the reliability of their climate conditions &mdash; conditions that have held for generations.</div>
+      <p class="step-body" id="sb-today-2">This is your vacation, today. These are the places where your dream trip exists.</p>
+    </div>
+
+    <div class="step" data-state="y2050" id="step-2050">
+      <div class="step-kicker"><div class="kicker-line"></div>Mid-century projections</div>
+      <h2 class="step-head" id="sh-2050">By 2050, the first changes appear</h2>
+      <p class="step-body" id="sb-2050-1">CMIP6 climate projections show that by mid-century, the conditions that define your vacation will have started to shift. Some changes are subtle. Others are already difficult to ignore.</p>
+      <div class="step-callout" id="sc-2050">The changes visible here are not projections for a distant future &mdash; 2050 is within the lifetime of anyone alive today, and the window of resorts, coastlines, and parks affected is already accelerating.</div>
+      <p class="step-body" id="sb-2050-2">The direction is clear. The question is how far it goes.</p>
+    </div>
+
+    <div class="step" data-state="y2100" id="step-2100">
+      <div class="step-kicker"><div class="kicker-line"></div>End of century</div>
+      <h2 class="step-head" id="sh-2100">By 2100, the map has fundamentally changed</h2>
+      <p class="step-body" id="sb-2100-1">End-of-century projections show what continued warming implies for vacation climate quality. For some vacation types, the change is a shift. For others, it is closer to a disappearance.</p>
+      <div class="step-callout" id="sc-2100">The states that currently define your favorite vacation may no longer offer what they do today. And some states you'd never consider are becoming newly viable.</div>
+      <p class="step-body" id="sb-2100-2">Scroll to see what happened &mdash; and why.</p>
+    </div>
+
+  </div>
+</div>
+
+<!-- ═══ S7: WHAT HAPPENED ════════════════════════════════════════════ -->
+<section id="factors">
+  <div class="factors-inner">
+    <p class="factors-kicker">The Climate Mechanism</p>
+    <h2 class="factors-head" id="fh">What's driving the change?</h2>
+    <p class="factors-sub" id="fs">Here are the specific climate variables that are shifting conditions for your vacation type &mdash; and by how much, from today to 2100.</p>
+    <div id="factor-list"></div>
+  </div>
+</section>
+
+<!-- ═══ S8: FINAL REVEAL ═════════════════════════════════════════════ -->
+<section id="final">
+  <p class="final-kicker">The Verdict</p>
+  <h2 class="final-verdict" id="final-verdict">Your vacation is <em id="final-outcome">changing</em>.</h2>
+  <div class="final-timeline" id="final-timeline"></div>
+  <p class="final-body" id="final-body">The climate that makes your vacation possible is shifting. The destinations you love are not disappearing overnight &mdash; but they are changing, and the change is directional.</p>
+  <button class="btn-explore" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Explore the full data &darr;</button>
+</section>
+
+<!-- ═══ S9: EXPLORE ══════════════════════════════════════════════════ -->
+<section id="explore">
+  <div class="explore-inner">
+    <div class="explore-head-row">
+      <div class="explore-head">
+        <h2>Explore the Data</h2>
+        <p>Compare vacation climate suitability across all states, time periods, and emissions scenarios. Click any state on the map for details.</p>
+      </div>
+      <div class="ec-row">
+        <div class="ec-grp">
+          <div class="ec-lbl">Vacation Type</div>
+          <div class="ec-tabs" id="ec-vtype-tabs">
+            <button class="ec-tab active" data-vt="beach">Beach</button>
+            <button class="ec-tab" data-vt="ski">Ski</button>
+            <button class="ec-tab" data-vt="hiking">Hiking</button>
+            <button class="ec-tab" data-vt="cool">Cool Escape</button>
+          </div>
+        </div>
+        <div class="ec-grp">
+          <div class="ec-lbl">Year</div>
+          <div class="ec-tabs" id="ec-year-tabs">
+            <button class="ec-tab active" data-yr="present">Today</button>
+            <button class="ec-tab" data-yr="y2050">2050</button>
+            <button class="ec-tab" data-yr="y2100">2100</button>
+          </div>
+        </div>
+        <div class="ec-grp">
+          <div class="ec-lbl">Scenario</div>
+          <div class="ec-tabs" id="ec-scen-tabs">
+            <button class="ec-tab active" data-sc="mod">Moderate</button>
+            <button class="ec-tab" data-sc="high">High</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="explore-map-row">
+      <svg id="explore-map-svg" height="360"></svg>
+      <div class="explore-detail" id="explore-detail">
+        <div class="ed-lbl">Select a state to compare</div>
+        <div class="ed-state" id="ed-state-name">Click any state on the map</div>
+        <div id="ed-metrics"></div>
+      </div>
+    </div>
+    <div id="explore-chart-wrap">
+      <div id="explore-chart-title">Vacation Climate Suitability Over Time &mdash; Key US Regions</div>
+      <svg id="explore-chart-svg" height="220"></svg>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ S10: CONCLUSION ══════════════════════════════════════════════ -->
+<section id="conclusion">
+  <h2>Climate change may reshape not just ecosystems &mdash; it may reshape the <em>geography of American leisure.</em></h2>
+  <p>The destinations Americans love exist because of their climate. Beaches need warm but tolerable heat. Ski resorts need reliable cold. National parks need mild hiking conditions. As these conditions change, so does the map of where those experiences are possible.</p>
+  <p>This is a projection, not a forecast. But the direction of change is consistent across the leading global climate models: warmer everywhere, with the most dramatic effects on the experiences most dependent on specific conditions.</p>
+  <div class="credits">
+    Data: CMIP6 climate model projections (BCC-CSM2-MR) &middot; Suitability methodology: temperature comfort windows, heat stress thresholds, snowpack reliability, and precipitation patterns &middot; Scenarios: SSP2-4.5 (moderate), SSP5-8.5 (high) &middot; All scores 0&ndash;1 normalized &middot; This visualization does not predict tourism revenue or travel behavior &middot; Built for DSC 106, UC San Diego
+  </div>
+</section>
+
+<!-- TOOLTIP -->
+<div id="tt">
+  <div class="tth" id="tt-state">-</div>
+  <div class="ttr"><span class="ttk">Today</span><span class="ttv" id="tt-now">-</span></div>
+  <div class="ttr"><span class="ttk">2050</span><span class="ttv" id="tt-50">-</span></div>
+  <div class="ttr"><span class="ttk">2100</span><span class="ttv" id="tt-100">-</span></div>
+  <div class="ttr"><span class="ttk">Change</span><span class="ttv" id="tt-delta">-</span></div>
+  <div class="ttbar"><div class="ttfill" id="tt-fill"></div></div>
+  <div class="tthint">Click for full details</div>
+</div>
+
+<script>
+// ── EMBEDDED STATE DATA ────────────────────────────────────────────────────
+const STATE_DATA = [{"fips": "23", "abbr": "ME", "state": "Maine", "region": "New England", "beach": {"present": 0.491, "y2050_mod": 0.545, "y2100_mod": 0.643, "y2050_high": 0.52, "y2100_high": 0.606}, "ski": {"present": 0.763, "y2050_mod": 0.658, "y2100_mod": 0.446, "y2050_high": 0.633, "y2100_high": 0.398}, "hiking": {"present": 0.813, "y2050_mod": 0.78, "y2100_mod": 0.745, "y2050_high": 0.773, "y2100_high": 0.683}, "cool": {"present": 0.825, "y2050_mod": 0.767, "y2100_mod": 0.716, "y2050_high": 0.765, "y2100_high": 0.644}}, {"fips": "33", "abbr": "NH", "state": "New Hampshire", "region": "New England", "beach": {"present": 0.474, "y2050_mod": 0.545, "y2100_mod": 0.63, "y2050_high": 0.515, "y2100_high": 0.586}, "ski": {"present": 0.787, "y2050_mod": 0.672, "y2100_mod": 0.427, "y2050_high": 0.606, "y2100_high": 0.375}, "hiking": {"present": 0.795, "y2050_mod": 0.771, "y2100_mod": 0.717, "y2050_high": 0.733, "y2100_high": 0.668}, "cool": {"present": 0.806, "y2050_mod": 0.777, "y2100_mod": 0.674, "y2050_high": 0.727, "y2100_high": 0.613}}, {"fips": "50", "abbr": "VT", "state": "Vermont", "region": "New England", "beach": {"present": 0.456, "y2050_mod": 0.536, "y2100_mod": 0.638, "y2050_high": 0.5, "y2100_high": 0.603}, "ski": {"present": 0.792, "y2050_mod": 0.64, "y2100_mod": 0.427, "y2050_high": 0.615, "y2100_high": 0.363}, "hiking": {"present": 0.807, "y2050_mod": 0.782, "y2100_mod": 0.718, "y2050_high": 0.759, "y2100_high": 0.672}, "cool": {"present": 0.806, "y2050_mod": 0.771, "y2100_mod": 0.687, "y2050_high": 0.734, "y2100_high": 0.618}}, {"fips": "25", "abbr": "MA", "state": "Massachusetts", "region": "New England", "beach": {"present": 0.599, "y2050_mod": 0.656, "y2100_mod": 0.689, "y2050_high": 0.624, "y2100_high": 0.674}, "ski": {"present": 0.576, "y2050_mod": 0.443, "y2100_mod": 0.268, "y2050_high": 0.397, "y2100_high": 0.231}, "hiking": {"present": 0.722, "y2050_mod": 0.723, "y2100_mod": 0.676, "y2050_high": 0.689, "y2100_high": 0.616}, "cool": {"present": 0.746, "y2050_mod": 0.724, "y2100_mod": 0.624, "y2050_high": 0.676, "y2100_high": 0.567}}, {"fips": "44", "abbr": "RI", "state": "Rhode Island", "region": "New England", "beach": {"present": 0.601, "y2050_mod": 0.63, "y2100_mod": 0.696, "y2050_high": 0.629, "y2100_high": 0.665}, "ski": {"present": 0.421, "y2050_mod": 0.317, "y2100_mod": 0.168, "y2050_high": 0.276, "y2100_high": 0.148}, "hiking": {"present": 0.704, "y2050_mod": 0.704, "y2100_mod": 0.647, "y2050_high": 0.685, "y2100_high": 0.565}, "cool": {"present": 0.726, "y2050_mod": 0.698, "y2100_mod": 0.618, "y2050_high": 0.674, "y2100_high": 0.562}}, {"fips": "09", "abbr": "CT", "state": "Connecticut", "region": "New England", "beach": {"present": 0.564, "y2050_mod": 0.6, "y2100_mod": 0.664, "y2050_high": 0.594, "y2100_high": 0.626}, "ski": {"present": 0.485, "y2050_mod": 0.335, "y2100_mod": 0.189, "y2050_high": 0.298, "y2100_high": 0.166}, "hiking": {"present": 0.706, "y2050_mod": 0.705, "y2100_mod": 0.629, "y2050_high": 0.665, "y2100_high": 0.559}, "cool": {"present": 0.707, "y2050_mod": 0.672, "y2100_mod": 0.611, "y2050_high": 0.635, "y2100_high": 0.557}}, {"fips": "36", "abbr": "NY", "state": "New York", "region": "Mid-Atlantic", "beach": {"present": 0.586, "y2050_mod": 0.62, "y2100_mod": 0.681, "y2050_high": 0.583, "y2100_high": 0.663}, "ski": {"present": 0.549, "y2050_mod": 0.409, "y2100_mod": 0.23, "y2050_high": 0.377, "y2100_high": 0.184}, "hiking": {"present": 0.728, "y2050_mod": 0.726, "y2100_mod": 0.63, "y2050_high": 0.701, "y2100_high": 0.563}, "cool": {"present": 0.727, "y2050_mod": 0.686, "y2100_mod": 0.608, "y2050_high": 0.673, "y2100_high": 0.546}}, {"fips": "42", "abbr": "PA", "state": "Pennsylvania", "region": "Mid-Atlantic", "beach": {"present": 0.408, "y2050_mod": 0.425, "y2100_mod": 0.482, "y2050_high": 0.407, "y2100_high": 0.484}, "ski": {"present": 0.534, "y2050_mod": 0.366, "y2100_mod": 0.21, "y2050_high": 0.339, "y2100_high": 0.161}, "hiking": {"present": 0.71, "y2050_mod": 0.707, "y2100_mod": 0.638, "y2050_high": 0.697, "y2100_high": 0.557}, "cool": {"present": 0.687, "y2050_mod": 0.676, "y2100_mod": 0.582, "y2050_high": 0.614, "y2100_high": 0.531}}, {"fips": "34", "abbr": "NJ", "state": "New Jersey", "region": "Mid-Atlantic", "beach": {"present": 0.691, "y2050_mod": 0.695, "y2100_mod": 0.73, "y2050_high": 0.682, "y2100_high": 0.714}, "ski": {"present": 0.262, "y2050_mod": 0.18, "y2100_mod": 0.091, "y2050_high": 0.158, "y2100_high": 0.069}, "hiking": {"present": 0.672, "y2050_mod": 0.648, "y2100_mod": 0.569, "y2050_high": 0.617, "y2100_high": 0.502}, "cool": {"present": 0.668, "y2050_mod": 0.65, "y2100_mod": 0.575, "y2050_high": 0.612, "y2100_high": 0.49}}, {"fips": "10", "abbr": "DE", "state": "Delaware", "region": "Mid-Atlantic", "beach": {"present": 0.653, "y2050_mod": 0.665, "y2100_mod": 0.697, "y2050_high": 0.647, "y2100_high": 0.665}, "ski": {"present": 0.187, "y2050_mod": 0.134, "y2100_mod": 0.051, "y2050_high": 0.1, "y2100_high": 0.047}, "hiking": {"present": 0.654, "y2050_mod": 0.629, "y2100_mod": 0.541, "y2050_high": 0.613, "y2100_high": 0.486}, "cool": {"present": 0.648, "y2050_mod": 0.623, "y2100_mod": 0.532, "y2050_high": 0.574, "y2100_high": 0.485}}, {"fips": "24", "abbr": "MD", "state": "Maryland", "region": "Mid-Atlantic", "beach": {"present": 0.636, "y2050_mod": 0.655, "y2100_mod": 0.685, "y2050_high": 0.632, "y2100_high": 0.672}, "ski": {"present": 0.251, "y2050_mod": 0.152, "y2100_mod": 0.072, "y2050_high": 0.103, "y2100_high": 0.054}, "hiking": {"present": 0.656, "y2050_mod": 0.63, "y2100_mod": 0.532, "y2050_high": 0.593, "y2100_high": 0.49}, "cool": {"present": 0.628, "y2050_mod": 0.597, "y2100_mod": 0.526, "y2050_high": 0.571, "y2100_high": 0.444}}, {"fips": "51", "abbr": "VA", "state": "Virginia", "region": "Mid-Atlantic", "beach": {"present": 0.662, "y2050_mod": 0.669, "y2100_mod": 0.712, "y2050_high": 0.677, "y2100_high": 0.683}, "ski": {"present": 0.335, "y2050_mod": 0.225, "y2100_mod": 0.112, "y2050_high": 0.181, "y2100_high": 0.072}, "hiking": {"present": 0.698, "y2050_mod": 0.661, "y2100_mod": 0.544, "y2050_high": 0.629, "y2100_high": 0.515}, "cool": {"present": 0.648, "y2050_mod": 0.611, "y2100_mod": 0.503, "y2050_high": 0.573, "y2100_high": 0.459}}, {"fips": "54", "abbr": "WV", "state": "West Virginia", "region": "Mid-Atlantic", "beach": {"present": 0.225, "y2050_mod": 0.259, "y2100_mod": 0.283, "y2050_high": 0.261, "y2100_high": 0.274}, "ski": {"present": 0.52, "y2050_mod": 0.363, "y2100_mod": 0.213, "y2050_high": 0.324, "y2100_high": 0.15}, "hiking": {"present": 0.7, "y2050_mod": 0.672, "y2100_mod": 0.571, "y2050_high": 0.619, "y2100_high": 0.483}, "cool": {"present": 0.629, "y2050_mod": 0.585, "y2100_mod": 0.517, "y2050_high": 0.57, "y2100_high": 0.474}}, {"fips": "11", "abbr": "DC", "state": "Washington D.C.", "region": "Mid-Atlantic", "beach": {"present": 0.407, "y2050_mod": 0.45, "y2100_mod": 0.471, "y2050_high": 0.446, "y2100_high": 0.445}, "ski": {"present": 0.104, "y2050_mod": 0.057, "y2100_mod": 0.04, "y2050_high": 0.053, "y2100_high": 0.04}, "hiking": {"present": 0.582, "y2050_mod": 0.553, "y2100_mod": 0.463, "y2050_high": 0.525, "y2100_high": 0.387}, "cool": {"present": 0.569, "y2050_mod": 0.565, "y2100_mod": 0.48, "y2050_high": 0.512, "y2100_high": 0.403}}, {"fips": "37", "abbr": "NC", "state": "North Carolina", "region": "Southeast", "beach": {"present": 0.75, "y2050_mod": 0.724, "y2100_mod": 0.698, "y2050_high": 0.705, "y2100_high": 0.672}, "ski": {"present": 0.309, "y2050_mod": 0.191, "y2100_mod": 0.074, "y2050_high": 0.125, "y2100_high": 0.045}, "hiking": {"present": 0.684, "y2050_mod": 0.624, "y2100_mod": 0.494, "y2050_high": 0.565, "y2100_high": 0.431}, "cool": {"present": 0.589, "y2050_mod": 0.548, "y2100_mod": 0.427, "y2050_high": 0.509, "y2100_high": 0.388}}, {"fips": "45", "abbr": "SC", "state": "South Carolina", "region": "Southeast", "beach": {"present": 0.792, "y2050_mod": 0.754, "y2100_mod": 0.705, "y2050_high": 0.73, "y2100_high": 0.653}, "ski": {"present": 0.113, "y2050_mod": 0.049, "y2100_mod": 0.04, "y2050_high": 0.054, "y2100_high": 0.04}, "hiking": {"present": 0.626, "y2050_mod": 0.555, "y2100_mod": 0.416, "y2050_high": 0.511, "y2100_high": 0.366}, "cool": {"present": 0.49, "y2050_mod": 0.442, "y2100_mod": 0.341, "y2050_high": 0.391, "y2100_high": 0.267}}, {"fips": "13", "abbr": "GA", "state": "Georgia", "region": "Southeast", "beach": {"present": 0.675, "y2050_mod": 0.644, "y2100_mod": 0.593, "y2050_high": 0.604, "y2100_high": 0.523}, "ski": {"present": 0.077, "y2050_mod": 0.052, "y2100_mod": 0.04, "y2050_high": 0.04, "y2100_high": 0.056}, "hiking": {"present": 0.607, "y2050_mod": 0.536, "y2100_mod": 0.423, "y2050_high": 0.507, "y2100_high": 0.35}, "cool": {"present": 0.45, "y2050_mod": 0.396, "y2100_mod": 0.314, "y2050_high": 0.369, "y2100_high": 0.242}}, {"fips": "12", "abbr": "FL", "state": "Florida", "region": "Southeast", "beach": {"present": 0.857, "y2050_mod": 0.814, "y2100_mod": 0.684, "y2050_high": 0.759, "y2100_high": 0.614}, "ski": {"present": 0.04, "y2050_mod": 0.056, "y2100_mod": 0.04, "y2050_high": 0.045, "y2100_high": 0.054}, "hiking": {"present": 0.449, "y2050_mod": 0.377, "y2100_mod": 0.265, "y2050_high": 0.317, "y2100_high": 0.204}, "cool": {"present": 0.23, "y2050_mod": 0.17, "y2100_mod": 0.111, "y2050_high": 0.14, "y2100_high": 0.107}}, {"fips": "01", "abbr": "AL", "state": "Alabama", "region": "Southeast", "beach": {"present": 0.54, "y2050_mod": 0.489, "y2100_mod": 0.431, "y2050_high": 0.484, "y2100_high": 0.401}, "ski": {"present": 0.05, "y2050_mod": 0.044, "y2100_mod": 0.04, "y2050_high": 0.04, "y2100_high": 0.051}, "hiking": {"present": 0.571, "y2050_mod": 0.498, "y2100_mod": 0.366, "y2050_high": 0.463, "y2100_high": 0.319}, "cool": {"present": 0.391, "y2050_mod": 0.324, "y2100_mod": 0.245, "y2050_high": 0.308, "y2100_high": 0.176}}, {"fips": "28", "abbr": "MS", "state": "Mississippi", "region": "Southeast", "beach": {"present": 0.522, "y2050_mod": 0.479, "y2100_mod": 0.419, "y2050_high": 0.469, "y2100_high": 0.372}, "ski": {"present": 0.04, "y2050_mod": 0.048, "y2100_mod": 0.04, "y2050_high": 0.046, "y2100_high": 0.049}, "hiking": {"present": 0.533, "y2050_mod": 0.423, "y2100_mod": 0.328, "y2050_high": 0.403, "y2100_high": 0.293}, "cool": {"present": 0.351, "y2050_mod": 0.314, "y2100_mod": 0.192, "y2050_high": 0.249, "y2100_high": 0.161}}, {"fips": "47", "abbr": "TN", "state": "Tennessee", "region": "Southeast", "beach": {"present": 0.305, "y2050_mod": 0.309, "y2100_mod": 0.306, "y2050_high": 0.313, "y2100_high": 0.283}, "ski": {"present": 0.219, "y2050_mod": 0.125, "y2100_mod": 0.067, "y2050_high": 0.088, "y2100_high": 0.057}, "hiking": {"present": 0.655, "y2050_mod": 0.544, "y2100_mod": 0.455, "y2050_high": 0.529, "y2100_high": 0.397}, "cool": {"present": 0.511, "y2050_mod": 0.467, "y2100_mod": 0.346, "y2050_high": 0.427, "y2100_high": 0.27}}, {"fips": "21", "abbr": "KY", "state": "Kentucky", "region": "Southeast", "beach": {"present": 0.227, "y2050_mod": 0.203, "y2100_mod": 0.254, "y2050_high": 0.202, "y2100_high": 0.214}, "ski": {"present": 0.203, "y2050_mod": 0.119, "y2100_mod": 0.058, "y2050_high": 0.097, "y2100_high": 0.054}, "hiking": {"present": 0.617, "y2050_mod": 0.515, "y2100_mod": 0.427, "y2050_high": 0.488, "y2100_high": 0.345}, "cool": {"present": 0.491, "y2050_mod": 0.441, "y2100_mod": 0.349, "y2050_high": 0.389, "y2100_high": 0.275}}, {"fips": "48", "abbr": "TX", "state": "Texas", "region": "South Central", "beach": {"present": 0.71, "y2050_mod": 0.633, "y2100_mod": 0.535, "y2050_high": 0.587, "y2100_high": 0.491}, "ski": {"present": 0.048, "y2050_mod": 0.053, "y2100_mod": 0.04, "y2050_high": 0.04, "y2100_high": 0.042}, "hiking": {"present": 0.523, "y2050_mod": 0.426, "y2100_mod": 0.318, "y2050_high": 0.414, "y2100_high": 0.25}, "cool": {"present": 0.252, "y2050_mod": 0.195, "y2100_mod": 0.116, "y2050_high": 0.166, "y2100_high": 0.074}}, {"fips": "22", "abbr": "LA", "state": "Louisiana", "region": "South Central", "beach": {"present": 0.612, "y2050_mod": 0.554, "y2100_mod": 0.462, "y2050_high": 0.512, "y2100_high": 0.411}, "ski": {"present": 0.052, "y2050_mod": 0.04, "y2100_mod": 0.04, "y2050_high": 0.048, "y2100_high": 0.04}, "hiking": {"present": 0.445, "y2050_mod": 0.367, "y2100_mod": 0.27, "y2050_high": 0.324, "y2100_high": 0.214}, "cool": {"present": 0.312, "y2050_mod": 0.249, "y2100_mod": 0.17, "y2050_high": 0.208, "y2100_high": 0.129}}, {"fips": "05", "abbr": "AR", "state": "Arkansas", "region": "South Central", "beach": {"present": 0.215, "y2050_mod": 0.214, "y2100_mod": 0.22, "y2050_high": 0.197, "y2100_high": 0.202}, "ski": {"present": 0.117, "y2050_mod": 0.064, "y2100_mod": 0.04, "y2050_high": 0.041, "y2100_high": 0.04}, "hiking": {"present": 0.527, "y2050_mod": 0.448, "y2100_mod": 0.367, "y2050_high": 0.42, "y2100_high": 0.278}, "cool": {"present": 0.432, "y2050_mod": 0.353, "y2100_mod": 0.283, "y2050_high": 0.335, "y2100_high": 0.224}}, {"fips": "40", "abbr": "OK", "state": "Oklahoma", "region": "South Central", "beach": {"present": 0.197, "y2050_mod": 0.168, "y2100_mod": 0.207, "y2050_high": 0.181, "y2100_high": 0.173}, "ski": {"present": 0.065, "y2050_mod": 0.04, "y2100_mod": 0.04, "y2050_high": 0.059, "y2100_high": 0.04}, "hiking": {"present": 0.489, "y2050_mod": 0.399, "y2100_mod": 0.309, "y2050_high": 0.396, "y2100_high": 0.243}, "cool": {"present": 0.353, "y2050_mod": 0.302, "y2100_mod": 0.19, "y2050_high": 0.237, "y2100_high": 0.143}}, {"fips": "27", "abbr": "MN", "state": "Minnesota", "region": "Great Plains", "beach": {"present": 0.344, "y2050_mod": 0.398, "y2100_mod": 0.474, "y2050_high": 0.386, "y2100_high": 0.44}, "ski": {"present": 0.569, "y2050_mod": 0.436, "y2100_mod": 0.281, "y2050_high": 0.392, "y2100_high": 0.213}, "hiking": {"present": 0.711, "y2050_mod": 0.7, "y2100_mod": 0.66, "y2050_high": 0.686, "y2100_high": 0.597}, "cool": {"present": 0.773, "y2050_mod": 0.746, "y2100_mod": 0.664, "y2050_high": 0.704, "y2100_high": 0.598}}, {"fips": "19", "abbr": "IA", "state": "Iowa", "region": "Great Plains", "beach": {"present": 0.206, "y2050_mod": 0.248, "y2100_mod": 0.266, "y2050_high": 0.241, "y2100_high": 0.261}, "ski": {"present": 0.294, "y2050_mod": 0.21, "y2100_mod": 0.101, "y2050_high": 0.17, "y2100_high": 0.06}, "hiking": {"present": 0.613, "y2050_mod": 0.571, "y2100_mod": 0.492, "y2050_high": 0.572, "y2100_high": 0.451}, "cool": {"present": 0.613, "y2050_mod": 0.57, "y2100_mod": 0.507, "y2050_high": 0.516, "y2100_high": 0.417}}, {"fips": "29", "abbr": "MO", "state": "Missouri", "region": "Great Plains", "beach": {"present": 0.189, "y2050_mod": 0.183, "y2100_mod": 0.213, "y2050_high": 0.216, "y2100_high": 0.202}, "ski": {"present": 0.218, "y2050_mod": 0.127, "y2100_mod": 0.072, "y2050_high": 0.093, "y2100_high": 0.04}, "hiking": {"present": 0.595, "y2050_mod": 0.532, "y2100_mod": 0.423, "y2050_high": 0.502, "y2100_high": 0.385}, "cool": {"present": 0.533, "y2050_mod": 0.474, "y2100_mod": 0.374, "y2050_high": 0.444, "y2100_high": 0.322}}, {"fips": "38", "abbr": "ND", "state": "North Dakota", "region": "Great Plains", "beach": {"present": 0.111, "y2050_mod": 0.133, "y2100_mod": 0.181, "y2050_high": 0.114, "y2100_high": 0.143}, "ski": {"present": 0.523, "y2050_mod": 0.381, "y2100_mod": 0.222, "y2050_high": 0.351, "y2100_high": 0.146}, "hiking": {"present": 0.576, "y2050_mod": 0.563, "y2100_mod": 0.551, "y2050_high": 0.568, "y2100_high": 0.474}, "cool": {"present": 0.674, "y2050_mod": 0.628, "y2100_mod": 0.568, "y2050_high": 0.585, "y2100_high": 0.517}}, {"fips": "46", "abbr": "SD", "state": "South Dakota", "region": "Great Plains", "beach": {"present": 0.114, "y2050_mod": 0.143, "y2100_mod": 0.188, "y2050_high": 0.119, "y2100_high": 0.17}, "ski": {"present": 0.467, "y2050_mod": 0.335, "y2100_mod": 0.183, "y2050_high": 0.274, "y2100_high": 0.113}, "hiking": {"present": 0.598, "y2050_mod": 0.574, "y2100_mod": 0.522, "y2050_high": 0.548, "y2100_high": 0.448}, "cool": {"present": 0.634, "y2050_mod": 0.618, "y2100_mod": 0.505, "y2050_high": 0.563, "y2100_high": 0.456}}, {"fips": "31", "abbr": "NE", "state": "Nebraska", "region": "Great Plains", "beach": {"present": 0.116, "y2050_mod": 0.153, "y2100_mod": 0.195, "y2050_high": 0.124, "y2100_high": 0.16}, "ski": {"present": 0.331, "y2050_mod": 0.193, "y2100_mod": 0.103, "y2050_high": 0.172, "y2100_high": 0.087}, "hiking": {"present": 0.58, "y2050_mod": 0.535, "y2100_mod": 0.454, "y2050_high": 0.514, "y2100_high": 0.392}, "cool": {"present": 0.594, "y2050_mod": 0.561, "y2100_mod": 0.459, "y2050_high": 0.494, "y2100_high": 0.411}}, {"fips": "20", "abbr": "KS", "state": "Kansas", "region": "Great Plains", "beach": {"present": 0.119, "y2050_mod": 0.117, "y2100_mod": 0.147, "y2050_high": 0.119, "y2100_high": 0.141}, "ski": {"present": 0.236, "y2050_mod": 0.146, "y2100_mod": 0.074, "y2050_high": 0.095, "y2100_high": 0.064}, "hiking": {"present": 0.522, "y2050_mod": 0.456, "y2100_mod": 0.345, "y2050_high": 0.414, "y2100_high": 0.297}, "cool": {"present": 0.495, "y2050_mod": 0.445, "y2100_mod": 0.362, "y2050_high": 0.402, "y2100_high": 0.27}}, {"fips": "26", "abbr": "MI", "state": "Michigan", "region": "Great Lakes", "beach": {"present": 0.481, "y2050_mod": 0.538, "y2100_mod": 0.594, "y2050_high": 0.524, "y2100_high": 0.552}, "ski": {"present": 0.524, "y2050_mod": 0.384, "y2100_mod": 0.244, "y2050_high": 0.373, "y2100_high": 0.192}, "hiking": {"present": 0.724, "y2050_mod": 0.697, "y2100_mod": 0.653, "y2050_high": 0.68, "y2100_high": 0.571}, "cool": {"present": 0.755, "y2050_mod": 0.719, "y2100_mod": 0.619, "y2050_high": 0.663, "y2100_high": 0.565}}, {"fips": "55", "abbr": "WI", "state": "Wisconsin", "region": "Great Lakes", "beach": {"present": 0.364, "y2050_mod": 0.408, "y2100_mod": 0.471, "y2050_high": 0.388, "y2100_high": 0.449}, "ski": {"present": 0.549, "y2050_mod": 0.418, "y2100_mod": 0.265, "y2050_high": 0.376, "y2100_high": 0.21}, "hiking": {"present": 0.726, "y2050_mod": 0.708, "y2100_mod": 0.644, "y2050_high": 0.706, "y2100_high": 0.575}, "cool": {"present": 0.755, "y2050_mod": 0.713, "y2100_mod": 0.633, "y2050_high": 0.681, "y2100_high": 0.544}}, {"fips": "17", "abbr": "IL", "state": "Illinois", "region": "Great Lakes", "beach": {"present": 0.226, "y2050_mod": 0.258, "y2100_mod": 0.289, "y2050_high": 0.243, "y2100_high": 0.26}, "ski": {"present": 0.253, "y2050_mod": 0.172, "y2100_mod": 0.086, "y2050_high": 0.135, "y2100_high": 0.067}, "hiking": {"present": 0.648, "y2050_mod": 0.599, "y2100_mod": 0.496, "y2050_high": 0.566, "y2100_high": 0.449}, "cool": {"present": 0.615, "y2050_mod": 0.567, "y2100_mod": 0.506, "y2050_high": 0.523, "y2100_high": 0.429}}, {"fips": "18", "abbr": "IN", "state": "Indiana", "region": "Great Lakes", "beach": {"present": 0.229, "y2050_mod": 0.232, "y2100_mod": 0.296, "y2050_high": 0.248, "y2100_high": 0.251}, "ski": {"present": 0.277, "y2050_mod": 0.17, "y2100_mod": 0.096, "y2050_high": 0.137, "y2100_high": 0.065}, "hiking": {"present": 0.63, "y2050_mod": 0.58, "y2100_mod": 0.467, "y2050_high": 0.562, "y2100_high": 0.434}, "cool": {"present": 0.596, "y2050_mod": 0.576, "y2100_mod": 0.463, "y2050_high": 0.52, "y2100_high": 0.424}}, {"fips": "39", "abbr": "OH", "state": "Ohio", "region": "Great Lakes", "beach": {"present": 0.271, "y2050_mod": 0.282, "y2100_mod": 0.308, "y2050_high": 0.257, "y2100_high": 0.318}, "ski": {"present": 0.282, "y2050_mod": 0.183, "y2100_mod": 0.097, "y2050_high": 0.156, "y2100_high": 0.063}, "hiking": {"present": 0.652, "y2050_mod": 0.601, "y2100_mod": 0.515, "y2050_high": 0.562, "y2100_high": 0.458}, "cool": {"present": 0.616, "y2050_mod": 0.59, "y2100_mod": 0.497, "y2050_high": 0.558, "y2100_high": 0.423}}, {"fips": "08", "abbr": "CO", "state": "Colorado", "region": "Mountain West", "beach": {"present": 0.194, "y2050_mod": 0.212, "y2100_mod": 0.235, "y2050_high": 0.181, "y2100_high": 0.228}, "ski": {"present": 0.886, "y2050_mod": 0.777, "y2100_mod": 0.587, "y2050_high": 0.718, "y2100_high": 0.48}, "hiking": {"present": 0.894, "y2050_mod": 0.842, "y2100_mod": 0.746, "y2050_high": 0.818, "y2100_high": 0.636}, "cool": {"present": 0.836, "y2050_mod": 0.784, "y2100_mod": 0.644, "y2050_high": 0.739, "y2100_high": 0.568}}, {"fips": "49", "abbr": "UT", "state": "Utah", "region": "Mountain West", "beach": {"present": 0.196, "y2050_mod": 0.187, "y2100_mod": 0.242, "y2050_high": 0.186, "y2100_high": 0.219}, "ski": {"present": 0.871, "y2050_mod": 0.735, "y2100_mod": 0.568, "y2050_high": 0.717, "y2100_high": 0.458}, "hiking": {"present": 0.856, "y2050_mod": 0.803, "y2100_mod": 0.698, "y2050_high": 0.758, "y2100_high": 0.601}, "cool": {"present": 0.777, "y2050_mod": 0.718, "y2100_mod": 0.597, "y2050_high": 0.697, "y2100_high": 0.487}}, {"fips": "56", "abbr": "WY", "state": "Wyoming", "region": "Mountain West", "beach": {"present": 0.062, "y2050_mod": 0.087, "y2100_mod": 0.13, "y2050_high": 0.091, "y2100_high": 0.1}, "ski": {"present": 0.895, "y2050_mod": 0.769, "y2100_mod": 0.588, "y2050_high": 0.719, "y2100_high": 0.476}, "hiking": {"present": 0.878, "y2050_mod": 0.824, "y2100_mod": 0.709, "y2050_high": 0.794, "y2100_high": 0.625}, "cool": {"present": 0.817, "y2050_mod": 0.752, "y2100_mod": 0.651, "y2050_high": 0.719, "y2100_high": 0.542}}, {"fips": "30", "abbr": "MT", "state": "Montana", "region": "Mountain West", "beach": {"present": 0.085, "y2050_mod": 0.117, "y2100_mod": 0.157, "y2050_high": 0.106, "y2100_high": 0.147}, "ski": {"present": 0.824, "y2050_mod": 0.706, "y2100_mod": 0.549, "y2050_high": 0.698, "y2100_high": 0.433}, "hiking": {"present": 0.824, "y2050_mod": 0.815, "y2100_mod": 0.737, "y2050_high": 0.764, "y2100_high": 0.629}, "cool": {"present": 0.817, "y2050_mod": 0.745, "y2100_mod": 0.638, "y2050_high": 0.736, "y2100_high": 0.567}}, {"fips": "16", "abbr": "ID", "state": "Idaho", "region": "Mountain West", "beach": {"present": 0.087, "y2050_mod": 0.127, "y2100_mod": 0.128, "y2050_high": 0.111, "y2100_high": 0.138}, "ski": {"present": 0.828, "y2050_mod": 0.72, "y2100_mod": 0.549, "y2050_high": 0.68, "y2100_high": 0.431}, "hiking": {"present": 0.805, "y2050_mod": 0.796, "y2100_mod": 0.708, "y2050_high": 0.76, "y2100_high": 0.613}, "cool": {"present": 0.797, "y2050_mod": 0.755, "y2100_mod": 0.622, "y2050_high": 0.698, "y2100_high": 0.516}}, {"fips": "32", "abbr": "NV", "state": "Nevada", "region": "Mountain West", "beach": {"present": 0.13, "y2050_mod": 0.141, "y2100_mod": 0.176, "y2050_high": 0.155, "y2100_high": 0.169}, "ski": {"present": 0.332, "y2050_mod": 0.254, "y2100_mod": 0.15, "y2050_high": 0.183, "y2100_high": 0.089}, "hiking": {"present": 0.607, "y2050_mod": 0.547, "y2100_mod": 0.42, "y2050_high": 0.516, "y2100_high": 0.348}, "cool": {"present": 0.478, "y2050_mod": 0.429, "y2100_mod": 0.335, "y2050_high": 0.395, "y2100_high": 0.251}}, {"fips": "35", "abbr": "NM", "state": "New Mexico", "region": "Mountain West", "beach": {"present": 0.092, "y2050_mod": 0.112, "y2100_mod": 0.123, "y2050_high": 0.084, "y2100_high": 0.1}, "ski": {"present": 0.377, "y2050_mod": 0.252, "y2100_mod": 0.151, "y2050_high": 0.221, "y2100_high": 0.086}, "hiking": {"present": 0.689, "y2050_mod": 0.628, "y2100_mod": 0.492, "y2050_high": 0.576, "y2100_high": 0.432}, "cool": {"present": 0.578, "y2050_mod": 0.523, "y2100_mod": 0.402, "y2050_high": 0.477, "y2100_high": 0.32}}, {"fips": "04", "abbr": "AZ", "state": "Arizona", "region": "Mountain West", "beach": {"present": 0.115, "y2050_mod": 0.132, "y2100_mod": 0.141, "y2050_high": 0.109, "y2100_high": 0.137}, "ski": {"present": 0.201, "y2050_mod": 0.125, "y2100_mod": 0.071, "y2050_high": 0.074, "y2100_high": 0.04}, "hiking": {"present": 0.631, "y2050_mod": 0.549, "y2100_mod": 0.383, "y2050_high": 0.512, "y2100_high": 0.336}, "cool": {"present": 0.358, "y2050_mod": 0.277, "y2100_mod": 0.186, "y2050_high": 0.254, "y2100_high": 0.125}}, {"fips": "53", "abbr": "WA", "state": "Washington", "region": "Pacific Northwest", "beach": {"present": 0.457, "y2050_mod": 0.526, "y2100_mod": 0.638, "y2050_high": 0.494, "y2100_high": 0.587}, "ski": {"present": 0.826, "y2050_mod": 0.683, "y2100_mod": 0.532, "y2050_high": 0.663, "y2100_high": 0.438}, "hiking": {"present": 0.853, "y2050_mod": 0.84, "y2100_mod": 0.761, "y2050_high": 0.792, "y2100_high": 0.654}, "cool": {"present": 0.879, "y2050_mod": 0.821, "y2100_mod": 0.703, "y2050_high": 0.786, "y2100_high": 0.614}}, {"fips": "41", "abbr": "OR", "state": "Oregon", "region": "Pacific Northwest", "beach": {"present": 0.44, "y2050_mod": 0.516, "y2100_mod": 0.589, "y2050_high": 0.478, "y2100_high": 0.558}, "ski": {"present": 0.73, "y2050_mod": 0.597, "y2100_mod": 0.452, "y2050_high": 0.545, "y2100_high": 0.355}, "hiking": {"present": 0.835, "y2050_mod": 0.821, "y2100_mod": 0.732, "y2050_high": 0.788, "y2100_high": 0.639}, "cool": {"present": 0.839, "y2050_mod": 0.774, "y2100_mod": 0.676, "y2050_high": 0.764, "y2100_high": 0.589}}, {"fips": "06", "abbr": "CA", "state": "California", "region": "California", "beach": {"present": 0.822, "y2050_mod": 0.786, "y2100_mod": 0.697, "y2050_high": 0.753, "y2100_high": 0.629}, "ski": {"present": 0.634, "y2050_mod": 0.491, "y2100_mod": 0.313, "y2050_high": 0.444, "y2100_high": 0.233}, "hiking": {"present": 0.777, "y2050_mod": 0.742, "y2100_mod": 0.614, "y2050_high": 0.688, "y2100_high": 0.533}, "cool": {"present": 0.719, "y2050_mod": 0.674, "y2100_mod": 0.56, "y2050_high": 0.615, "y2100_high": 0.474}}, {"fips": "15", "abbr": "HI", "state": "Hawaii", "region": "Hawaii", "beach": {"present": 0.905, "y2050_mod": 0.867, "y2100_mod": 0.764, "y2050_high": 0.828, "y2100_high": 0.716}, "ski": {"present": 0.04, "y2050_mod": 0.04, "y2100_mod": 0.053, "y2050_high": 0.04, "y2100_high": 0.05}, "hiking": {"present": 0.719, "y2050_mod": 0.693, "y2100_mod": 0.565, "y2050_high": 0.654, "y2100_high": 0.497}, "cool": {"present": 0.8, "y2050_mod": 0.758, "y2100_mod": 0.627, "y2050_high": 0.723, "y2100_high": 0.553}}, {"fips": "02", "abbr": "AK", "state": "Alaska", "region": "Alaska", "beach": {"present": 0.107, "y2050_mod": 0.131, "y2100_mod": 0.211, "y2050_high": 0.133, "y2100_high": 0.187}, "ski": {"present": 0.887, "y2050_mod": 0.822, "y2100_mod": 0.694, "y2050_high": 0.785, "y2100_high": 0.588}, "hiking": {"present": 0.661, "y2050_mod": 0.694, "y2100_mod": 0.693, "y2050_high": 0.654, "y2100_high": 0.662}, "cool": {"present": 0.9, "y2050_mod": 0.862, "y2100_mod": 0.78, "y2050_high": 0.814, "y2100_high": 0.708}}];
+
+// ── LOOKUPS ────────────────────────────────────────────────────────────────
+const fipsMap = new Map();
+STATE_DATA.forEach(s => fipsMap.set(s.fips, s));
+
+function getScore(s, vtype, period, scen='mod') {
+  if (!s || !s[vtype]) return null;
+  const d = s[vtype];
+  if (period === 'present') return d.present;
+  if (period === 'y2050')   return scen === 'high' ? d.y2050_high : d.y2050_mod;
+  if (period === 'y2100')   return scen === 'high' ? d.y2100_high : d.y2100_mod;
+  return d.present;
+}
+
+function binLabel(v) {
+  if (v >= 0.84) return 'Excellent';
+  if (v >= 0.72) return 'Very Good';
+  if (v >= 0.60) return 'Good';
+  if (v >= 0.45) return 'Fair';
+  if (v >= 0.30) return 'Poor';
+  return 'Very Poor';
+}
+
+// ── COLOR SCALES ───────────────────────────────────────────────────────────
+const SUIT_T = [0.30,0.45,0.60,0.72,0.84];
+const SUIT_C = ['#d73027','#f46d43','#fee08b','#a6d96a','#1a9850'];
+const SUIT_L = ['Very Poor','Poor','Fair','Good','Very Good','Excellent'];
+const suitScale = d3.scaleThreshold().domain(SUIT_T).range(SUIT_C);
+
+const DIFF_T = [-0.25,-0.10,-0.03,0.03,0.10];
+const DIFF_C = ['#d73027','#f46d43','#d4d4d4','#a6d96a','#22c55e','#006837'];
+const DIFF_L = ['Major loss','Moderate loss','Stable','Modest gain','Significant gain','Large gain'];
+const diffScale = d3.scaleThreshold().domain(DIFF_T).range(DIFF_C);
+
+// ── PROFILE META ────────────────────────────────────────────────────────────
+const PROFILE_META = {
+  beach: {
+    name:'Beach Escape', color:'var(--beach)', vtype:'beach',
+    desc:'Your ideal trip centers on warm coastal temperatures, sunshine, and comfortable swimming conditions. You travel for warmth, salt air, and the rhythm of the ocean.',
+    outcome:'WORSENING',
+    outcomeColor:'var(--worsen)',
+    outcomeBody:'Your destination still exists. But the experience is becoming less comfortable. Summer heat in Florida and the Gulf Coast increasingly exceeds safe thresholds, narrowing the window of ideal beach days — even as northern Atlantic coasts warm into viability.',
+    today:'Florida, Hawaii, and California\'s coast currently lead beach climate suitability. The Carolinas and Gulf Coast follow closely. These states built major beach economies on the reliability of warm, comfortable coastal conditions.',
+    y2050:'Rising temperatures are pushing peak-summer conditions past comfortable thresholds in traditional beach states. Florida and the Gulf Coast see more extreme-heat beach days. The Mid-Atlantic coast begins to warm into reliable beach territory.',
+    y2100:'By 2100, the geography of American beach travel has shifted. Florida\'s peak-summer suitability has declined sharply. The Northeast coast — New Jersey, Delaware, Massachusetts — has emerged as a genuine contender for summer beach travel.',
+    diffNote:'Florida and the Gulf Coast show the steepest losses in beach comfort. The Mid-Atlantic and southern New England coasts are among the few places that improve.',
+  },
+  ski: {
+    name:'Mountain Adventure', color:'var(--ski)', vtype:'ski',
+    desc:'Your ideal trip requires cold winters, reliable snowpack, and the thrill of winter terrain. You travel for the mountain experience: powder days, cozy lodges, and the challenge of the slopes.',
+    outcome:'DISAPPEARING',
+    outcomeColor:'var(--disap)',
+    outcomeBody:'The conditions that define your vacation — reliable winter snowpack and dependable cold — are becoming rarer. This is not a shift to somewhere new. The experience itself is becoming increasingly scarce.',
+    today:'Colorado, Utah, Wyoming, Montana, and Vermont offer the nation\'s most reliable ski conditions. High elevation and cold winters create consistent snowpack that ski resorts depend on.',
+    y2050:'By 2050, lower-elevation ski resorts across the Northeast and Rockies face unreliable snow seasons. Snowlines are retreating upward. The comfortable ski window is narrowing from the bottom.',
+    y2100:'By 2100, reliable skiing has contracted dramatically. Lower-elevation states face fundamentally disrupted seasons. Only the highest Rocky Mountain terrain maintains consistent conditions — but even that has declined.',
+    diffNote:'Nearly every ski state shows suitability loss. The question is how much, not whether. Alaska is the notable exception: its high latitude and extreme elevation provide the most climate resilience of any ski region.',
+  },
+  hiking: {
+    name:'Outdoor Explorer', color:'var(--hiking)', vtype:'hiking',
+    desc:'Your ideal trip combines dramatic landscapes with comfortable outdoor temperatures. You travel for trails, national parks, and days spent in motion through natural scenery.',
+    outcome:'RELOCATING',
+    outcomeColor:'var(--reloc)',
+    outcomeBody:'The climate conditions ideal for hiking are not disappearing — they are moving. The comfortable outdoor temperature window that defines your vacation is shifting northward and upward in elevation.',
+    today:'The Pacific Northwest, Rocky Mountains, and northern Appalachians offer the best hiking climate today — dramatic landscapes combined with mild temperatures that stay comfortable for full days on trail.',
+    y2050:'The Southwest and Southeast see growing summer heat that shrinks the comfortable hiking window. Northern states hold better. The Pacific Northwest, northern Rockies, and upper Midwest improve or hold.',
+    y2100:'The Pacific Northwest and northern Rockies have emerged as the nation\'s most climate-resilient hiking destinations. The iconic desert Southwest — Grand Canyon, Arches, Zion — faces significantly shortened viable seasons.',
+    diffNote:'The south-to-north gradient is the clearest pattern for hiking. Southern and desert states lose the most. Northern tier states hold steady or improve modestly.',
+  },
+  cool: {
+    name:'Mild Climate Getaway', color:'var(--cool)', vtype:'cool',
+    desc:'Your ideal trip is about genuine summer comfort — temperatures that stay pleasant when the rest of the country swelters. You travel specifically to escape heat, not to find more of it.',
+    outcome:'RELOCATING',
+    outcomeColor:'var(--reloc)',
+    outcomeBody:'The cool, comfortable summer climate you seek is not disappearing — but it is retreating northward. States that currently offer summer relief are warming into the range that prompted escape tourism in the first place.',
+    today:'The Pacific Northwest, Upper Midwest lake region, and northern New England offer the best summer escape climate today. Alaska tops all rankings. These regions offer genuine relief when most of the country is sweltering.',
+    y2050:'Even the coolest states are warming into uncomfortable peak-summer territory by mid-century. The Pacific Northwest, which depends on dry summers, is especially exposed to rapid warming.',
+    y2100:'Reliable cool summer conditions have retreated to Alaska and the far northern tier. The Pacific Northwest has lost much of its advantage. Vermont, Maine, and northern Minnesota hold best within the lower 48.',
+    diffNote:'Summer comfort loss is nearly universal. Almost everywhere shows red on this map. The far north holds longest — but even there, conditions are declining.',
+  },
+};
+
+// ── BUILDER STATE ─────────────────────────────────────────────────────────
+const answers = { temp:null, landscape:null, activities:[], weather:null, style:null };
+let currentStep = 0;
+let userProfile = null;
+let userVtype = 'beach';
+let mapTopo = null;
+let currentMapState = 'today';
+let exploreVtype = 'beach';
+let exploreYear  = 'present';
+let exploreScen  = 'mod';
+
+// ── BUILDER LOGIC ─────────────────────────────────────────────────────────
+function selectOpt(card, step) {
+  const parent = card.closest('.option-grid');
+  parent.querySelectorAll('.opt-card').forEach(c => c.classList.remove('selected'));
+  card.classList.add('selected');
+  if (step === 0) answers.temp      = card.dataset.val;
+  if (step === 1) answers.landscape = card.dataset.val;
+  if (step === 3) answers.weather   = card.dataset.val;
+  if (step === 4) answers.style     = card.dataset.val;
+  document.getElementById(`next-${step}`)?.removeAttribute('disabled');
+  if (step === 4) document.getElementById('btn-reveal')?.removeAttribute('disabled');
+}
+
+function toggleOpt(card, step) {
+  const val = card.dataset.val;
+  if (card.classList.contains('selected')) {
+    card.classList.remove('selected');
+    answers.activities = answers.activities.filter(a => a !== val);
+  } else {
+    if (answers.activities.length >= 3) return;
+    card.classList.add('selected');
+    answers.activities.push(val);
+  }
+  const cnt = answers.activities.length;
+  document.getElementById('act-count').textContent = cnt;
+  const nextBtn = document.getElementById(`next-${step}`);
+  if (cnt > 0) nextBtn.removeAttribute('disabled');
+  else nextBtn.setAttribute('disabled','');
+}
+
+function nextStep(step) {
+  document.getElementById(`bstep-${step}`).classList.remove('active');
+  document.getElementById(`bstep-${step+1}`).classList.add('active');
+  document.getElementById(`pd-${step}`).classList.remove('active');
+  document.getElementById(`pd-${step}`).classList.add('done');
+  document.getElementById(`pd-${step+1}`).classList.add('active');
+  currentStep = step + 1;
+  // Scroll to top of builder so user sees the new step
+  document.getElementById('builder').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+// ── PROFILE COMPUTATION ────────────────────────────────────────────────────
+function computeProfile() {
+  const s = { beach:0, ski:0, hiking:0, cool:0 };
+  const tw = {
+    cool:{ski:3,cool:3,hiking:1,beach:0}, mild:{cool:2,hiking:2,ski:1,beach:0},
+    warm:{beach:3,hiking:1,cool:0,ski:0}, hot:{beach:4,cool:0,ski:0,hiking:0},
+  };
+  const lw = {
+    ocean:{beach:4,ski:0,hiking:1,cool:0}, mountains:{ski:3,hiking:3,cool:1,beach:0},
+    forest:{hiking:3,cool:2,ski:1,beach:0}, lakes:{cool:3,beach:1,hiking:2,ski:0},
+    desert:{hiking:2,beach:1,cool:0,ski:0}, cities:{beach:1,cool:1,hiking:0,ski:0},
+  };
+  const aw = {
+    swimming:{beach:4}, skiing:{ski:5}, hiking:{hiking:4}, camping:{hiking:2,cool:1},
+    wildlife:{hiking:2,cool:2}, food:{beach:1,cool:1}, beach:{beach:3},
+    sightseeing:{beach:1,cool:1,hiking:1},
+  };
+  const ww = {
+    sunny:{beach:3,hiking:1}, mild_clear:{cool:2,hiking:1,beach:1},
+    cool_over:{cool:3,hiking:1}, snowy:{ski:4}, rainy:{cool:2,beach:1}, nopref:{},
+  };
+  const stw = {
+    relaxing:{beach:3,cool:1}, adventurous:{ski:2,hiking:2}, active:{hiking:2,ski:1},
+    scenic:{hiking:2,cool:1}, cultural:{beach:1,cool:1}, mixed:{},
+  };
+  if (tw[answers.temp]) Object.entries(tw[answers.temp]).forEach(([k,v]) => s[k]+=v);
+  if (lw[answers.landscape]) Object.entries(lw[answers.landscape]).forEach(([k,v]) => s[k]+=v);
+  answers.activities.forEach(a => { if(aw[a]) Object.entries(aw[a]).forEach(([k,v]) => s[k]+=v); });
+  if (ww[answers.weather]) Object.entries(ww[answers.weather]).forEach(([k,v]) => s[k]+=v);
+  if (stw[answers.style]) Object.entries(stw[answers.style]).forEach(([k,v]) => s[k]+=v);
+  return s;
+}
+
+function revealProfile() {
+  // Compute profile
+  const raw = computeProfile();
+  const total = Object.values(raw).reduce((a,b) => a+b, 0) || 1;
+  const pcts = {};
+  Object.entries(raw).forEach(([k,v]) => pcts[k] = Math.round((v/total)*100));
+  // Normalize to 100
+  const keys = Object.keys(pcts).sort((a,b) => pcts[b]-pcts[a]);
+  let sum = Object.values(pcts).reduce((a,b)=>a+b,0);
+  if (sum !== 100) pcts[keys[0]] += (100 - sum);
+
+  userProfile = keys[0];
+  userVtype = PROFILE_META[userProfile].vtype;
+  
+  // Scroll to reveal
+  document.getElementById('profile-reveal').scrollIntoView({behavior:'smooth'});
+  
+  // Animate bars after delay
+  setTimeout(() => {
+    const bars = {beach:'pb-beach',ski:'pb-ski',hiking:'pb-hiking',cool:'pb-cool'};
+    const pctEls = {beach:'pp-beach',ski:'pp-ski',hiking:'pp-hiking',cool:'pp-cool'};
+    ['beach','ski','hiking','cool'].forEach((k,i) => {
+      setTimeout(() => {
+        document.getElementById(bars[k]).style.width = pcts[k] + '%';
+        animateCount(document.getElementById(pctEls[k]), 0, pcts[k], 800);
+      }, i * 200);
+    });
+    setTimeout(() => {
+      const meta = PROFILE_META[userProfile];
+      const nameEl = document.getElementById('reveal-name');
+      nameEl.textContent = meta.name;
+      nameEl.style.color = meta.color;
+      nameEl.classList.add('show');
+      document.getElementById('reveal-desc').textContent = meta.desc;
+      document.getElementById('reveal-desc').classList.add('show');
+      document.getElementById('btn-discover').classList.add('show');
+      // Pre-populate story sections
+      setupStory();
+    }, 1200);
+  }, 400);
+}
+
+function animateCount(el, from, to, dur) {
+  const start = performance.now();
+  function step(now) {
+    const t = Math.min((now-start)/dur, 1);
+    el.textContent = Math.round(from + (to-from)*t) + '%';
+    if (t < 1) requestAnimationFrame(step);
+  }
+  requestAnimationFrame(step);
+}
+
+// ── STORY SETUP ────────────────────────────────────────────────────────────
+function setupStory() {
+  const meta = PROFILE_META[userProfile];
+  // Map profile pill
+  const pill = document.getElementById('map-profile-pill');
+  pill.textContent = meta.name;
+  pill.style.borderColor = meta.color;
+  pill.style.color = meta.color;
+  // Narrative text
+  document.getElementById('sh-today').textContent = `The best places for a ${meta.name} today`;
+  document.getElementById('sb-today-1').textContent = meta.today;
+  document.getElementById('sc-today').textContent = 'These conditions have sustained regional vacation economies for generations. The question is whether they will continue to.';
+  document.getElementById('sh-2050').textContent = 'By 2050, the first changes are measurable';
+  document.getElementById('sb-2050-1').textContent = meta.y2050;
+  document.getElementById('sc-2050').textContent = 'The change visible here is not a distant future scenario — 2050 is within the lifetime of anyone alive today.';
+  document.getElementById('sh-2100').textContent = 'By 2100, the change is undeniable';
+  document.getElementById('sb-2100-1').textContent = meta.y2100;
+  document.getElementById('sc-2100').textContent = meta.diffNote;
+  // Legend
+  currentVtype = meta.vtype;
+  buildLegend();
+  // Factors section
+  buildFactors();
+  // Final reveal
+  buildFinalReveal();
+  // Update explore tabs to match
+  setExploreVtype(meta.vtype, false);
+}
+
+function startStory() {
+  document.getElementById('story-container').scrollIntoView({behavior:'smooth'});
+}
+
+// ── MAP SETUP ──────────────────────────────────────────────────────────────
+const mapSvg   = d3.select('#map-svg');
+const statesG  = mapSvg.append('g');
+const bordersG = mapSvg.append('g');
+const projection = d3.geoAlbersUsa();
+const pathGen    = d3.geoPath().projection(projection);
+let currentVtype = 'beach';
+
+function fitMap(svgEl) {
+  const W = svgEl.clientWidth  || 600;
+  const H = svgEl.clientHeight || 500;
+  if (mapTopo) {
+    const fc = topojson.feature(mapTopo, mapTopo.objects.states);
+    projection.fitExtent([[20,44],[W-20,H-20]], fc);
+  }
+}
+
+function getMapFill(d) {
+  const fips = String(d.id).padStart(2,'0');
+  const s = fipsMap.get(fips);
+  if (!s) return '#0d1f38';
+  if (currentMapState === 'diff') {
+    const n = getScore(s,currentVtype,'present');
+    const f = getScore(s,currentVtype,'y2100','mod');
+    return (n!==null&&f!==null) ? diffScale(f-n) : '#162438';
+  }
+  const v = getScore(s,currentVtype,currentMapState,'mod');
+  return v!==null ? suitScale(v) : '#162438';
+}
+
+function initMainMap(topo) {
+  mapTopo = topo;
+  fitMap(document.getElementById('map-svg'));
+  const fc = topojson.feature(topo, topo.objects.states);
+  statesG.selectAll('.sp')
+    .data(fc.features).join('path').attr('class','sp')
+    .attr('d',pathGen).attr('fill','#0d1f38')
+    .on('mouseover',onOver).on('mousemove',onMove)
+    .on('mouseout',onOut).on('click',onClick);
+  bordersG.append('path')
+    .datum(topojson.mesh(topo,topo.objects.states,(a,b)=>a!==b))
+    .attr('fill','none').attr('stroke','#1c3250').attr('stroke-width','.6')
+    .attr('d',pathGen).attr('pointer-events','none');
+  buildLegend();
+}
+
+function transitionMainMap(dur=650) {
+  statesG.selectAll('.sp')
+    .transition().duration(dur).ease(d3.easeQuadInOut)
+    .attr('fill', getMapFill);
+}
+
+function buildLegend() {
+  const isDiff = currentMapState === 'diff';
+  const C = isDiff ? DIFF_C.slice(0,-1) : SUIT_C;
+  const L = isDiff ? DIFF_L.slice(0,-1) : SUIT_L;
+  document.getElementById('ml-title').textContent = isDiff
+    ? 'Change vs Today (2100)'
+    : (PROFILE_META[userProfile]?.name || 'Suitability');
+  const cont = document.getElementById('ml-bins');
+  cont.innerHTML = '';
+  C.forEach((c,i) => cont.innerHTML += `<div class="ml-row"><div class="ml-swatch" style="background:${c}"></div><span class="ml-label">${L[i]}</span></div>`);
+}
+
+// ── TOOLTIP ────────────────────────────────────────────────────────────────
+const ttEl = document.getElementById('tt');
+function showTT(e, s) {
+  if (!s||!s[currentVtype]) return;
+  const now = getScore(s,currentVtype,'present');
+  const y50 = getScore(s,currentVtype,'y2050','mod');
+  const y100= getScore(s,currentVtype,'y2100','mod');
+  const d   = y100 - now;
+  document.getElementById('tt-state').textContent = s.state+' ('+s.abbr+')';
+  document.getElementById('tt-now').textContent   = binLabel(now)+' ('+now.toFixed(2)+')';
+  document.getElementById('tt-50').textContent    = binLabel(y50)+' ('+y50.toFixed(2)+')';
+  document.getElementById('tt-100').textContent   = binLabel(y100)+' ('+y100.toFixed(2)+')';
+  const dEl = document.getElementById('tt-delta');
+  dEl.textContent  = (d>=0?'+':'')+d.toFixed(2);
+  dEl.style.color  = d>=0?'#22c55e':'#ef4444';
+  const v = currentMapState==='diff' ? getScore(s,currentVtype,'present') : getScore(s,currentVtype,currentMapState,'mod');
+  document.getElementById('tt-fill').style.width      = Math.min(v||0,1)*100+'%';
+  document.getElementById('tt-fill').style.background = suitScale(v||0);
+  moveTT(e); ttEl.classList.add('show');
+}
+function moveTT(e) {
+  let x=e.clientX+14,y=e.clientY-14;
+  if(x+210>window.innerWidth)  x=e.clientX-224;
+  if(y+200>window.innerHeight) y=e.clientY-200;
+  ttEl.style.left=x+'px'; ttEl.style.top=y+'px';
+}
+function hideTT() { ttEl.classList.remove('show'); }
+
+function onOver(e,d) {
+  const s=fipsMap.get(String(d.id).padStart(2,'0')); if(!s) return;
+  d3.select(this).attr('stroke','#fff').attr('stroke-width','1');
+  showTT(e,s);
+}
+function onMove(e) { moveTT(e); }
+function onOut()   { d3.select(this).attr('stroke','#0c1929').attr('stroke-width','.5'); hideTT(); }
+function onClick(e,d) {
+  const s=fipsMap.get(String(d.id).padStart(2,'0')); if(!s) return;
+  openDetail(s); hideTT();
+}
+
+// ── STATE DETAIL ───────────────────────────────────────────────────────────
+function openDetail(s) {
+  const vt = currentVtype;
+  const col = PROFILE_META[userProfile]?.color || 'var(--accent)';
+  const now = getScore(s,vt,'present');
+  const y50 = getScore(s,vt,'y2050','mod');
+  const y100= getScore(s,vt,'y2100','mod');
+  const d50 = y50-now; const d100=y100-now;
+  const fmt = v=>v.toFixed(2);
+  const dc  = v=>v>=0?'#22c55e':'#ef4444';
+  const ds  = v=>(v>=0?'+':'')+v.toFixed(2);
+
+  document.getElementById('sd-name').textContent=s.state;
+  document.getElementById('sd-name').style.color=col;
+  document.getElementById('sd-reg').textContent=s.region;
+
+  document.getElementById('sd-bd').innerHTML=`
+    <div>
+      <div class="sd-metric-label">Current Suitability</div>
+      <div class="sd-big" style="color:${suitScale(now)}">${fmt(now)} — ${binLabel(now)}</div>
+      <div class="sd-bar-bg"><div class="sd-bar-fill" style="width:${now*100}%;background:${suitScale(now)}"></div></div>
+      <div class="sd-tl">
+        <div class="sd-tc"><div class="sd-ty">Today</div><div class="sd-tv" style="color:${suitScale(now)}">${fmt(now)}</div><div class="sd-td" style="color:var(--text-dim)">baseline</div></div>
+        <div class="sd-tc"><div class="sd-ty">2050</div><div class="sd-tv" style="color:${suitScale(y50)}">${fmt(y50)}</div><div class="sd-td" style="color:${dc(d50)}">${ds(d50)}</div></div>
+        <div class="sd-tc"><div class="sd-ty">2100</div><div class="sd-tv" style="color:${suitScale(y100)}">${fmt(y100)}</div><div class="sd-td" style="color:${dc(d100)}">${ds(d100)}</div></div>
+      </div>
+    </div>
+    <div style="margin-top:4px">
+      <div class="sd-metric-label">All Vacation Types — Today</div>
+      ${['beach','ski','hiking','cool'].map(k=>{
+        const v=getScore(s,k,'present');
+        const nm={beach:'Beach',ski:'Ski',hiking:'Hiking',cool:'Cool'}[k];
+        return `<div style="display:flex;align-items:center;gap:8px;margin-bottom:5px">
+          <span style="font-family:var(--mono);font-size:9px;color:var(--text-dim);width:50px">${nm}</span>
+          <div style="flex:1;height:4px;border-radius:2px;background:var(--border);overflow:hidden">
+            <div style="height:100%;width:${v*100}%;background:${suitScale(v)};border-radius:2px"></div></div>
+          <span style="font-family:var(--mono);font-size:10px;color:${suitScale(v)}">${v.toFixed(2)}</span>
+        </div>`;
+      }).join('')}
+    </div>`;
+
+  // Simple insight
+  const trend = y100-now;
+  const trendStr = trend<-0.2?'faces significant suitability decline by 2100':trend<-0.08?'sees moderate decline':trend>0.05?'is among the few states that improve':'remains relatively stable';
+  document.getElementById('sd-insight').innerHTML = `<strong>${s.state}</strong> ${trendStr} for ${PROFILE_META[userProfile]?.name||'your vacation type'}.`;
+  document.getElementById('state-detail').classList.add('open');
+}
+document.getElementById('sd-close').addEventListener('click',()=>{
+  document.getElementById('state-detail').classList.remove('open');
+});
+
+// ── SCROLL OBSERVER ────────────────────────────────────────────────────────
+function initScroll() {
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting) {
+        const state = e.target.dataset.state;
+        if (state && state !== currentMapState) {
+          currentMapState = state;
+          transitionMainMap();
+          buildLegend();
+          const badge = document.getElementById('map-period-badge');
+          badge.textContent = state==='today'?'Today':state==='y2050'?'2050 Projection':state==='y2100'?'2100 Projection':'Change vs Today';
+          badge.style.color = state==='today'?'var(--text-dim)':state==='y2050'?'var(--worsen)':state==='y2100'?'var(--disap)':'var(--text-mid)';
+        }
+      }
+    });
+  },{rootMargin:'-42% 0px -42% 0px',threshold:0});
+  document.querySelectorAll('.step[data-state]').forEach(el=>obs.observe(el));
+}
+
+// ── FACTOR BARS ────────────────────────────────────────────────────────────
+const FACTORS = {
+  beach:[
+    {name:'Average Summer Temperature',change:'+3.1°C by 2100',pct:62,color:'#f97316',note:'Peak-summer temperatures rise above comfortable outdoor thresholds more frequently, narrowing the ideal beach day window.'},
+    {name:'Extreme Heat Beach Days',change:'+68% by 2100',pct:78,color:'#ef4444',note:'Days where outdoor heat stress exceeds safe beach activity thresholds increase dramatically in Florida and the Gulf.'},
+    {name:'Comfortable Swimming Days',change:'−22% by 2100',pct:44,color:'#f59e0b',note:'The window of ocean temperatures comfortable for extended swimming shifts, with peak-summer discomfort increasing.'},
+    {name:'Northern Coast Viability',change:'+31% by 2100',pct:31,color:'#22c55e',note:'Mid-Atlantic and southern New England coastal temperatures warm into reliable summer beach territory.'},
+  ],
+  ski:[
+    {name:'Winter Temperature Rise',change:'+3.4°C by 2100',pct:68,color:'#ef4444',note:'Winter temperatures rise across all ski regions, pushing more precipitation to fall as rain rather than snow at lower elevations.'},
+    {name:'Snowpack Reliability Decline',change:'−45% by 2100',pct:90,color:'#d73027',note:'Snowpack depth and season reliability decline across virtually all US ski states — the most uniform negative signal in the data.'},
+    {name:'Viable Ski Season Length',change:'−6 weeks by 2100',pct:60,color:'#f97316',note:'The number of days with sufficient snow depth for ski operations shrinks substantially at most US resort elevations.'},
+    {name:'Elevation Threshold Rise',change:'+400m by 2100',pct:50,color:'#f59e0b',note:'The minimum elevation required for reliable snow increases dramatically, stranding lower-elevation resorts without natural snow.'},
+  ],
+  hiking:[
+    {name:'Dangerous Heat Days on Trail',change:'+75% by 2100',pct:75,color:'#ef4444',note:'Days where heat index exceeds safe extended outdoor exertion thresholds increase across the South and Southwest.'},
+    {name:'Summer Comfortable Day Count',change:'−8 weeks by 2100',pct:55,color:'#f97316',note:'The number of days where temperatures are comfortable for full-day outdoor activity declines in the most-affected states.'},
+    {name:'Northern Viable Season',change:'+3 weeks by 2100',pct:30,color:'#22c55e',note:'Northern states (Washington, Oregon, Minnesota, Maine) gain comfortable hiking weeks as previously too-cold seasons warm.'},
+    {name:'Southwest Park Access Window',change:'−40% by 2100',pct:80,color:'#d73027',note:'The Grand Canyon, Arches, and Zion face dramatically shortened seasons when temperatures are safe for visitor activity.'},
+  ],
+  cool:[
+    {name:'Average Summer High Temperature',change:'+3.8°C by 2100',pct:76,color:'#ef4444',note:'Summer temperatures rise across all regions including traditional cool-escape destinations, eroding their competitive advantage.'},
+    {name:'Heat Wave Frequency',change:'+120% by 2100',pct:85,color:'#d73027',note:'Extended periods of dangerous heat become dramatically more common even in states that currently offer summer relief.'},
+    {name:'Cool Summer Days Lost',change:'−40% by 2100',pct:80,color:'#f97316',note:'The number of days where temperatures stay in the comfortable 60–75°F range during peak summer declines significantly.'},
+    {name:'Northern Refuge Viability',change:'Stable',pct:15,color:'#3b82f6',note:'Alaska and the northern tier maintain cool-summer advantages longer than any other region, becoming the primary cool-escape destinations.'},
+  ],
+};
+
+function buildFactors() {
+  const meta = PROFILE_META[userProfile];
+  const factors = FACTORS[meta.vtype];
+  document.getElementById('fh').textContent = 'Why your ' + meta.name + ' is changing';
+  document.getElementById('fs').textContent = 'These are the specific climate variables driving suitability change for your vacation type — and the scale of change projected from today to 2100.';
+  const list = document.getElementById('factor-list');
+  list.innerHTML = '';
+  factors.forEach((f,i) => {
+    list.innerHTML += `
+      <div class="factor-item">
+        <div class="factor-label">
+          <span class="factor-name">${f.name}</span>
+          <span class="factor-change" style="color:${f.color}">${f.change}</span>
+        </div>
+        <div class="factor-track">
+          <div class="factor-fill" data-pct="${f.pct}" style="background:${f.color}"></div>
+        </div>
+        <div class="factor-note">${f.note}</div>
+      </div>`;
+  });
+  // Animate bars when section enters view
+  const obs = new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if (e.isIntersecting) {
+        document.querySelectorAll('.factor-fill').forEach((el,i)=>{
+          setTimeout(()=>{el.style.width=el.dataset.pct+'%'},i*150);
+        });
+        obs.disconnect();
+      }
+    });
+  },{threshold:0.3});
+  obs.observe(document.getElementById('factors'));
+}
+
+// ── FINAL REVEAL ───────────────────────────────────────────────────────────
+function buildFinalReveal() {
+  const meta = PROFILE_META[userProfile];
+  const vt = meta.vtype;
+  // Pick a representative state for the timeline
+  // Best state for vacation type today
+  const best = [...STATE_DATA].sort((a,b)=>getScore(b,vt,'present')-getScore(a,vt,'present'))[0];
+  const now  = getScore(best,vt,'present');
+  const y50  = getScore(best,vt,'y2050','mod');
+  const y100 = getScore(best,vt,'y2100','mod');
+
+  document.getElementById('final-verdict').innerHTML =
+    `Your vacation is <em id="final-outcome" style="color:${meta.outcomeColor}">${meta.outcome}.</em>`;
+  document.getElementById('final-body').textContent = meta.outcomeBody;
+
+  const tl = document.getElementById('final-timeline');
+  tl.innerHTML = `
+    <div class="ft-item">
+      <div class="ft-year">Today</div>
+      <div class="ft-score" style="color:${suitScale(now)}">${now.toFixed(2)}</div>
+      <div class="ft-label">${binLabel(now)} — ${best.state}</div>
+    </div>
+    <div class="ft-arrow" style="color:${y50<now?'#ef4444':'#22c55e'}">${y50<now?'▼':'▲'}</div>
+    <div class="ft-item">
+      <div class="ft-year">2050</div>
+      <div class="ft-score" style="color:${suitScale(y50)}">${y50.toFixed(2)}</div>
+      <div class="ft-label">${binLabel(y50)}</div>
+    </div>
+    <div class="ft-arrow" style="color:${y100<y50?'#ef4444':'#22c55e'}">${y100<y50?'▼':'▲'}</div>
+    <div class="ft-item">
+      <div class="ft-year">2100</div>
+      <div class="ft-score" style="color:${suitScale(y100)}">${y100.toFixed(2)}</div>
+      <div class="ft-label">${binLabel(y100)}</div>
+    </div>`;
+}
+
+// ── EXPLORE SECTION ────────────────────────────────────────────────────────
+const exMapSvg   = d3.select('#explore-map-svg');
+const exStatesG  = exMapSvg.append('g');
+const exBordersG = exMapSvg.append('g');
+const exProj     = d3.geoAlbersUsa();
+const exPath     = d3.geoPath().projection(exProj);
+
+function initExploreMap(topo) {
+  const el = document.getElementById('explore-map-svg');
+  const W  = el.clientWidth || 600;
+  const H  = +el.getAttribute('height') || 360;
+  const fc = topojson.feature(topo, topo.objects.states);
+  exProj.fitExtent([[12,12],[W-12,H-12]],fc);
+  exStatesG.selectAll('.xsp').data(fc.features).join('path').attr('class','xsp sp')
+    .attr('d',exPath).attr('fill','#101e30')
+    .on('mouseover',(e,d)=>{
+      const s=fipsMap.get(String(d.id).padStart(2,'0')); if(!s) return;
+      d3.select(e.currentTarget).attr('stroke','#fff').attr('stroke-width','1');
+      showExploreDetail(s);
+    })
+    .on('mouseout',e=>d3.select(e.currentTarget).attr('stroke','#0c1929').attr('stroke-width','.5'));
+  exBordersG.append('path')
+    .datum(topojson.mesh(topo,topo.objects.states,(a,b)=>a!==b))
+    .attr('fill','none').attr('stroke','#1c3250').attr('stroke-width','.6')
+    .attr('d',exPath).attr('pointer-events','none');
+  updateExploreMap();
+}
+
+function getExFill(d) {
+  const s=fipsMap.get(String(d.id).padStart(2,'0'));
+  if (!s) return '#101e30';
+  const v=getScore(s,exploreVtype,exploreYear,exploreScen);
+  return v!==null?suitScale(v):'#101e30';
+}
+
+function updateExploreMap() {
+  exStatesG.selectAll('.xsp')
+    .transition().duration(500).ease(d3.easeQuadInOut)
+    .attr('fill',getExFill);
+}
+
+function showExploreDetail(s) {
+  document.getElementById('ed-state-name').textContent = s.state + ' — ' + s.region;
+  const metrics = document.getElementById('ed-metrics');
+  metrics.innerHTML = '';
+  ['beach','ski','hiking','cool'].forEach(vt=>{
+    const v = getScore(s,vt,exploreYear,exploreScen);
+    const nm={beach:'Beach',ski:'Ski',hiking:'Hiking',cool:'Cool Escape'}[vt];
+    metrics.innerHTML += `
+      <div class="ed-metric">
+        <div style="display:flex;justify-content:space-between;margin-bottom:3px">
+          <span style="font-family:var(--mono);font-size:10px;color:var(--text-dim)">${nm}</span>
+          <span style="font-family:var(--mono);font-size:10px;color:${suitScale(v)}">${v.toFixed(2)}</span>
+        </div>
+        <div class="ed-bar-bg"><div class="ed-bar-fill" style="width:${v*100}%;background:${suitScale(v)}"></div></div>
+      </div>`;
+  });
+}
+
+function setExploreVtype(vt, update=true) {
+  exploreVtype = vt;
+  document.querySelectorAll('[data-vt]').forEach(b=>{
+    b.classList.toggle('active', b.dataset.vt===vt);
+  });
+  if (update) updateExploreMap();
+}
+
+// Line chart for explore
+function buildExploreChart() {
+  const el = document.getElementById('explore-chart-svg');
+  const W  = el.clientWidth || 880;
+  const H  = +el.getAttribute('height') || 220;
+  const m  = {t:10,r:100,b:36,l:44};
+  const iW = W-m.l-m.r, iH = H-m.t-m.b;
+
+  const svg = d3.select('#explore-chart-svg').attr('width',W);
+  svg.selectAll('*').remove();
+  const g   = svg.append('g').attr('transform',`translate(${m.l},${m.t})`);
+
+  // Simple representative states per vtype
+  const REP = {
+    beach:['12','06','53','25'], // FL,CA,WA,MA
+    ski:  ['08','49','50','02'], // CO,UT,VT,AK
+    hiking:['53','41','30','37'], // WA,OR,MT,NC
+    cool: ['02','27','23','53'], // AK,MN,ME,WA
+  };
+  const stateKeys = REP[exploreVtype] || REP.beach;
+  const COLORS2 = ['#06b6d4','#3b82f6','#22c55e','#a855f7'];
+
+  // Build time series: present(2020), y2050_mod, y2100_mod, y2050_high, y2100_high
+  // Interpolate intermediate points for smoother line
+  const years = [2020,2035,2050,2070,2100];
+  function interpScore(s,vt,y) {
+    const p=getScore(s,vt,'present');
+    const m50=getScore(s,vt,'y2050','mod');
+    const m100=getScore(s,vt,'y2100','mod');
+    if(y<=2020) return p;
+    if(y<=2050) return p+(m50-p)*((y-2020)/30);
+    return m50+(m100-m50)*((y-2050)/50);
+  }
+
+  const xS = d3.scaleLinear().domain([2020,2100]).range([0,iW]);
+  const allScores = stateKeys.flatMap(f=>years.map(y=>interpScore(fipsMap.get(f),exploreVtype,y)));
+  const yS = d3.scaleLinear().domain([Math.max(0,d3.min(allScores)-.05),Math.min(1,d3.max(allScores)+.05)]).range([iH,0]);
+
+  // Grid
+  [0.3,0.5,0.7,0.9].forEach(v=>{
+    g.append('line').attr('x1',0).attr('x2',iW).attr('y1',yS(v)).attr('y2',yS(v))
+     .attr('stroke','#182e48').attr('stroke-width',1);
+  });
+
+  g.append('g').attr('transform',`translate(0,${iH})`)
+   .call(d3.axisBottom(xS).tickValues([2020,2050,2100]).tickFormat(d3.format('d')).tickSize(4))
+   .call(g2=>g2.select('.domain').attr('stroke','#1c3250'))
+   .call(g2=>g2.selectAll('.tick line').attr('stroke','#1c3250'))
+   .call(g2=>g2.selectAll('text').attr('fill','#5e7fa0').attr('font-size',10).attr('font-family','Fira Code,monospace'));
+
+  g.append('g').call(d3.axisLeft(yS).ticks(4).tickFormat(d3.format('.1f')).tickSize(4))
+   .call(g2=>g2.select('.domain').attr('stroke','#1c3250'))
+   .call(g2=>g2.selectAll('.tick line').attr('stroke','#1c3250'))
+   .call(g2=>g2.selectAll('text').attr('fill','#5e7fa0').attr('font-size',9).attr('font-family','Fira Code,monospace'));
+
+  const line = d3.line().x((_,i)=>xS(years[i])).y(d=>yS(d)).curve(d3.curveCatmullRom.alpha(.5));
+
+  stateKeys.forEach((fips,ci)=>{
+    const s = fipsMap.get(fips); if(!s) return;
+    const vals = years.map(y=>interpScore(s,exploreVtype,y));
+    g.append('path').datum(vals)
+     .attr('fill','none').attr('stroke',COLORS2[ci]).attr('stroke-width',2).attr('opacity',.85)
+     .attr('d',line);
+    // Label at end
+    const lastY = yS(vals[vals.length-1]);
+    g.append('text').attr('x',iW+6).attr('y',lastY+4)
+     .attr('fill',COLORS2[ci]).attr('font-size',10).attr('font-family','Fira Code,monospace')
+     .text(s.abbr);
+  });
+}
+
+// Explore controls — single listeners per control group
+document.querySelectorAll('[data-vt]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-vt]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    exploreVtype = btn.dataset.vt;
+    updateExploreMap();
+    buildExploreChart();
+  });
+});
+document.querySelectorAll('[data-yr]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-yr]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    exploreYear = btn.dataset.yr;
+    updateExploreMap();
+  });
+});
+document.querySelectorAll('[data-sc]').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('[data-sc]').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    exploreScen = btn.dataset.sc;
+    updateExploreMap();
+  });
+});
+
+// ── INIT ──────────────────────────────────────────────────────────────────
+d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(topo=>{
+  mapTopo = topo;
+  fitMap(document.getElementById('map-svg'));
+  initMainMap(topo);
+  initScroll();
+  initExploreMap(topo);
+  buildExploreChart();
+}).catch(err=>console.error('Map load failed:',err));
+
+// Chart rebuild is already handled inside setExploreVtype via event listeners below
+
+window.addEventListener('resize',()=>{
+  if(!mapTopo) return;
+  fitMap(document.getElementById('map-svg'));
+  statesG.selectAll('.sp').attr('d',pathGen);
+  bordersG.select('path').attr('d',pathGen);
+  const el=document.getElementById('explore-map-svg');
+  const W=el.clientWidth||600,H=+el.getAttribute('height')||360;
+  const fc=topojson.feature(mapTopo,mapTopo.objects.states);
+  exProj.fitExtent([[12,12],[W-12,H-12]],fc);
+  exStatesG.selectAll('.xsp').attr('d',exPath);
+  exBordersG.select('path').attr('d',exPath);
+});
+</script>
+</body>
+</html>
