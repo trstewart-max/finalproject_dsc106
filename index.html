@@ -39,18 +39,23 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
   padding:5px 18px;border:1px solid rgba(0,212,255,.25);border-radius:20px;
   display:inline-block;position:relative;
 }
+.hero-hook{
+  font-family:var(--serif);font-size:clamp(18px,2.2vw,26px);font-weight:700;
+  color:var(--text-mid);line-height:1.4;margin-bottom:20px;position:relative;
+  font-style:italic;
+}
 #hero h1{
   font-family:var(--serif);font-size:clamp(34px,6vw,78px);font-weight:900;
   line-height:1.05;max-width:880px;margin-bottom:24px;position:relative;
 }
 #hero h1 em{color:var(--accent);font-style:italic}
 .hero-sub{
-  font-size:clamp(15px,1.8vw,20px);color:var(--text-mid);
-  max-width:540px;line-height:1.75;margin-bottom:20px;position:relative;
+  font-size:clamp(16px,2vw,22px);color:var(--text-mid);
+  max-width:600px;line-height:1.7;margin-bottom:20px;position:relative;
 }
 .hero-intro{
-  font-size:14px;color:var(--text-dim);max-width:480px;line-height:1.7;
-  margin-bottom:52px;position:relative;font-family:var(--mono);
+  font-size:15px;color:var(--text-dim);max-width:500px;line-height:1.75;
+  margin-bottom:52px;position:relative;
 }
 .scroll-cue{
   display:flex;flex-direction:column;align-items:center;gap:10px;
@@ -373,6 +378,26 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
   font-family:var(--mono);font-size:14px;padding:0 8px;
   background:var(--bg);color:var(--text-dim);border-right:1px solid var(--border);
 }
+/* Migration map */
+#reloc-map-wrap{
+  width:100%;max-width:680px;margin:0 auto 36px;
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:14px;padding:24px 28px;text-align:left;
+}
+.reloc-map-title{
+  font-family:var(--mono);font-size:9px;color:var(--text-dim);
+  text-transform:uppercase;letter-spacing:1.5px;margin-bottom:4px;
+}
+.reloc-map-subtitle{
+  font-size:15px;font-weight:700;color:var(--text);margin-bottom:18px;line-height:1.3;
+}
+#final-map-svg{width:100%;display:block;border-radius:8px;overflow:hidden}
+.reloc-legend{
+  display:flex;gap:24px;margin-top:14px;flex-wrap:wrap;
+}
+.rl-item{display:flex;align-items:center;gap:8px}
+.rl-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0}
+.rl-label{font-family:var(--mono);font-size:10px;color:var(--text-mid)}
 .final-body{font-size:16px;color:var(--text-mid);line-height:1.75;max-width:560px;margin-bottom:40px}
 .btn-explore{
   padding:13px 32px;border-radius:8px;border:1px solid var(--border);
@@ -422,21 +447,32 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 
 /* ── CONCLUSION ── */
 #conclusion{
-  min-height:60vh;display:flex;flex-direction:column;
-  align-items:center;justify-content:center;text-align:center;
-  padding:80px 40px;
+  padding:80px 40px 60px;
   background:radial-gradient(ellipse at 50% 50%,#0e0614 0%,var(--bg) 70%);
   border-top:1px solid var(--border);
+  display:flex;flex-direction:column;align-items:center;text-align:center;
+}
+.conclusion-kicker{
+  font-family:var(--mono);font-size:10px;color:var(--accent);
+  text-transform:uppercase;letter-spacing:3px;margin-bottom:20px;
+  padding:4px 16px;border:1px solid rgba(0,212,255,.2);border-radius:20px;
 }
 #conclusion h2{
-  font-family:var(--serif);font-size:clamp(24px,4vw,50px);
-  font-weight:900;line-height:1.15;max-width:760px;margin-bottom:24px;
+  font-family:var(--serif);font-size:clamp(26px,4vw,50px);
+  font-weight:900;line-height:1.15;max-width:760px;margin-bottom:28px;
 }
 #conclusion h2 em{color:var(--accent);font-style:italic}
-#conclusion p{font-size:15px;color:var(--text-mid);line-height:1.8;max-width:620px;margin-bottom:32px}
+#conclusion p{font-size:15px;color:var(--text-mid);line-height:1.8;max-width:680px;margin-bottom:20px}
+#conclusion strong{color:var(--text)}
+.conclusion-why{
+  background:var(--surface);border:1px solid var(--border);
+  border-radius:12px;padding:20px 24px;
+  font-size:14px !important;text-align:left;
+  max-width:680px;margin-bottom:32px !important;
+}
 .credits{
   font-family:var(--mono);font-size:10px;color:var(--text-dim);
-  border-top:1px solid var(--border);padding-top:24px;max-width:640px;
+  border-top:1px solid var(--border);padding-top:24px;max-width:680px;
   line-height:1.7;
 }
   </style>
@@ -446,11 +482,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 <!-- ═══ S1: HERO ═══════════════════════════════════════════════════ -->
 <section id="hero">
   <div class="hero-badge">DSC 106 &mdash; CMIP6 Climate Projections</div>
-  <h1>Can Your Dream Vacation<br>Survive <em>Climate Change?</em></h1>
-  <p class="hero-sub">The weather that makes your favorite trips possible may not stay the same forever.</p>
-  <p class="hero-intro">People choose destinations because of climate. Beaches need warmth without extreme heat. Ski resorts need reliable snow. National parks need mild temperatures. As the climate changes, so does the geography of the perfect vacation.</p>
+  <h1>What if your dream vacation<br>destination <em>didn&rsquo;t exist anymore?</em></h1>
+  <p class="hero-sub">Rising temperatures, stronger storms, sea level rise, and shrinking snowpack are already changing many of the places people travel to every year.</p>
+  <p class="hero-intro">Take our quiz to discover your perfect getaway &mdash; and see how climate change could transform it by the end of the century.</p>
   <div class="scroll-cue">
-    <span>Build your vacation to find out</span>
+    <span>Start the quiz</span>
     <div class="scroll-arrow"></div>
   </div>
 </section>
@@ -737,25 +773,25 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
     <div class="step" data-state="today" id="step-today">
       <div class="step-kicker"><div class="kicker-line"></div>Your ideal destinations today</div>
       <h2 class="step-head" id="sh-today">The best places for your vacation, today</h2>
-      <p class="step-body" id="sb-today-1">The map shows current climate suitability for your vacation type across all 50 states. Greener states offer conditions closest to what your ideal trip needs.</p>
-      <div class="step-callout" id="sc-today">These regions have built entire vacation economies on the reliability of their climate conditions &mdash; conditions that have held for generations.</div>
-      <p class="step-body" id="sb-today-2">This is your vacation, today. These are the places where your dream trip exists.</p>
+      <p class="step-body" id="sb-today-1">The map shows current climate suitability for your vacation type across all 50 states. Greener states offer conditions closest to what your ideal trip needs right now.</p>
+      <div class="step-callout" id="sc-today">These regions have built entire vacation economies on the reliability of their climate &mdash; conditions that have held for generations. Right now, the dream is real and the map is in your favor.</div>
+      <p class="step-body" id="sb-today-2">Enjoy it. Because the map is about to change.</p>
     </div>
 
     <div class="step" data-state="y2050" id="step-2050">
-      <div class="step-kicker"><div class="kicker-line"></div>Mid-century projections</div>
-      <h2 class="step-head" id="sh-2050">By 2050, the first changes appear</h2>
-      <p class="step-body" id="sb-2050-1">CMIP6 climate projections show that by mid-century, the conditions that define your vacation will have started to shift. Some changes are subtle. Others are already difficult to ignore.</p>
-      <div class="step-callout" id="sc-2050">The changes visible here are not projections for a distant future &mdash; 2050 is within the lifetime of anyone alive today, and the window of resorts, coastlines, and parks affected is already accelerating.</div>
-      <p class="step-body" id="sb-2050-2">The direction is clear. The question is how far it goes.</p>
+      <div class="step-kicker"><div class="kicker-line"></div>Mid-century projection</div>
+      <h2 class="step-head" id="sh-2050">By 2050, the conditions that define your vacation begin to shift</h2>
+      <p class="step-body" id="sb-2050-1">CMIP6 climate projections show that by mid-century, the climate behind your vacation will have measurably changed. Some shifts are subtle. Others are not. The map is no longer what it was.</p>
+      <div class="step-callout" id="sc-2050">2050 is not a distant future &mdash; it is within the lifetime of anyone alive today. The resorts, coastlines, and parks on this map are already feeling the early pressure of these projections.</div>
+      <p class="step-body" id="sb-2050-2">The direction is clear. The only question is how far it goes.</p>
     </div>
 
     <div class="step" data-state="y2100" id="step-2100">
       <div class="step-kicker"><div class="kicker-line"></div>End of century</div>
       <h2 class="step-head" id="sh-2100">By 2100, the map has fundamentally changed</h2>
-      <p class="step-body" id="sb-2100-1">End-of-century projections show what continued warming implies for vacation climate quality. For some vacation types, the change is a shift. For others, it is closer to a disappearance.</p>
-      <div class="step-callout" id="sc-2100">The states that currently define your favorite vacation may no longer offer what they do today. And some states you'd never consider are becoming newly viable.</div>
-      <p class="step-body" id="sb-2100-2">Scroll to see what happened &mdash; and why.</p>
+      <p class="step-body" id="sb-2100-1">End-of-century projections show what continued warming means for your vacation climate. For some trip types, the experience worsens in place. For others, the ideal conditions relocate entirely. For some, they disappear.</p>
+      <div class="step-callout" id="sc-2100">The states that currently define your favorite vacation may no longer offer what they do today. Some states you&rsquo;d never consider are becoming newly viable &mdash; the geography of American leisure is being redrawn.</div>
+      <p class="step-body" id="sb-2100-2">Scroll to find out what happened to your vacation &mdash; and why.</p>
     </div>
 
   </div>
@@ -776,6 +812,13 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
   <p class="final-kicker">The Verdict</p>
   <h2 class="final-verdict" id="final-verdict">Your vacation is <em id="final-outcome">changing</em>.</h2>
   <div class="final-timeline" id="final-timeline"></div>
+  <!-- Migration map — built by buildFinalMap() -->
+  <div id="reloc-map-wrap" style="display:none">
+    <div class="reloc-map-title" id="reloc-map-title">Where is your vacation going?</div>
+    <div class="reloc-map-subtitle" id="reloc-map-subtitle"></div>
+    <svg id="final-map-svg" height="220"></svg>
+    <div class="reloc-legend" id="reloc-legend"></div>
+  </div>
   <p class="final-body" id="final-body">The climate that makes your vacation possible is shifting. The destinations you love are not disappearing overnight &mdash; but they are changing, and the change is directional.</p>
   <button class="btn-explore" onclick="document.getElementById('explore').scrollIntoView({behavior:'smooth'})">Explore the full data &darr;</button>
 </section>
@@ -832,9 +875,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 
 <!-- ═══ S10: CONCLUSION ══════════════════════════════════════════════ -->
 <section id="conclusion">
-  <h2>Climate change may reshape not just ecosystems &mdash; it may reshape the <em>geography of American leisure.</em></h2>
-  <p>The destinations Americans love exist because of their climate. Beaches need warm but tolerable heat. Ski resorts need reliable cold. National parks need mild hiking conditions. As these conditions change, so does the map of where those experiences are possible.</p>
-  <p>This is a projection, not a forecast. But the direction of change is consistent across the leading global climate models: warmer everywhere, with the most dramatic effects on the experiences most dependent on specific conditions.</p>
+  <p class="conclusion-kicker">The one thing to take away</p>
+  <h2>Climate change isn&rsquo;t just an environmental story.<br>It&rsquo;s a <em>personal</em> one.</h2>
+  <p>Every American vacation is really a climate preference in disguise. You book Florida in January because you want warmth. You drive to Vermont in February because you need snow. You hike Colorado in July because you need mild air. That relationship between people and place is built entirely on climate &mdash; and climate is changing.</p>
+  <p>The most important insight from this project is not that temperatures are rising. It is that the <strong>experiences people travel to find</strong> &mdash; warmth without danger, reliable snow, cool summer air &mdash; are shifting in ways that will force Americans to either adapt where they travel or accept a diminished version of the trip they once loved.</p>
+  <p class="conclusion-why"><strong>Why this visualization succeeds at showing it:</strong> Unlike a static chart of rising temperatures, this project makes climate change personal. You built your vacation first. The map showed you where it exists today. Then you watched it change &mdash; specifically for your trip, your preferences, your states. The verdict (WORSENING, RELOCATING, or DISAPPEARING) is not a global average. It is yours. That personalization is what transforms an abstract projection into a decision you might actually face.</p>
   <div class="credits">
     Data: CMIP6 climate model projections (BCC-CSM2-MR) &middot; Suitability methodology: temperature comfort windows, heat stress thresholds, snowpack reliability, and precipitation patterns &middot; Scenarios: SSP2-4.5 (moderate), SSP5-8.5 (high) &middot; All scores 0&ndash;1 normalized &middot; This visualization does not predict tourism revenue or travel behavior &middot; Built for DSC 106, UC San Diego
   </div>
@@ -1347,8 +1392,6 @@ function buildFactors() {
 function buildFinalReveal() {
   const meta = PROFILE_META[userProfile];
   const vt = meta.vtype;
-  // Pick a representative state for the timeline
-  // Best state for vacation type today
   const best = [...STATE_DATA].sort((a,b)=>getScore(b,vt,'present')-getScore(a,vt,'present'))[0];
   const now  = getScore(best,vt,'present');
   const y50  = getScore(best,vt,'y2050','mod');
@@ -1377,6 +1420,180 @@ function buildFinalReveal() {
       <div class="ft-score" style="color:${suitScale(y100)}">${y100.toFixed(2)}</div>
       <div class="ft-label">${binLabel(y100)}</div>
     </div>`;
+
+  // Build migration map (after next paint so SVG has width)
+  requestAnimationFrame(() => buildFinalMap(meta));
+}
+
+// ── MIGRATION MAP ──────────────────────────────────────────────────────────
+function buildFinalMap(meta) {
+  if (!mapTopo) return;
+  const vt      = meta.vtype;
+  const outcome = meta.outcome; // 'WORSENING' | 'RELOCATING' | 'DISAPPEARING'
+  const accentCol = meta.outcomeColor;
+
+  // Find source: best state TODAY
+  const sorted = [...STATE_DATA].sort((a,b)=>getScore(b,vt,'present')-getScore(a,vt,'present'));
+  const srcState = sorted[0];
+
+  // Find destination: state with BIGGEST GAIN from present → 2100
+  // (exclude source state so arrow actually moves somewhere)
+  const destState = [...STATE_DATA]
+    .filter(s => s.fips !== srcState.fips)
+    .sort((a,b) => {
+      const gA = getScore(a,vt,'y2100','mod') - getScore(a,vt,'present');
+      const gB = getScore(b,vt,'y2100','mod') - getScore(b,vt,'present');
+      return gB - gA;
+    })[0];
+
+  // Show the container
+  const wrap = document.getElementById('reloc-map-wrap');
+  wrap.style.display = 'block';
+
+  // Set titles per outcome
+  const titles = {
+    RELOCATING:   { t:'Where is the climate going?', s:`The ideal conditions for a ${meta.name} are shifting from <strong>${srcState.state}</strong> toward <strong>${destState.state}</strong> by 2100.` },
+    WORSENING:    { t:'Your destination is getting harder to enjoy', s:`<strong>${srcState.state}</strong> still leads today — but conditions there are declining. The experience worsens in place.` },
+    DISAPPEARING: { t:'The conditions are becoming increasingly rare', s:`<strong>${srcState.state}</strong> currently leads for ski climate. By 2100, no state fully replaces what is being lost.` },
+  };
+  document.getElementById('reloc-map-title').textContent = titles[outcome]?.t || '';
+  document.getElementById('reloc-map-subtitle').innerHTML = titles[outcome]?.s || '';
+
+  // SVG setup
+  const svgEl = document.getElementById('final-map-svg');
+  const W = svgEl.clientWidth || 620;
+  const H = +svgEl.getAttribute('height') || 220;
+  const svg = d3.select('#final-map-svg').attr('width', W);
+  svg.selectAll('*').remove();
+
+  const proj = d3.geoAlbersUsa();
+  const path = d3.geoPath().projection(proj);
+  const fc = topojson.feature(mapTopo, mapTopo.objects.states);
+  proj.fitExtent([[10,10],[W-10,H-10]], fc);
+
+  // Draw base map
+  const mapG = svg.append('g');
+  mapG.selectAll('path').data(fc.features).join('path')
+    .attr('d', path)
+    .attr('fill', d => {
+      const fips = String(d.id).padStart(2,'0');
+      if (fips === srcState.fips)  return outcome === 'DISAPPEARING' ? '#2a1a1a' : '#1a1a2e';
+      if (outcome !== 'DISAPPEARING' && fips === destState.fips) return '#1a2e1a';
+      return '#0d1929';
+    })
+    .attr('stroke', '#1c3250').attr('stroke-width', 0.5);
+
+  // Helper: get projected centroid of a state by fips
+  function getCentroid(fips) {
+    const feat = fc.features.find(f => String(f.id).padStart(2,'0') === fips);
+    return feat ? proj(d3.geoCentroid(feat)) : null;
+  }
+
+  const srcPt  = getCentroid(srcState.fips);
+  const destPt = outcome !== 'DISAPPEARING' ? getCentroid(destState.fips) : null;
+
+  if (!srcPt) return;
+
+  // ── RELOCATING / WORSENING: draw animated arrow ──────────────────────────
+  if (outcome === 'RELOCATING' && destPt) {
+    // Curved arc path: control point above midpoint
+    const mx = (srcPt[0] + destPt[0]) / 2;
+    const my = (srcPt[1] + destPt[1]) / 2 - Math.abs(destPt[0]-srcPt[0]) * 0.35;
+
+    const arrowPath = svg.append('path')
+      .attr('d', `M${srcPt[0]},${srcPt[1]} Q${mx},${my} ${destPt[0]},${destPt[1]}`)
+      .attr('fill','none')
+      .attr('stroke', accentCol)
+      .attr('stroke-width', 2)
+      .attr('stroke-dasharray','6 3')
+      .attr('opacity', 0.85)
+      .attr('marker-end','url(#arrowhead)');
+
+    // Arrowhead marker
+    const defs = svg.append('defs');
+    defs.append('marker')
+      .attr('id','arrowhead').attr('markerWidth',8).attr('markerHeight',6)
+      .attr('refX',8).attr('refY',3).attr('orient','auto')
+      .append('polygon').attr('points','0 0, 8 3, 0 6').attr('fill', accentCol);
+
+    // Animate the dashes drawing in
+    const totalLen = arrowPath.node().getTotalLength();
+    arrowPath
+      .attr('stroke-dasharray', totalLen + ' ' + totalLen)
+      .attr('stroke-dashoffset', totalLen)
+      .transition().duration(1600).delay(300).ease(d3.easeQuadInOut)
+      .attr('stroke-dashoffset', 0);
+
+    // Source dot (today) — fades slightly as destination grows
+    svg.append('circle').attr('cx',srcPt[0]).attr('cy',srcPt[1]).attr('r',9)
+      .attr('fill','#fee08b').attr('opacity',0.9).attr('stroke','#fff').attr('stroke-width',1.5);
+    svg.append('text').attr('x',srcPt[0]).attr('y',srcPt[1]-14)
+      .attr('text-anchor','middle').attr('fill','#fee08b')
+      .attr('font-size',9).attr('font-family','Fira Code,monospace')
+      .attr('font-weight','600').text('Today: '+srcState.abbr);
+
+    // Destination dot (2100) — appears after arrow draws
+    const destCircle = svg.append('circle').attr('cx',destPt[0]).attr('cy',destPt[1]).attr('r',0)
+      .attr('fill', accentCol).attr('opacity',0).attr('stroke','#fff').attr('stroke-width',1.5);
+    destCircle.transition().duration(500).delay(1700)
+      .attr('r',9).attr('opacity',0.95);
+
+    const destLabel = svg.append('text').attr('x',destPt[0]).attr('y',destPt[1]-14)
+      .attr('text-anchor','middle').attr('fill', accentCol)
+      .attr('font-size',9).attr('font-family','Fira Code,monospace')
+      .attr('font-weight','600').attr('opacity',0).text('2100: '+destState.abbr);
+    destLabel.transition().duration(500).delay(1800).attr('opacity',1);
+  }
+
+  // ── WORSENING: dot stays, pulses downward ────────────────────────────────
+  if (outcome === 'WORSENING') {
+    // Pulse ring
+    const pulse = svg.append('circle').attr('cx',srcPt[0]).attr('cy',srcPt[1])
+      .attr('r',9).attr('fill','none').attr('stroke',accentCol).attr('stroke-width',2).attr('opacity',0.8);
+    function pulseAnim() {
+      pulse.attr('r',9).attr('opacity',0.8)
+        .transition().duration(1200).ease(d3.easeCubicOut)
+        .attr('r',22).attr('opacity',0)
+        .on('end', pulseAnim);
+    }
+    pulseAnim();
+    svg.append('circle').attr('cx',srcPt[0]).attr('cy',srcPt[1]).attr('r',8)
+      .attr('fill',accentCol).attr('opacity',0.9).attr('stroke','#fff').attr('stroke-width',1.5);
+    svg.append('text').attr('x',srcPt[0]).attr('y',srcPt[1]-14)
+      .attr('text-anchor','middle').attr('fill',accentCol)
+      .attr('font-size',9).attr('font-family','Fira Code,monospace').attr('font-weight','600')
+      .text(srcState.abbr+' — worsening');
+  }
+
+  // ── DISAPPEARING: dot shrinks ────────────────────────────────────────────
+  if (outcome === 'DISAPPEARING') {
+    const dot = svg.append('circle').attr('cx',srcPt[0]).attr('cy',srcPt[1])
+      .attr('r',10).attr('fill',accentCol).attr('opacity',0.9)
+      .attr('stroke','#fff').attr('stroke-width',1.5);
+    dot.transition().duration(2000).delay(600).ease(d3.easeCubicInOut)
+      .attr('r',3).attr('opacity',0.3);
+    svg.append('text').attr('x',srcPt[0]).attr('y',srcPt[1]-16)
+      .attr('text-anchor','middle').attr('fill',accentCol)
+      .attr('font-size',9).attr('font-family','Fira Code,monospace').attr('font-weight','600')
+      .text(srcState.abbr+' — fading');
+    svg.append('text').attr('x',W/2).attr('y',H-10)
+      .attr('text-anchor','middle').attr('fill','#5e7fa0')
+      .attr('font-size',9).attr('font-family','Fira Code,monospace')
+      .text('No equivalent destination emerges by 2100');
+  }
+
+  // Legend
+  const leg = document.getElementById('reloc-legend');
+  leg.innerHTML = '';
+  if (outcome === 'RELOCATING') {
+    leg.innerHTML = `
+      <div class="rl-item"><div class="rl-dot" style="background:#fee08b"></div><span class="rl-label">Best destination today — ${srcState.state}</span></div>
+      <div class="rl-item"><div class="rl-dot" style="background:${accentCol}"></div><span class="rl-label">Best destination by 2100 — ${destState.state}</span></div>`;
+  } else if (outcome === 'WORSENING') {
+    leg.innerHTML = `<div class="rl-item"><div class="rl-dot" style="background:${accentCol}"></div><span class="rl-label">${srcState.state} — conditions declining in place</span></div>`;
+  } else {
+    leg.innerHTML = `<div class="rl-item"><div class="rl-dot" style="background:${accentCol}"></div><span class="rl-label">${srcState.state} — best today, but fading by 2100</span></div>`;
+  }
 }
 
 // ── EXPLORE SECTION ────────────────────────────────────────────────────────
@@ -1443,7 +1660,7 @@ function setExploreVtype(vt, update=true) {
   document.querySelectorAll('[data-vt]').forEach(b=>{
     b.classList.toggle('active', b.dataset.vt===vt);
   });
-  if (update) updateExploreMap();
+  if (update) { updateExploreMap(); buildExploreChart(); }
 }
 
 // Line chart for explore
@@ -1517,15 +1734,9 @@ function buildExploreChart() {
   });
 }
 
-// Explore controls — single listeners per control group
+// Explore controls
 document.querySelectorAll('[data-vt]').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('[data-vt]').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    exploreVtype = btn.dataset.vt;
-    updateExploreMap();
-    buildExploreChart();
-  });
+  btn.addEventListener('click',()=>setExploreVtype(btn.dataset.vt));
 });
 document.querySelectorAll('[data-yr]').forEach(btn=>{
   btn.addEventListener('click',()=>{
@@ -1553,8 +1764,6 @@ d3.json('https://cdn.jsdelivr.net/npm/us-atlas@3/states-10m.json').then(topo=>{
   initExploreMap(topo);
   buildExploreChart();
 }).catch(err=>console.error('Map load failed:',err));
-
-// Chart rebuild is already handled inside setExploreVtype via event listeners below
 
 window.addEventListener('resize',()=>{
   if(!mapTopo) return;
