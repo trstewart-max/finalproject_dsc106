@@ -470,6 +470,11 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
   font-size:14px !important;text-align:left;
   max-width:680px;margin-bottom:32px !important;
 }
+.video-wrap{
+  width:100%;max-width:680px;margin-bottom:36px;
+  border-radius:12px;overflow:hidden;border:1px solid var(--border);
+}
+.video-wrap iframe{width:100%;display:block}
 .credits{
   font-family:var(--mono);font-size:10px;color:var(--text-dim);
   border-top:1px solid var(--border);padding-top:24px;max-width:680px;
@@ -877,9 +882,12 @@ body{background:var(--bg);color:var(--text);font-family:var(--sans);overflow-x:h
 <section id="conclusion">
   <p class="conclusion-kicker">The one thing to take away</p>
   <h2>Climate change isn&rsquo;t just an environmental story.<br>It&rsquo;s a <em>personal</em> one.</h2>
-  <p>Every American vacation is really a climate preference in disguise. You book Florida in January because you want warmth. You drive to Vermont in February because you need snow. You hike Colorado in July because you need mild air. That relationship between people and place is built entirely on climate, and climate is changing.</p>
-  <p>The most important insight from this project is not that temperatures are rising. It is that the experiences people travel to find are shifting in ways that will force Americans to either adapt where they travel or accept a diminished version of the trip they once loved.</p>
-  <p class="conclusion-why"><strong>Why this visualization succeeds at showing it:</strong> Unlike a static chart of rising temperatures, this project makes climate change personal. You built your vacation first. The map showed you where it exists today. Then you watched it change, specifically for your trip, your preferences, your states. The verdict (WORSENING, RELOCATING, or DISAPPEARING) is not a global average. It is yours. That personalization is what transforms an abstract projection into a decision you might actually face.</p>
+  <p>Every American vacation is really a climate preference in disguise. You book Florida in January because you want warmth. You drive to Vermont in February because you need snow. You hike Colorado in July because you need mild air. That relationship between people and place is built entirely on climate &mdash; and climate is changing.</p>
+  <p>The most important insight from this project is not that temperatures are rising. It is that the <strong>experiences people travel to find</strong> &mdash; warmth without danger, reliable snow, cool summer air &mdash; are shifting in ways that will force Americans to either adapt where they travel or accept a diminished version of the trip they once loved.</p>
+  <p class="conclusion-why"><strong>Why this visualization succeeds at showing it:</strong> Unlike a static chart of rising temperatures, this project makes climate change personal. You built your vacation first. The map showed you where it exists today. Then you watched it change &mdash; specifically for your trip, your preferences, your states. The verdict (WORSENING, RELOCATING, or DISAPPEARING) is not a global average. It is yours. That personalization is what transforms an abstract projection into a decision you might actually face.</p>
+  <div class="video-wrap">
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/8LrZkMrHapY" title="Project Demo Video" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  </div>
   <div class="credits">
     Data: CMIP6 climate model projections (BCC-CSM2-MR) &middot; Suitability methodology: temperature comfort windows, heat stress thresholds, snowpack reliability, and precipitation patterns &middot; Scenarios: SSP2-4.5 (moderate), SSP5-8.5 (high) &middot; All scores 0&ndash;1 normalized &middot; This visualization does not predict tourism revenue or travel behavior &middot; Built for DSC 106, UC San Diego
   </div>
